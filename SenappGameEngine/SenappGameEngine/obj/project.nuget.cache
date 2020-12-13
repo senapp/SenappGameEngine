@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "dgSpecHash": "nJM/E22u5p4+nPum0h43LeYvCdPChyA9AuRfU7MOQCgzwT5q3PAigJR5QLmpG6P3J0sfkYEzxmqpV7h2/FCnmg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\albin\\Desktop\\Tools\\Dev\\SenappGameEngine\\SenappGameEngine\\Senapp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\albin\\.nuget\\packages\\imgui.net\\1.78.0\\imgui.net.1.78.0.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\opentk\\3.3.1\\opentk.3.3.1.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.4.0\\system.runtime.compilerservices.unsafe.4.4.0.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\microsoft.netcore.app.host.win-x86\\3.0.3\\microsoft.netcore.app.host.win-x86.3.0.3.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.0.1\\microsoft.aspnetcore.app.ref.3.0.1.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\microsoft.netcore.app.ref\\3.0.0\\microsoft.netcore.app.ref.3.0.0.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.0.0\\microsoft.windowsdesktop.app.ref.3.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'OpenTK 3.3.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.0'. This package may not be fully compatible with your project.",
+      "libraryId": "OpenTK",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.0"
+      ]
+    }
+  ]
+}
