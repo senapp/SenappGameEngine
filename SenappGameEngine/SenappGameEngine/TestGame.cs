@@ -65,18 +65,18 @@ namespace Senapp
 
             GameObject earth = new GameObject();
             earth.AddComponent(new Entity(Geometries.Sphere, "earth8k"));
-            earth.transform = new Transform(0, 0, 3);
+            earth.transform = new Transform(0, 0, -3);
 
             GameObject mars = new GameObject();
             mars.AddComponent(new Entity(Geometries.Sphere, "mars"));
-            mars.transform = new Transform(0, 0, -3);
+            mars.transform = new Transform(0, 0, 3);
 
             GameObject pyramid = new GameObject();
-            pyramid.AddComponent(new Entity(Geometries.Pyramid, "pyramid"));
+            pyramid.AddComponent(new Entity(Geometries.Sphere, "jupiter"));
             pyramid.transform = new Transform(-3, 0, 0);
 
             GameObject cube = new GameObject();
-            cube.AddComponent(new Entity(Geometries.Cube, ""));
+            cube.AddComponent(new Entity(Geometries.Sphere, "mercury"));
             cube.transform = new Transform(3, 0, 0);
 
 
@@ -140,16 +140,16 @@ namespace Senapp
             const float cameraSpeed = 10.0f;
             var camera = mainCamera.GetComponent<Camera>();
             if (Input.GetKey(Key.W))
-                mainCamera.transform.position += camera.Front * cameraSpeed * args.DeltaTime; 
+                mainCamera.transform.position += camera.Up * cameraSpeed * args.DeltaTime; 
             if (Input.GetKey(Key.S))
-                mainCamera.transform.position -= camera.Front * cameraSpeed * args.DeltaTime; 
+                mainCamera.transform.position -= camera.Up * cameraSpeed * args.DeltaTime; 
             if (Input.GetKey(Key.A))
                 mainCamera.transform.position -= camera.Right * cameraSpeed * args.DeltaTime; 
             if (Input.GetKey(Key.D))
                 mainCamera.transform.position += camera.Right * cameraSpeed * args.DeltaTime;
-            if (Input.GetKey(Key.W))
+            if (Input.GetKey(Key.Space))
                 mainCamera.transform.position += camera.Front * cameraSpeed * args.DeltaTime;
-            if (Input.GetKey(Key.S))
+            if (Input.GetKey(Key.ShiftLeft))
                 mainCamera.transform.position -= camera.Front * cameraSpeed * args.DeltaTime;
 
             if (CameraFollowMouse)

@@ -350,11 +350,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\albin\\Desktop\\Tools\\Dev\\SenappGameEngine\\SenappGameEngine\\Senapp.csproj",
+      "projectUniqueName": "D:\\Documents\\senappGameEngine\\SenappGameEngine\\SenappGameEngine\\Senapp.csproj",
       "projectName": "Senapp",
-      "projectPath": "C:\\Users\\albin\\Desktop\\Tools\\Dev\\SenappGameEngine\\SenappGameEngine\\Senapp.csproj",
+      "projectPath": "D:\\Documents\\senappGameEngine\\SenappGameEngine\\SenappGameEngine\\Senapp.csproj",
       "packagesPath": "C:\\Users\\albin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\albin\\Desktop\\Tools\\Dev\\SenappGameEngine\\SenappGameEngine\\obj\\",
+      "outputPath": "D:\\Documents\\senappGameEngine\\SenappGameEngine\\SenappGameEngine\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

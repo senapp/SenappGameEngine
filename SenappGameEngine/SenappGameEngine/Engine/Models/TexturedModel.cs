@@ -19,7 +19,7 @@ namespace Senapp.Engine.Models
             texture = tex;
             shineDamper = 10;
             reflectivity = 1;
-            luminosity = 0;
+            luminosity = 0.1f;
         }
         public void BindTexture(TextureUnit textureUnit)
         {
