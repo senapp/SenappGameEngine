@@ -1,5 +1,5 @@
 # Senapp Game Engine
-Simple Game Engine is written in C# with OpenTK.
+Simple game engine written in C# with OpenTK.
 
 The engine works on a GameObject and component-based design pattern much like Unity 3D as well as that the engine has ImGUI support for basic RunTime adjustments to the scene.
 
