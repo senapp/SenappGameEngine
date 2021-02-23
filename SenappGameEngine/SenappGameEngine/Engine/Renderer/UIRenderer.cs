@@ -4,6 +4,7 @@ using Senapp.Engine.Base;
 using Senapp.Engine.Models;
 using Senapp.Engine.Shaders;
 using Senapp.Engine.UI;
+using System;
 using System.Collections.Generic;
 
 namespace Senapp.Engine.Renderer
@@ -30,7 +31,8 @@ namespace Senapp.Engine.Renderer
                 {
                     var elementComponent = element.GetComponent<UIElement>();
                     BindUIElement(elementComponent);
-                    PrepareInstance(elementComponent, element.transform, cameraPosition);
+                    var val = new Transform(element.transform.GetUIPosition(), element.transform.rotation, element.transform.localScale);
+                    PrepareInstance(elementComponent, val, cameraPosition);
                     GL.DrawElements(BeginMode.Triangles, UIQuad.vertexCount, DrawElementsType.UnsignedInt, 0);
                     UnbindUIElement();
                 }
@@ -56,8 +58,8 @@ namespace Senapp.Engine.Renderer
         }
         public void PrepareInstance(UIElement element, Transform transform, Vector3 cameraPosition)
         {
-            shader.LoadTransformationMatrix(transform.TransformFromUIConstraint(element.constraint).TransformationMatrixUI(cameraPosition));
-            shader.LoadSprite(element.sprite);
+            shader.LoadTransformationMatrix(transform.TransformationMatrixUI(cameraPosition));
+            shader.LoadColour(element.sprite.colour);
         }
     }
 }

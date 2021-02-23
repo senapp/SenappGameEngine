@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Senapp.Engine.Shaders;
 using System;
 using Senapp.Engine.Base;
+using Senapp.Engine.Utilities;
 
 namespace Senapp.Engine.Renderer
 {
@@ -21,12 +22,14 @@ namespace Senapp.Engine.Renderer
         {
             foreach (TexturedModel model in entities.Keys)
             {
+                entities.TryGetValue(model, out List<GameObject> batch);
                 PrepareTexturedModel(model);
-                entities.TryGetValue(model,out List<GameObject> batch);
                 foreach (GameObject entity in batch)
                 {
                     PrepareInstance(entity);
+                    if (WireFrame.IsEnabled()) GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
                     GL.DrawElements(BeginMode.Triangles, model.rawModel.vertexCount, DrawElementsType.UnsignedInt, 0);
+                    if (WireFrame.IsEnabled()) GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
                 }
                 UnbindTexturedModel();
             }
@@ -43,6 +46,10 @@ namespace Senapp.Engine.Renderer
             GL.EnableVertexAttribArray(2);
             shader.LoadUseFakeLightingVariable(texturedModel.useFakeLighting);
             shader.LoadShineVariables(texturedModel.shineDamper, texturedModel.reflectivity, texturedModel.luminosity);
+            shader.LoadColour(texturedModel.colour);
+            shader.LoadEnviromentMap(1);
+            GL.ActiveTexture(TextureUnit.Texture1);
+            GL.BindTexture(TextureTarget.TextureCubeMap, SkyboxRenderer.skyboxTextureID);
             texturedModel.BindTexture(OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
 
         }

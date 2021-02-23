@@ -1,25 +1,23 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using OpenTK;
+using OpenTK.Graphics.OpenGL4;
 namespace Senapp.Engine.Models
 {
     public class TexturedModel
     {
-        public RawModel rawModel { get; }
-        public Texture texture { get; }
-        public float shineDamper { get; set; }
-        public float reflectivity { get; set; }
-        public float luminosity { get; set; }
+        public RawModel rawModel;
+        public Texture texture;
+        public float shineDamper = 1;
+        public float reflectivity = 0.01f;
+        public float luminosity = 0.3f;
+        public Vector3 colour = Vector3.One;
 
-        public bool hasTransparency { get; set; }
-        public bool useFakeLighting { get; set; }
+        public bool hasTransparency = false;
+        public bool useFakeLighting = false;
 
         public TexturedModel(RawModel model, Texture tex)
         {
             rawModel = model;
             texture = tex;
-            texture = tex;
-            shineDamper = 10;
-            reflectivity = 1;
-            luminosity = 0.1f;
         }
         public void BindTexture(TextureUnit textureUnit)
         {

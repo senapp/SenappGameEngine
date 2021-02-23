@@ -81,17 +81,17 @@ namespace Senapp.Engine.Shaders
         {
             base.LoadMatrix(location_viewMatrix, matrix);
         }
-        public void LoadLight(Light light, Transform transform)
+        public void LoadLight(Light light)
         {
-            base.LoadVector(location_lightPosition, transform.position);
+            base.LoadVector(location_lightPosition, light.gameObject.transform.position);
             base.LoadVector(location_lightColour, light.colour);
 
         }
 
-        public void UpdateCamera(Camera camera, Transform transform)
+        public void UpdateCamera(Camera camera)
         {
             LoadProjectionMatrix(camera.GetProjectionMatrix());
-            LoadViewMatrix(camera.GetViewMatrix(transform));
+            LoadViewMatrix(camera.GetViewMatrix());
         }
     }
 }

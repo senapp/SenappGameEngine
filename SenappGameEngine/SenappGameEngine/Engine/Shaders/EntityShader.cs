@@ -17,8 +17,9 @@ namespace Senapp.Engine.Shaders
         private int location_reflectivity;
         private int location_luminosity;
         private int location_useFakeLighting;
-
-
+        private int location_enviroMap;
+        private int location_cameraPosition;
+        private int location_colour;
 
 
         public EntityShader() : base(VERTEX_SHADER_FILE, FRAGMENT_SHADER_FILE) { }
@@ -42,6 +43,13 @@ namespace Senapp.Engine.Shaders
             location_reflectivity = base.GetUniformLocation("reflectivity");
             location_luminosity = base.GetUniformLocation("luminosity");
             location_useFakeLighting = base.GetUniformLocation("useFakeLighting");
+            location_cameraPosition = base.GetUniformLocation("cameraPosition");
+            location_enviroMap = base.GetUniformLocation("enviroMap");
+            location_colour = base.GetUniformLocation("colour");
+        }
+        public void LoadColour(Vector3 colour)
+        {
+            base.LoadVector(location_colour, colour);
         }
         public void LoadUseFakeLightingVariable(bool useFake)
         {
@@ -65,17 +73,25 @@ namespace Senapp.Engine.Shaders
         {
             base.LoadMatrix(location_viewMatrix, matrix);
         }
-        public void LoadLight(Light light, Transform transform)
+        public void LoadLight(Light light)
         {
-            base.LoadVector(location_lightPosition, transform.position);
+            base.LoadVector(location_lightPosition, light.gameObject.transform.position);
             base.LoadVector(location_lightColour, light.colour);
 
         }
-
-        public void UpdateCamera(Camera camera, Transform transform)
+        public void LoadCameraPosition(Vector3 pos)
+        {
+            base.LoadVector(location_cameraPosition, pos);
+        }
+        public void LoadEnviromentMap(int textureID)
+        {
+            base.LoadInt(location_enviroMap, textureID);
+        }
+        public void UpdateCamera(Camera camera)
         {
             LoadProjectionMatrix(camera.GetProjectionMatrix());
-            LoadViewMatrix(camera.GetViewMatrix(transform));
+            LoadViewMatrix(camera.GetViewMatrix());
+            LoadCameraPosition(camera.gameObject.transform.position);
         }
     }
 }

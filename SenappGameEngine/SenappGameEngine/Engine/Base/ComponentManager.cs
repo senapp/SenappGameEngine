@@ -6,7 +6,7 @@ namespace Senapp.Engine.Base
 {
     public class ComponentManager
     {
-        private Dictionary<Type, Component> components;
+        private Dictionary<Type, Component> components = new Dictionary<Type, Component>();
 
         public ComponentManager()
         {

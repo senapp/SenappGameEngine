@@ -3391,9 +3391,9 @@ namespace Senapp.Engine.Renderer
                 return null;
             }
         }
-        public static Loader.LoaderVertex GetVertex(Geometries geometry)
+        public static LoaderVertex GetVertex(Geometries geometry)
         {
-            Loader.LoaderVertex vertex = new Loader.LoaderVertex(GetVertices(geometry), GetTextureCoordinates(geometry), GetNormals(geometry), GetIndices(geometry));
+            LoaderVertex vertex = new LoaderVertex(GetVertices(geometry), GetTextureCoordinates(geometry), GetNormals(geometry), GetIndices(geometry));
             return vertex;
         }
     }

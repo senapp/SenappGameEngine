@@ -16,24 +16,6 @@ namespace Senapp.Engine.Models
         private static List<int> textures = new List<int>();
         private static Dictionary<string, Texture> table = new Dictionary<string, Texture>();
 
-        public class LoaderVertex
-        {
-            public float[] position;
-            public float[] textureCoords;
-            public float[] normals;
-            public int[] indices;
-            public float furthestPoint;
-
-
-            public LoaderVertex(float[] pos, float[] texCor, float[] norms, int[] ind, float furthestpoint = 0)
-            {
-                position = pos;
-                textureCoords = texCor;
-                normals = norms;
-                indices = ind;
-                furthestPoint = furthestpoint;
-            }
-        }
         public static void DisposeModel(RawModel model)
         {
             foreach (var vbo in model.vboIDs)
@@ -71,7 +53,7 @@ namespace Senapp.Engine.Models
         }
         public static RawModel LoadToVAO(LoaderVertex vertexData)
         {
-            return LoadToVAO(vertexData.position, vertexData.textureCoords, vertexData.normals, vertexData.indices);
+            return LoadToVAO(vertexData.positions, vertexData.textureCoords, vertexData.normals, vertexData.indices);
         }
         public static RawModel LoadToVAO(float[] positions,float[] textureCoords, float[] normals, int[] indices)
         {
@@ -83,7 +65,14 @@ namespace Senapp.Engine.Models
             vboIDs.Add(FloatsToAttribute(2, 3, normals));
 
             UnbindVAO();
-            return new RawModel(vaoID, indices.Length, vboIDs);
+            return new RawModel(vaoID, indices.Length, vboIDs, new LoaderVertex(positions, textureCoords, normals, indices));
+        }
+        public static RawModel LoadToVAO(float[] positions, int dimensions)
+        {
+            int vaoID = CreateVAO();
+            FloatsToAttribute(0, dimensions, positions);
+            UnbindVAO();
+            return new RawModel(vaoID, positions.Length / dimensions);
         }
         private static int CreateVAO()
         {
@@ -92,20 +81,56 @@ namespace Senapp.Engine.Models
             GL.BindVertexArray(vaoID);
             return vaoID;
         }
-        public static Texture LoadTexture(string fileName = null, bool wrap = false)
+        public static int LoadCubeMap(string[] filePaths, string fileStart, string ext)
         {
-            Texture tex = null;
+            int texID = GL.GenTexture();
+            GL.ActiveTexture(TextureUnit.Texture0);
+            GL.BindTexture(TextureTarget.TextureCubeMap, texID);
+
+            for (int i = 0; i < filePaths.Length; i++)
+            {
+                using (var image = new Bitmap("Resources/Textures/CubeMap/"+ fileStart + filePaths[i] + ext))
+                {
+                    var data = image.LockBits(
+                        new Rectangle(0, 0, image.Width, image.Height),
+                        ImageLockMode.ReadOnly,
+                        System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+
+
+                    GL.TexImage2D(TextureTarget.TextureCubeMapPositiveX + i,
+                        0,
+                        PixelInternalFormat.Rgba,
+                        image.Width,
+                        image.Height,
+                        0,
+                        PixelFormat.Bgra,
+                        PixelType.UnsignedByte,
+                        data.Scan0);
+                }
+            }
+
+            GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+            GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
+            GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
+            GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
+            GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureWrapR, (int)TextureWrapMode.ClampToEdge);
+
+            textures.Add(texID);
+            return texID;
+        }
+        public static Texture LoadTexture(string filePath = null, string ext = ".png")
+        {
+            Texture tex;
             if (table.Count != 0)
             {
-                if (fileName == null || fileName == "")
-                    table.TryGetValue("DEFAULT_TEXTURE", out tex);
-                else
-                    table.TryGetValue(fileName, out tex);
+                if (filePath == null || filePath == "")  table.TryGetValue("DEFAULT_TEXTURE", out tex);
+                else  table.TryGetValue(filePath, out tex);
             }
             else
             {
                 Bitmap bitmap = new Bitmap("Engine/Defaults/DEFAULT_TEXTURE.png");
-                tex = new Texture("DEFAULT_TEXTURE", bitmap, true, true);
+                tex = new Texture("DEFAULT_TEXTURE", bitmap, false, true);
                 textures.Add(tex.GLTexture);
                 table.Add("DEFAULT_TEXTURE", tex);
                 tex = null;
@@ -115,45 +140,29 @@ namespace Senapp.Engine.Models
                 Bitmap bitmap = null;
                 try
                 {
-                    if (fileName == null || fileName == "")
-                        bitmap = new Bitmap("Engine/Defaults/DEFAULT_TEXTURE.png");
-                    else if (!fileName.Contains(".png"))
-                        bitmap = new Bitmap("Resources/Textures/" + fileName + ".png");
-                    else
-                        bitmap = new Bitmap(fileName);
+                    if (File.Exists("Resources/Textures/" + filePath + ext)) bitmap = new Bitmap("Resources/Textures/" + filePath + ext);
+                    else bitmap = new Bitmap(filePath);
                 }
                 catch (FileNotFoundException e)
                 {
                     Console.WriteLine(e.Message);
-                    if (table.Count != 0)
-                        table.TryGetValue("DEFAULT_TEXTURE", out tex);
-                    if (tex != null)
-                        return tex;
-
-                    bitmap = new Bitmap("Engine/Defaults/DEFAULT_TEXTURE.png");
+                    if (table.Count != 0) table.TryGetValue("DEFAULT_TEXTURE", out tex);
+                    if (tex != null) return tex;
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    if (table.Count != 0)
-                        table.TryGetValue("DEFAULT_TEXTURE", out tex);
-                    if (tex != null)
-                        return tex;
-
-                    bitmap = new Bitmap("Engine/Defaults/DEFAULT_TEXTURE.png");
+                    if (table.Count != 0)  table.TryGetValue("DEFAULT_TEXTURE", out tex);
+                    if (tex != null) return tex;
                 }
 
-                tex = new Texture(fileName, bitmap, true, true);
+                tex = new Texture(filePath, bitmap, true, false);
                 textures.Add(tex.GLTexture);
                 
-                if (fileName != null)
-                    table.Add(fileName, tex);
-                return tex;
+                if (filePath != null)
+                    table.Add(filePath, tex);
             }
-            else
-            {
-                return tex;
-            }
+            return tex;
         }
         private static int FloatsToAttribute(int attributeNumber,int size, float[] data)
         {

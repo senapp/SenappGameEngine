@@ -4,6 +4,7 @@ using Senapp.Engine.Base;
 using Senapp.Engine.Models;
 using Senapp.Engine.Shaders;
 using Senapp.Engine.UI;
+using System;
 using System.Collections.Generic;
 
 namespace Senapp.Engine.Renderer
@@ -30,13 +31,18 @@ namespace Senapp.Engine.Renderer
                 {
                     int textLength = 0;
                     var textComponent = text.GetComponent<Text>();
-                    foreach (var character in textComponent.textCharactersID)
+                    for (int i = 0; i < textComponent.textCharactersID.Count; i++)
                     {
+                        var character = textComponent.textCharactersCustomID[i];
+                        var characterID = textComponent.textCharactersID[i];
                         if (font.characterRawModels.TryGetValue(character, out RawModel model)) BindCharacter(model);
-                        PrepareInstance(textComponent, new Transform((text.transform.position.X + font.GetCharacter(character).xoffset + textLength) * textComponent.fontSize / Text.ScalingConst, (-text.transform.position.Y - font.GetCharacter(character).yoffset) * textComponent.fontSize / Text.ScalingConst, 0), cameraPosition);
+                        var rawPos = text.transform.GetUIPosition();
+                        var val = new Transform(new Vector3(rawPos.X + (font.GetCharacter(characterID).xoffset + textLength) * textComponent.fontSize / Transform.UIScalingConst, rawPos.Y - (font.GetCharacter(characterID).yoffset) * textComponent.fontSize / Transform.UIScalingConst, rawPos.Z), Vector3.Zero, Vector3.One );
+                        
+                        PrepareInstance(textComponent, val, cameraPosition);
                         GL.DrawElements(BeginMode.Triangles, UIQuad.vertexCount, DrawElementsType.UnsignedInt, 0);
                         UnbindCharacter();
-                        textLength += font.GetCharacter(character).xadvance - 5;
+                        textLength += font.GetCharacter(characterID).xadvance - 5;
                     }
                 }
             }
@@ -61,8 +67,8 @@ namespace Senapp.Engine.Renderer
         }
         public void PrepareInstance(Text text, Transform transform, Vector3 cameraPosition)
         {
-            shader.LoadTransformationMatrix(transform.TransformFromUIConstraint(text.constraint).TransformationMatrixUI(cameraPosition));
-            shader.LoadSprite(text.FontSprite);
+            shader.LoadTransformationMatrix(transform.TransformationMatrixUI(cameraPosition));
+            shader.LoadColour(text.colour);
         }
     }
 }

@@ -13,8 +13,6 @@ namespace Senapp.Engine.Shaders
         private int location_viewMatrix;
         private int location_projectionMatrix;
         private int location_colour;
-        private int location_colourMixRatio;
-        private int location_screenSize;
 
 
 
@@ -29,24 +27,18 @@ namespace Senapp.Engine.Shaders
         protected override void GetAllUniformLocations()
         {
             location_transformationMatrix = base.GetUniformLocation("transformationMatrix");
-            location_colourMixRatio = base.GetUniformLocation("colourMixRatio");
             location_viewMatrix = base.GetUniformLocation("viewMatrix");
             location_projectionMatrix = base.GetUniformLocation("projectionMatrix");
             location_colour = base.GetUniformLocation("colour");
-            location_screenSize = base.GetUniformLocation("screenSize");
         }
-
+        public void LoadColour(Vector3 colour)
+        {
+            base.LoadVector(location_colour, colour);
+        }
         public void LoadTransformationMatrix(Matrix4 matrix)
         {
             base.LoadMatrix(location_transformationMatrix, matrix);
         }
-        public void LoadSprite(Sprite sprite)
-        {
-            base.LoadVector(location_colour, sprite.colour);
-            base.LoadFloat(location_colourMixRatio, sprite.colourMixRatio);
-            base.LoadVector(location_screenSize, new Vector2(Game.Instance.Width, Game.Instance.Height));
-        }
-
         public void LoadViewMatrix(Matrix4 matrix)
         {
             base.LoadMatrix(location_viewMatrix, matrix);
@@ -55,9 +47,9 @@ namespace Senapp.Engine.Shaders
         {
             base.LoadMatrix(location_projectionMatrix, matrix);
         }
-        public void UpdateCamera(Camera camera, Transform transform)
+        public void UpdateCamera(Camera camera)
         {
-            LoadViewMatrix(camera.GetViewMatrixUI(transform));
+            LoadViewMatrix(camera.GetViewMatrixUI());
             LoadProjectionMatrix(camera.GetProjectionMatrixUI());
         }
     }

@@ -19,11 +19,13 @@ namespace Senapp.Engine.Renderer
         private TerrainShader terrainShader;
         private UIShader shaderUI;
         private TextShader textShader;
+        private SkyboxShader skyboxShader;
 
         private EntityRenderer entityRenderer;
         private TerrainRenderer terrainRenderer;
         private UIRenderer rendererUI;
         private TextRenderer textRenderer;
+        private SkyboxRenderer skyboxRenderer;
 
 
         private Dictionary<TexturedModel, List<GameObject>> entities = new Dictionary<TexturedModel, List<GameObject>>();
@@ -59,19 +61,21 @@ namespace Senapp.Engine.Renderer
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.ClearColor(0, 0, 0, 1);
         }
-        public void Initiliaze()
+        public void Initiliaze(Camera camera)
         {
             entityShader = new EntityShader();
             terrainShader = new TerrainShader();
             shaderUI = new UIShader();
             textShader = new TextShader();
+            skyboxShader = new SkyboxShader();
 
             entityRenderer = new EntityRenderer(entityShader);
             terrainRenderer = new TerrainRenderer(terrainShader);
             rendererUI = new UIRenderer(shaderUI);
             textRenderer = new TextRenderer(textShader);
+            skyboxRenderer = new SkyboxRenderer(skyboxShader, camera.GetProjectionMatrix());
         }
-        public void Render(GameObject sun, GameObject camera)
+        public void Render(Light sun, Camera camera)
         {
             foreach (var gameObject in GameObject.GameObjects)
             {
@@ -82,27 +86,30 @@ namespace Senapp.Engine.Renderer
 
             }
 
+            skyboxRenderer.Render(camera);
+
             entityShader.Start();
-            entityShader.UpdateCamera(camera.GetComponent<Camera>(), camera.transform);
+            entityShader.UpdateCamera(camera);
             entityRenderer.Render(entities);
-            entityShader.LoadLight(sun.GetComponent<Light>(), sun.transform);
+            entityShader.LoadLight(sun);
             entityShader.Stop();
 
             terrainShader.Start();
-            terrainShader.UpdateCamera(camera.GetComponent<Camera>(), camera.transform);
+            terrainShader.UpdateCamera(camera);
             terrainRenderer.Render(terrains);
-            terrainShader.LoadLight(sun.GetComponent<Light>(), sun.transform);
+            terrainShader.LoadLight(sun);
             terrainShader.Stop();
 
             shaderUI.Start();
-            shaderUI.UpdateCamera(camera.GetComponent<Camera>(), camera.transform);
-            rendererUI.Render(UIElements, camera.transform.position);
+            shaderUI.UpdateCamera(camera);
+            rendererUI.Render(UIElements, camera.gameObject.transform.position);
             shaderUI.Stop();
 
             textShader.Start();
-            textShader.UpdateCamera(camera.GetComponent<Camera>(), camera.transform);
-            textRenderer.Render(texts, camera.transform.position);
+            textShader.UpdateCamera(camera);
+            textRenderer.Render(texts, camera.gameObject.transform.position);
             textShader.Stop();
+
 
             terrains.Clear();
             entities.Clear();
@@ -165,6 +172,7 @@ namespace Senapp.Engine.Renderer
             terrainShader.CleanUp();
             shaderUI.CleanUp();
             textShader.CleanUp();
+            skyboxShader.CleanUp();
         }
         public static void EnableCulling()
         {

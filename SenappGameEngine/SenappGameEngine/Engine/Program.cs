@@ -9,7 +9,7 @@ namespace Senapp.Engine
         {
             using (Toolkit.Init())
             {
-                GraphicsMode mode = new GraphicsMode(new ColorFormat(24), 16, 8, 4, new ColorFormat(32), 2, false);
+                GraphicsMode mode = new GraphicsMode(new ColorFormat(24), 16, 8, 8, new ColorFormat(32), 2, false);
                 new TestGame(mode);
             }
         }   

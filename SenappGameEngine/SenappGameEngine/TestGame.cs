@@ -1,26 +1,20 @@
-﻿using System;
-using System.Drawing;
-using OpenTK.Graphics.OpenGL4;
-using OpenTK.Input;
-using OpenTK;
-
-using Senapp.Engine;
-using Senapp.Engine.Renderer;
-using Senapp.Engine.Events;
-using Senapp.Engine.Models;
-using Senapp.Engine.Entities;
-using Senapp.Engine.Base;
-using Senapp.Engine.Terrains;
-using System.Collections.Generic;
-using Senapp.Engine.UI;
-using System.Diagnostics;
-using ImGuiNET;
-using Senapp.Engine.ImGUI;
+﻿using OpenTK;
 using OpenTK.Graphics;
-using System.Linq;
-using System.Reflection;
-using System.Globalization;
-using System.Text.RegularExpressions;
+using OpenTK.Input;
+using Senapp.Engine;
+using Senapp.Engine.Base;
+using Senapp.Engine.Entities;
+using Senapp.Engine.Events;
+using Senapp.Engine.ImGUI;
+using Senapp.Engine.Models;
+using Senapp.Engine.Physics;
+using Senapp.Engine.PlayerInput;
+using Senapp.Engine.Renderer;
+using Senapp.Engine.Terrains;
+using Senapp.Engine.UI;
+using Senapp.Engine.Utilities;
+using System;
+using System.Diagnostics;
 
 namespace Senapp
 {
@@ -42,7 +36,6 @@ namespace Senapp
         public static readonly string TITLE = "Test";
 
         public GameFont font = new GameFont();
-
         private void Initialize(object sender)
         {
             font.LoadFont("arial");
@@ -56,77 +49,141 @@ namespace Senapp
                 WindowState = WindowState.Fullscreen;
         }
         private void GameInitilaztion()
-        {  
-            //GameObject plane = new GameObject();
-            //int size = 25;
-            //plane.AddComponent(new Entity(Terrain.GenerateTerrain(size),""));
-            //plane.isStatic = true;
-            //plane.transform = new Transform(size / 2, -1.2f, size / 2); 
+        {
+            GameObject plane = new GameObject();
+            int size = 100;
+            plane.AddComponent(new Entity(Terrain.GenerateTerrain(size), ""));
+            plane.isStatic = true;
+            plane.transform = new Transform(size / 2, 0, size / 2);
+            plane.AddComponent(new BoxCollisionMesh());
 
-            GameObject earth = new GameObject();
-            earth.AddComponent(new Entity(Geometries.Sphere, "earth8k"));
-            earth.transform = new Transform(0, 0, -3);
+            target.AddComponent(new Entity("alduin", "alduin"));
+            target.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
+            target.transform.position = new Vector3(-10, 5, 0);
+            target.GetComponent<Entity>().model.hasTransparency = true;
+            target.AddComponent(new RaycastTarget(5 / 0.02f, null, () => { Targeting = !Targeting; player.transform.rotation = new Vector3(0, player.transform.LookAt(target.transform.position).Y - 180, 0); },null));
 
-            GameObject mars = new GameObject();
-            mars.AddComponent(new Entity(Geometries.Sphere, "mars"));
-            mars.transform = new Transform(0, 0, 3);
+            for (int i = 0; i < 200; i++)
+            {
+                GameObject obj = new GameObject();
+                obj.AddComponent(new Entity(Geometries.Sphere, ""));
+                obj.GetComponent<Entity>().model.colour = new Vector3(Randomize.RangeFloat(0f, 1f), Randomize.RangeFloat(0f, 1f), Randomize.RangeFloat(0f, 1f));
+                obj.transform.position = new Vector3(Randomize.RangeFloat(-50f, 50f), Randomize.RangeFloat(0.5f, 50f), Randomize.RangeFloat(-50f, 50f));
+                obj.transform.localScale = new Vector3(Randomize.RangeFloat(0.5f, 2f));
+                obj.GetComponent<Entity>().model.reflectivity = 1;
+                obj.AddComponent(new BoxCollisionMesh());
+                obj.AddComponent(new Rigidbody(0.1f));
 
-            GameObject pyramid = new GameObject();
-            pyramid.AddComponent(new Entity(Geometries.Sphere, "jupiter"));
-            pyramid.transform = new Transform(-3, 0, 0);
+            }
 
-            GameObject cube = new GameObject();
-            cube.AddComponent(new Entity(Geometries.Sphere, "mercury"));
-            cube.transform = new Transform(3, 0, 0);
+            player.AddComponent(new Entity("witcher", "witcher"));
+            player.transform.localScale = new Vector3(2, 2, 2);
+            player.GetComponent<Entity>().model.hasTransparency = true;
 
 
-            sunLight.transform = new Transform(0, 2, 0, 0, 0, 0, .2f, .2f, .2f);
+            sunLight.transform = new Transform(-200, 2000, -200, 0, 0, 0, 2f, 2f, 2f);
             sunLight.AddComponent(new Entity(Geometries.Sphere));
             sunLight.GetComponent<Entity>().model.luminosity = 1;
-            mainCamera.transform = new Transform(3.754f, 3.5f, 4.893f);
-            var cam = mainCamera.GetComponent<Camera>();
-            cam.Yaw = 235f;
-            cam.Pitch = -30f;
 
-            text1.AddComponent(new Text("FPS", font, new Sprite(font.fontAtlas), 10, UIConstraint.TopLeft));
-            text1.transform = new Transform(0, 0, 0);
-            text3.AddComponent(new Text("Memory", font, new Sprite(font.fontAtlas), 10, UIConstraint.TopLeft));
-            text3.transform = new Transform(0, 75, 0); 
+            mainCamera.transform = new Transform(0, 4, 10);
+
+            var healthbar = new GameObject();
+            healthbar.AddComponent(new UIElement(new Sprite("healthbar")));
+            healthbar.transform.position = new Vector3(5,-10,0);
+            healthbar.transform.localScale = new Vector3(0.8f, 100f / 256f * 0.8f, 0.5f);
+            healthbar.transform.SetUIPosition(UIPosition.TopLeft);
+
+            var minimap = new GameObject();
+            minimap.AddComponent(new UIElement(new Sprite("minimap")));
+            minimap.transform.position = new Vector3(-15, -10, 0);
+            minimap.transform.localScale = new Vector3(0.8f, 128f / 256f * 0.8f, 0.5f);
+            minimap.transform.SetUIPosition(UIPosition.TopRight);
+
+            var questText = new GameObject();
+            questText.AddComponent(new Text("Ladies of the Wood", font, 6));
+            questText.GetComponent<Text>().colour = new Vector3(216f / 255f, 150f / 255f, 63f / 255f);
+            questText.transform.position = new Vector3(45f, -55, 0);
+            questText.transform.SetUIPosition(UIPosition.TopRight);
+
+            var questDes1 = new GameObject();
+            questDes1.AddComponent(new Text("Strange women lying", font, 4));
+            questDes1.GetComponent<Text>().colour = new Vector3(249f / 255f, 212f / 255f, 144f / 255f);
+            questDes1.transform.position = new Vector3(50f, -62, 0);
+            questDes1.transform.SetUIPosition(UIPosition.TopRight);
+
+            var questDes2 = new GameObject();
+            questDes2.AddComponent(new Text("in ponds distributing", font, 4));
+            questDes2.GetComponent<Text>().colour = new Vector3(249f / 255f, 212f / 255f, 144f / 255f);
+            questDes2.transform.position = new Vector3(50f, -65, 0);
+            questDes2.transform.SetUIPosition(UIPosition.TopRight);
+
+            var questDes3 = new GameObject();
+            questDes3.AddComponent(new Text("swords is no basis for", font, 4));
+            questDes3.GetComponent<Text>().colour = new Vector3(249f / 255f, 212f / 255f, 144f / 255f);
+            questDes3.transform.position = new Vector3(50f, -68, 0);
+            questDes3.transform.SetUIPosition(UIPosition.TopRight);
+
+            var questDes4 = new GameObject();
+            questDes4.AddComponent(new Text("a system of government", font, 4));
+            questDes4.GetComponent<Text>().colour = new Vector3(249f / 255f, 212f / 255f, 144f / 255f);
+            questDes4.transform.position = new Vector3(50f, -71, 0);
+            questDes4.transform.SetUIPosition(UIPosition.TopRight);
+
+            float offset = 30;
+
+            ProfilerScreen.AddComponent(new UIElement(new Sprite("grid")));
+            ProfilerScreen.transform.localScale = new Vector3(0.6f, 0.2f, 0.5f);
+            ProfilerScreen.transform.position = new Vector3(0, 7 + offset, 0);
+            ProfilerScreen.transform.SetUIPosition(UIPosition.Left);
+
+            text1.AddComponent(new Text("FPS", font, 8));
+            text1.transform.position = new Vector3(0, -35 + offset, 0);
+            text1.transform.SetUIPosition(UIPosition.Left);
+
+            text2.AddComponent(new Text("Memory", font, 8));
+            text2.transform.position = new Vector3(0, -43 + offset, 0);
+            text2.transform.SetUIPosition(UIPosition.Left);
         }
-        private GameObject text1 = new GameObject();
-        private GameObject text3 = new GameObject();
+
+        GameObject player = new GameObject();
+        GameObject target = new GameObject();
+
+        GameObject text1 = new GameObject();
+        GameObject text2 = new GameObject();
+        GameObject ProfilerScreen = new GameObject();
 
         private bool CameraFollowMouse;
+        private bool Gaming;
+        private bool Targeting;
 
 
         private void DebugScreenTexts()
         {
-            text1.GetComponent<Text>().UpdateText("FPS: " + GetFrameRate().ToString());
-            text3.GetComponent<Text>().UpdateText(string.Format("Memory: {0}mb", MathF.Round(Process.GetCurrentProcess().PrivateMemorySize64 / 1024f / 1024f)));
+            text1.GetComponent<Text>().UpdateText("FPS: " + FrameRate.Get().ToString());
+            text2.GetComponent<Text>().UpdateText("GameObjects: " + GameObject.GameObjects.Count);
+            //text2.GetComponent<Text>().UpdateText(string.Format("Memory: {0}mb", MathF.Round(Process.GetCurrentProcess().PrivateMemorySize64 / 1024f / 1024f)));
         }
         private void Update(object sender, GameUpdatedEventArgs args)
         {
-            foreach (var gameObject in GameObject.GameObjects)
-            {
-                if (gameObject.HasComponent<Entity>() && !gameObject.HasComponent<Light>() && !gameObject.isStatic) gameObject.transform.Rotate(0, 0, 0.01f);
-            }
             if (!Focused)
                 return;
-            if (Input.GetKeyDown(Key.E))
-                EditorWindow.enabled = !EditorWindow.enabled;
-            if (EditorWindow.enabled) return;
+            DebugScreenTexts();
+            if (Input.GetKeyDown(Key.E)) EditorWindow.enabled = !EditorWindow.enabled;
 
-            if (Input.GetKeyDown(Key.Escape))
-                Exit();
-
-            if (Input.GetKeyDown(Key.F))
-                FrameRateCapture(!GetFrameRateEnabled());
+            if (Input.GetKeyDown(Key.Escape)) Exit();
+            if (Input.GetKeyDown(Key.F)) FrameRate.Enable(!FrameRate.IsEnabled());
+            if (Input.GetKeyDown(Key.Z)) WireFrame.Enable(!WireFrame.IsEnabled());
+            if (Input.GetKeyDown(Key.Q))
+            {
+                ProfilerScreen.enabled = !ProfilerScreen.enabled;
+                text1.enabled = !text1.enabled;
+                text2.enabled = !text2.enabled;
+            }
+            if (Input.GetKeyDown(Key.G)) Gaming = !Gaming;
             if (Input.GetKeyDown(Key.V))
             {
-                if (VSync == VSyncMode.Off)
-                    VSync = VSyncMode.On;
-                else 
-                    VSync = VSyncMode.Off;
+                if (VSync == VSyncMode.Off) VSync = VSyncMode.On;
+                else VSync = VSyncMode.Off;
             }
             if (Input.GetKeyDown(Key.L))
             {
@@ -137,31 +194,83 @@ namespace Senapp
                     Input.SetMousePositionScreenCenter(0, 0);
             }
 
-            const float cameraSpeed = 10.0f;
-            var camera = mainCamera.GetComponent<Camera>();
-            if (Input.GetKey(Key.W))
-                mainCamera.transform.position += camera.Up * cameraSpeed * args.DeltaTime; 
-            if (Input.GetKey(Key.S))
-                mainCamera.transform.position -= camera.Up * cameraSpeed * args.DeltaTime; 
-            if (Input.GetKey(Key.A))
-                mainCamera.transform.position -= camera.Right * cameraSpeed * args.DeltaTime; 
-            if (Input.GetKey(Key.D))
-                mainCamera.transform.position += camera.Right * cameraSpeed * args.DeltaTime;
-            if (Input.GetKey(Key.Space))
-                mainCamera.transform.position += camera.Front * cameraSpeed * args.DeltaTime;
-            if (Input.GetKey(Key.ShiftLeft))
-                mainCamera.transform.position -= camera.Front * cameraSpeed * args.DeltaTime;
-
-            if (CameraFollowMouse)
+            if (!Gaming)
             {
-                Vector2 delta = Input.GetMouseDelta();
-                if (Input.GetLockCursor())
-                    Input.SetMousePositionScreenCenter(0, 0);
-                camera.Pitch -= delta.Y * camera.Sensitivity ;
-                camera.Yaw += delta.X * camera.Sensitivity;
-            }            
-        }
+                const float cameraSpeed = 10.0f;
 
+                if (Input.GetKey(Key.W))
+                    mainCamera.transform.position += mainCamera.transform.Up * cameraSpeed * args.DeltaTime;
+                if (Input.GetKey(Key.S))
+                    mainCamera.transform.position -= mainCamera.transform.Up * cameraSpeed * args.DeltaTime;
+                if (Input.GetKey(Key.A))
+                    mainCamera.transform.position -= mainCamera.transform.Right * cameraSpeed * args.DeltaTime;
+                if (Input.GetKey(Key.D))
+                    mainCamera.transform.position += mainCamera.transform.Right * cameraSpeed * args.DeltaTime;
+                if (Input.GetKey(Key.Space))
+                    mainCamera.transform.position += mainCamera.transform.Front * cameraSpeed * args.DeltaTime;
+                if (Input.GetKey(Key.ShiftLeft))
+                    mainCamera.transform.position -= mainCamera.transform.Front * cameraSpeed * args.DeltaTime;
+
+                if (CameraFollowMouse)
+                {
+                    Vector2 delta = Input.GetMouseDelta();
+                    if (Input.GetLockCursor()) Input.SetMousePositionScreenCenter(0, 0);
+
+                    mainCamera.transform.Rotate(-delta.Y * Camera.Sensitivity, -delta.X * Camera.Sensitivity, 0);
+                    mainCamera.transform.rotation = new Vector3(Math.Clamp(mainCamera.transform.rotation.X, -89f, 89f), mainCamera.transform.rotation.Y, mainCamera.transform.rotation.Z);
+                }
+            }
+            else
+            {
+                const float movementSpeed = 10.0f;
+                var movement = Vector3.Zero;
+                if (Input.GetKey(Key.W)) movement.Z += 1;
+                if (Input.GetKey(Key.S)) movement.Z -= 1;
+                if (Input.GetKey(Key.A)) movement.X += 1;
+                if (Input.GetKey(Key.D)) movement.X -= 1;
+
+                if (CameraFollowMouse)
+                {
+                    Vector2 delta = Input.GetMouseDelta();
+                    if (Input.GetLockCursor()) Input.SetMousePositionScreenCenter(0, 0);
+
+                    if (delta.X < 0)
+                        mainCamera.transform.position -= mainCamera.transform.Right * 10 * args.DeltaTime;
+                    if (delta.X > 0)
+                        mainCamera.transform.position += mainCamera.transform.Right * 10 * args.DeltaTime;      
+                     mainCamera.transform.LookAt(player.transform.position);
+                }
+                else
+                {
+                    if (movement.Z != 0 || movement.X != 0)
+                    {
+                        var camForward = mainCamera.transform.Front;
+                        camForward.Y = 0;
+                        camForward.Normalize();
+                        var camRight = mainCamera.transform.Right;
+                        camRight.Y = 0;
+                        camRight.Normalize();
+
+                        if (!Targeting)
+                        {
+                            var _direction = player.transform.position + (camForward * -movement.Z + camRight * movement.X).Normalized();
+                            player.transform.rotation = Vector3.Lerp(player.transform.rotation, player.transform.LookAt(_direction), args.DeltaTime * 5);
+                        }
+                        else player.transform.rotation = new Vector3(0, player.transform.LookAt(target.transform.position).Y - 180, 0);
+
+
+                        var movementVector = new Vector3(((camForward * -movement.Z + camRight * movement.X) * movementSpeed * args.DeltaTime).X, 0, ((camForward * -movement.Z + camRight * movement.X) * movementSpeed * args.DeltaTime).Z);
+
+                        player.transform.position -= movementVector;
+                    }
+
+                    var pos = player.transform.position;
+                    mainCamera.transform.rotation = new Vector3(-15f, -180, mainCamera.transform.rotation.Z);
+                    mainCamera.transform.position = new Vector3(pos.X, pos.Y + 6, pos.Z - 7);
+                }
+            }
+
+        }
         protected override void OnMouseMove(MouseMoveEventArgs e)
         {
             base.OnMouseMove(e);
@@ -173,10 +282,7 @@ namespace Senapp
             base.OnMouseWheel(e);
         }
 
-        private void Render(object sender, GameRenderedEventArgs e)
-        {
-            DebugScreenTexts();
-        }
+        private void Render(object sender, GameRenderedEventArgs e) { }
         private void Resized(object sender) { }
         private void Close(object sender) { }
     }

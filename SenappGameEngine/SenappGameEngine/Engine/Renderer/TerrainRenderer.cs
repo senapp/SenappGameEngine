@@ -6,6 +6,7 @@ using System.Text;
 using OpenTK.Graphics.OpenGL4;
 using Senapp.Engine.Models;
 using Senapp.Engine.Base;
+using Senapp.Engine.Utilities;
 
 namespace Senapp.Engine.Renderer
 {
@@ -26,7 +27,9 @@ namespace Senapp.Engine.Renderer
                 var terrainComponent = terrain.GetComponent<Terrain>();
                 PrepareTerrain(terrainComponent);
                 LoadModelMatrix(terrain);
+                if (WireFrame.IsEnabled()) GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
                 GL.DrawElements(BeginMode.Triangles, terrainComponent.model.vertexCount, DrawElementsType.UnsignedInt, 0);
+                if (WireFrame.IsEnabled()) GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
                 UnbindTexturedModel();
             }
         }

@@ -4,15 +4,15 @@ in vec3 position;
 in vec2 textureCoords;
 in vec3 normal;
 
-
 out vec2 pass_textureCoords;
 out vec3 surfaceNormal;
 out vec3 toLightVector;
-out vec3 toCameraVector;
+out vec3 reflectedVector;
 
 uniform mat4 transformationMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
+uniform vec3 cameraPosition;
 
 uniform vec3 lightPosition;
 uniform float useFakeLighting;
@@ -31,6 +31,8 @@ void main()
 	 }
 
 	 surfaceNormal = actualNormal * mat3(transpose(inverse(transformationMatrix)));
+
 	 toLightVector = lightPosition - worldPosition.xyz; 
-	 toCameraVector  = (inverse(viewMatrix) * vec4(0,0,0,1)).xyz - worldPosition.xyz;
+	 vec3 viewVector = normalize(worldPosition.xyz - cameraPosition);
+	 reflectedVector = reflect(viewVector, normalize(surfaceNormal));
 }

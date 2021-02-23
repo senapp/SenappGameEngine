@@ -11,37 +11,21 @@ namespace Senapp.Engine.UI
     {
         public Sprite sprite { get; set; }
         public RawModel quad { get; set; }
-        public UIConstraint constraint { get; set; }
         public UIElement() { }
-        public UIElement(RawModel _quad, Sprite _sprite, UIConstraint _constraint)
+        public UIElement(RawModel _quad, Sprite _sprite)
         {
             quad = _quad;
             sprite = _sprite;
-            constraint = _constraint;
         }
-        public UIElement(Sprite _sprite, UIConstraint _constraint)
+        public UIElement(Sprite _sprite)
         {
             quad = Loader.LoadToVAO(Geometry.GetVertex(Geometries.Quad));
             sprite = _sprite;
-            constraint = _constraint;
 
         }
         public void BindTexture()
         {
             sprite.BindTexture(OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
         }
-    }
-    public enum UIConstraint
-    {
-        None,
-        TopLeft,
-        Top,
-        TopRight,
-        CenterLeft,
-        Center,
-        CenterRight,
-        BottomLeft,
-        Bottom,
-        BottomRight
     }
 }

@@ -50,14 +50,9 @@ namespace Senapp.Engine.Models
 
             if (generateMipmaps)
             {
-                // Calculate how many levels to generate for this texture
                 MipmapLevels = (int)Math.Floor(Math.Log(Math.Max(Width, Height), 2));
             }
-            else
-            {
-                // There is only one level
-                MipmapLevels = 1;
-            }
+            else MipmapLevels = 1;
 
             Util.CheckGLError("Clear");
 
@@ -86,7 +81,9 @@ namespace Senapp.Engine.Models
 
             GL.TextureParameter(GLTexture, TextureParameterName.TextureMaxLevel, MipmapLevels - 1);
 
-            // This is a bit weird to do here
+            GL.TexParameter(TextureTarget.Texture2D, (TextureParameterName)OpenTK.Graphics.ES11.ExtTextureFilterAnisotropic.TextureMaxAnisotropyExt, MaxAniso);
+            Util.CheckGLError("Anisotropic");
+
             image.Dispose();
         }
 

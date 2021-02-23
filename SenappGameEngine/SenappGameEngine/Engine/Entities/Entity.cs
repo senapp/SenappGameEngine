@@ -2,6 +2,7 @@
 using Senapp.Engine.Renderer;
 using Senapp.Engine.Base;
 using System;
+using System.Collections.Generic;
 
 namespace Senapp.Engine.Entities
 {
@@ -10,24 +11,24 @@ namespace Senapp.Engine.Entities
         public TexturedModel model;
 
         public Entity() { }
-        public Entity(TexturedModel texturedModel)
+        public Entity(TexturedModel model)
         {
-            model = texturedModel;
-
+            this.model = model;
         }
-        public Entity(Geometries geometry, string textureFileName = null)
+        public Entity(Geometries geometry, string textureFileName = null, string ext = ".png")
         {
             RawModel rawModel = Loader.LoadToVAO(Geometry.GetVertex(geometry));
-            model = new TexturedModel(rawModel, Loader.LoadTexture(textureFileName));
+            model = new TexturedModel(rawModel, Loader.LoadTexture(textureFileName, ext));
         }
-        public Entity(string objectFileName = null, string textureFileName = null)
+        public Entity(string objectFileName = null, string textureFileName = null, string ext = ".png")
         {
-            RawModel rawModel = Loader.LoadToVAO(OBJLoader.LoadOBJModel(objectFileName));
-            model = new TexturedModel(rawModel, Loader.LoadTexture(textureFileName));
+            var vertex = OBJLoader.LoadOBJModel(objectFileName);
+            RawModel rawModel = Loader.LoadToVAO(vertex);
+            model = new TexturedModel(rawModel, Loader.LoadTexture(textureFileName, ext));
         }
-        public Entity(RawModel rawModel, string textureFileName = null)
+        public Entity(RawModel rawModel, string textureFileName = null, string ext = ".png")
         {
-            model = new TexturedModel(rawModel, Loader.LoadTexture(textureFileName));
+            model = new TexturedModel(rawModel, Loader.LoadTexture(textureFileName, ext));
         }
     }
 }

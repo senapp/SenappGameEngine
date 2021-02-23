@@ -10,8 +10,6 @@ namespace Senapp.Engine.Events
     public delegate void GameClosedEventHandler(object sender);
     public delegate void GameResizeEventHandler(object sender);
 
-
-
     public class GameUpdatedEventArgs : EventArgs
     {
         public readonly float DeltaTime;
