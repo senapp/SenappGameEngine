@@ -40,6 +40,7 @@ namespace Senapp
         {
             font.LoadFont("arial");
             WindowInitialization();
+            Icon = new System.Drawing.Icon(".\\Engine\\Defaults\\newIcon.ico");
             GameInitilaztion();
         }
         private void WindowInitialization()

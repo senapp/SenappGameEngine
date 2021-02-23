@@ -195,3 +195,4 @@ D:\Documents\senappGameEngine\SenappGameEngine\SenappGameEngine\bin\Debug\netcor
 D:\Documents\senappGameEngine\SenappGameEngine\SenappGameEngine\bin\Debug\netcoreapp3.0\Resources\Models\alduin.obj
 D:\Documents\senappGameEngine\SenappGameEngine\SenappGameEngine\bin\Debug\netcoreapp3.0\Resources\Textures\alduin.png
 D:\Documents\senappGameEngine\SenappGameEngine\SenappGameEngine\bin\Debug\netcoreapp3.0\Resources\Textures\alduin_n.png
+D:\Documents\senappGameEngine\SenappGameEngine\SenappGameEngine\bin\Debug\netcoreapp3.0\Engine\Defaults\newIcon.ico
