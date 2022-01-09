@@ -9,9 +9,6 @@ C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\De
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\OpenTK.dll
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\System.Drawing.Common.dll
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\System.Resources.Extensions.dll
-C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\obj\Debug\net5.0\Senapp.csproj.AssemblyReference.cache
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\obj\Debug\net5.0\Senapp.Properties.Resources.resources
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\obj\Debug\net5.0\Senapp.csproj.GenerateResource.cache
@@ -24,3 +21,6 @@ C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\obj\De
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\obj\Debug\net5.0\ref\Senapp.dll
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\obj\Debug\net5.0\Senapp.pdb
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\obj\Debug\net5.0\Senapp.genruntimeconfig.cache
+C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\System.Drawing.Common.dll
