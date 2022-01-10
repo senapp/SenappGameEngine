@@ -56,12 +56,14 @@ namespace Senapp.Programs
             plane.isStatic = true;
             plane.transform = new Transform(size / 2, 0, size / 2);
             plane.AddComponent(new RigidEntity(plane.transform.position));
+            MainScene.AddGameObject(plane);
 
             target.AddComponent(new Entity("alduin", "alduin_img"));
             target.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
             target.transform.position = new Vector3(-10, 5, 0);
             target.GetComponent<Entity>().model.hasTransparency = true;
             target.AddComponent(new RaycastTarget(5 / 0.02f, null, () => { Targeting = !Targeting; player.transform.rotation = new Vector3(0, player.transform.LookAt(target.transform.position).Y - 180, 0); },null));
+            MainScene.AddGameObject(target);
 
             for (int i = 0; i < 200; i++)
             {
@@ -72,60 +74,68 @@ namespace Senapp.Programs
                 obj.transform.localScale = new Vector3(Randomize.RangeFloat(0.5f, 2f));
                 obj.GetComponent<Entity>().model.reflectivity = 0.5f;
                 obj.AddComponent(new RigidEntity(obj.transform.position));
+                MainScene.AddGameObject(obj);
             }
 
             player.AddComponent(new Entity("witcher", "witcher_img"));
             player.transform.localScale = new Vector3(2, 2, 2);
             player.GetComponent<Entity>().model.hasTransparency = true;
+            MainScene.AddGameObject(player);
 
+            SunLight.gameObject.transform = new Transform(-200, 2000, -200, 0, 0, 0, 2f, 2f, 2f);
+            SunLight.gameObject.AddComponent(new Entity(Geometries.Sphere));
+            SunLight.gameObject.GetComponent<Entity>().model.luminosity = 1;
 
-            sunLight.transform = new Transform(-200, 2000, -200, 0, 0, 0, 2f, 2f, 2f);
-            sunLight.AddComponent(new Entity(Geometries.Sphere));
-            sunLight.GetComponent<Entity>().model.luminosity = 1;
-
-            mainCamera.transform = new Transform(0, 4, 10);
+            MainCamera.gameObject.transform = new Transform(0, 4, 10);
 
             var healthbar = new GameObject();
             healthbar.AddComponent(new Sprite("healthbar"));
             healthbar.transform.position = new Vector3(5,-10,0);
             healthbar.transform.localScale = new Vector3(0.8f, 100f / 256f * 0.8f, 0.5f);
             healthbar.GetComponent<Sprite>().UIConstriant = UIPosition.TopLeft;
+            MainScene.AddGameObject(healthbar);
 
             var minimap = new GameObject();
             minimap.AddComponent(new Sprite("minimap"));
             minimap.transform.position = new Vector3(-15, -10, 0);
             minimap.transform.localScale = new Vector3(0.8f, 128f / 256f * 0.8f, 0.5f);
             minimap.GetComponent<Sprite>().UIConstriant = UIPosition.TopRight;
+            MainScene.AddGameObject(minimap);
 
             var questText = new GameObject();
             questText.AddComponent(new Text("Ladies of the Wood", font, 6));
             questText.SetColour(new Vector3(216f / 255f, 150f / 255f, 63f / 255f));
             questText.transform.position = new Vector3(45f, -55, 0);
             questText.GetComponent<Text>().UIConstriant = UIPosition.TopRight;
+            MainScene.AddGameObject(questText);
 
             var questDes1 = new GameObject();
             questDes1.AddComponent(new Text("Strange women lying", font, 4));
             questDes1.SetColour(new Vector3(249f / 255f, 212f / 255f, 144f / 255f));
             questDes1.transform.position = new Vector3(50f, -62, 0);
             questDes1.GetComponent<Text>().UIConstriant = UIPosition.TopRight;
+            MainScene.AddGameObject(questDes1);
 
             var questDes2 = new GameObject();
             questDes2.AddComponent(new Text("in ponds distributing", font, 4));
             questDes2.SetColour(new Vector3(249f / 255f, 212f / 255f, 144f / 255f));
             questDes2.transform.position = new Vector3(50f, -65, 0);
             questDes2.GetComponent<Text>().UIConstriant = UIPosition.TopRight;
+            MainScene.AddGameObject(questDes2);
 
             var questDes3 = new GameObject();
             questDes3.AddComponent(new Text("swords is no basis for", font, 4));
             questDes3.SetColour(new Vector3(249f / 255f, 212f / 255f, 144f / 255f));
             questDes3.transform.position = new Vector3(50f, -68, 0);
             questDes3.GetComponent<Text>().UIConstriant = UIPosition.TopRight;
+            MainScene.AddGameObject(questDes3);
 
             var questDes4 = new GameObject();
             questDes4.AddComponent(new Text("a system of government", font, 4));
             questDes4.SetColour(new Vector3(249f / 255f, 212f / 255f, 144f / 255f));
             questDes4.transform.position = new Vector3(50f, -71, 0);
             questDes4.GetComponent<Text>().UIConstriant = UIPosition.TopRight;
+            MainScene.AddGameObject(questDes4);
 
             float offset = 30;
 
@@ -133,14 +143,17 @@ namespace Senapp.Programs
             ProfilerScreen.transform.localScale = new Vector3(0.6f, 0.2f, 0.5f);
             ProfilerScreen.transform.position = new Vector3(0, 7 + offset, 0);
             ProfilerScreen.GetComponent<Sprite>().UIConstriant = UIPosition.Left;
+            MainScene.AddGameObject(ProfilerScreen);
 
             text1.AddComponent(new Text("FPS", font, 8));
             text1.transform.position = new Vector3(0, -35 + offset, 0);
             text1.GetComponent<Text>().UIConstriant = UIPosition.Left;
+            MainScene.AddGameObject(text1);
 
             text2.AddComponent(new Text("Memory", font, 8));
             text2.transform.position = new Vector3(0, -43 + offset, 0);
             text2.GetComponent<Text>().UIConstriant = UIPosition.Left;
+            MainScene.AddGameObject(text2);
         }
 
         GameObject player = new GameObject();
@@ -157,7 +170,7 @@ namespace Senapp.Programs
         private void DebugScreenTexts()
         {
             text1.GetComponent<Text>().UpdateText("FPS: " + FrameRate.Get().ToString());
-            text2.GetComponent<Text>().UpdateText("GameObjects: " + Game.GameObjects.Count);
+            text2.GetComponent<Text>().UpdateText("GameObjects: " + Game.GetAllGameObjects().Count);
             //text2.GetComponent<Text>().UpdateText(string.Format("Memory: {0}mb", MathF.Round(Process.GetCurrentProcess().PrivateMemorySize64 / 1024f / 1024f)));
         }
 
@@ -208,30 +221,30 @@ namespace Senapp.Programs
                 const float cameraSpeed = 20.0f;
 
                 if (Input.GetKey(Key.Space))
-                    mainCamera.transform.position += mainCamera.transform.Up * cameraSpeed * args.DeltaTime;
+                    MainCamera.gameObject.transform.position += MainCamera.gameObject.transform.Up * cameraSpeed * args.DeltaTime;
                 if (Input.GetKey(Key.ShiftLeft))
-                    mainCamera.transform.position -= mainCamera.transform.Up * cameraSpeed * args.DeltaTime;
+                    MainCamera.gameObject.transform.position -= MainCamera.gameObject.transform.Up * cameraSpeed * args.DeltaTime;
                 if (ControllerManager.ControllerExists(0) && ControllerManager.GetController(0).GetButton(Buttons.A))
-                    mainCamera.transform.position += mainCamera.transform.Up * cameraSpeed * args.DeltaTime;
+                    MainCamera.gameObject.transform.position += MainCamera.gameObject.transform.Up * cameraSpeed * args.DeltaTime;
                 if (ControllerManager.ControllerExists(0) && ControllerManager.GetController(0).GetButton(Buttons.B))
-                    mainCamera.transform.position -= mainCamera.transform.Up * cameraSpeed * args.DeltaTime;
+                    MainCamera.gameObject.transform.position -= MainCamera.gameObject.transform.Up * cameraSpeed * args.DeltaTime;
 
                 if (Input.GetKey(Key.A))
-                    mainCamera.transform.position -= mainCamera.transform.Right * cameraSpeed * args.DeltaTime;
+                    MainCamera.gameObject.transform.position -= MainCamera.gameObject.transform.Right * cameraSpeed * args.DeltaTime;
                 if (Input.GetKey(Key.D))
-                    mainCamera.transform.position += mainCamera.transform.Right * cameraSpeed * args.DeltaTime;
+                    MainCamera.gameObject.transform.position += MainCamera.gameObject.transform.Right * cameraSpeed * args.DeltaTime;
                 if (ControllerManager.ControllerExists(0))
                 {
-                    mainCamera.transform.position += mainCamera.transform.Right * cameraSpeed * args.DeltaTime * ControllerManager.GetController(0).GetAxis(Controller.Axis.HorizontalLeft);
+                    MainCamera.gameObject.transform.position += MainCamera.gameObject.transform.Right * cameraSpeed * args.DeltaTime * ControllerManager.GetController(0).GetAxis(Controller.Axis.HorizontalLeft);
                 }
 
                 if (Input.GetKey(Key.W))
-                    mainCamera.transform.position += mainCamera.transform.Front * cameraSpeed * args.DeltaTime;
+                    MainCamera.gameObject.transform.position += MainCamera.gameObject.transform.Front * cameraSpeed * args.DeltaTime;
                 if (Input.GetKey(Key.S))
-                    mainCamera.transform.position -= mainCamera.transform.Front * cameraSpeed * args.DeltaTime;
+                    MainCamera.gameObject.transform.position -= MainCamera.gameObject.transform.Front * cameraSpeed * args.DeltaTime;
                 if (ControllerManager.ControllerExists(0))
                 {
-                    mainCamera.transform.position += mainCamera.transform.Front * cameraSpeed * args.DeltaTime * ControllerManager.GetController(0).GetAxis(Controller.Axis.VerticalLeft);
+                    MainCamera.gameObject.transform.position += MainCamera.gameObject.transform.Front * cameraSpeed * args.DeltaTime * ControllerManager.GetController(0).GetAxis(Controller.Axis.VerticalLeft);
                 }
 
                 if (CameraFollowMouse)
@@ -250,8 +263,8 @@ namespace Senapp.Programs
 
                     if (Input.GetLockCursor()) Input.SetMousePositionScreenCenter(0, 0);
 
-                    mainCamera.transform.Rotate(-delta.Y * sensitivity, -delta.X * sensitivity, 0);
-                    mainCamera.transform.rotation = new Vector3(Math.Clamp(mainCamera.transform.rotation.X, -89f, 89f), mainCamera.transform.rotation.Y, mainCamera.transform.rotation.Z);
+                    MainCamera.gameObject.transform.Rotate(-delta.Y * sensitivity, -delta.X * sensitivity, 0);
+                    MainCamera.gameObject.transform.rotation = new Vector3(Math.Clamp(MainCamera.gameObject.transform.rotation.X, -89f, 89f), MainCamera.gameObject.transform.rotation.Y, MainCamera.gameObject.transform.rotation.Z);
                 }
             }
             else
@@ -282,18 +295,18 @@ namespace Senapp.Programs
 
                     if (Input.GetLockCursor()) Input.SetMousePositionScreenCenter(0, 0);
 
-                     // if (delta.X < 0) mainCamera.transform.position -= mainCamera.transform.Right * 10 * args.DeltaTime;
-                     // if (delta.X > 0) mainCamera.transform.position += mainCamera.transform.Right * 10 * args.DeltaTime;      
-                     // mainCamera.transform.LookAt(player.transform.position);
+                     // if (delta.X < 0) MainCamera.gameObject.transform.position -= MainCamera.gameObject.transform.Right * 10 * args.DeltaTime;
+                     // if (delta.X > 0) MainCamera.gameObject.transform.position += MainCamera.gameObject.transform.Right * 10 * args.DeltaTime;      
+                     // MainCamera.gameObject.transform.LookAt(player.transform.position);
                 }
                 else
                 {
                     if (movement.Z != 0 || movement.X != 0)
                     {
-                        var camForward = mainCamera.transform.Front;
+                        var camForward = MainCamera.gameObject.transform.Front;
                         camForward.Y = 0;
                         camForward.Normalize();
-                        var camRight = mainCamera.transform.Right;
+                        var camRight = MainCamera.gameObject.transform.Right;
                         camRight.Y = 0;
                         camRight.Normalize();
 
@@ -314,8 +327,8 @@ namespace Senapp.Programs
                     }
 
                     var pos = player.transform.position;
-                    mainCamera.transform.rotation = new Vector3(-15f, -180, mainCamera.transform.rotation.Z);
-                    mainCamera.transform.position = new Vector3(pos.X, pos.Y + 6, pos.Z - 7);
+                    MainCamera.gameObject.transform.rotation = new Vector3(-15f, -180, MainCamera.gameObject.transform.rotation.Z);
+                    MainCamera.gameObject.transform.position = new Vector3(pos.X, pos.Y + 6, pos.Z - 7);
                 }
             }
 
@@ -330,7 +343,7 @@ namespace Senapp.Programs
         }
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
-            mainCamera.GetComponent<Camera>().Fov -= e.DeltaPrecise;
+            MainCamera.Fov -= e.DeltaPrecise;
             base.OnMouseWheel(e);
         }
     }

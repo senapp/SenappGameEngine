@@ -28,6 +28,7 @@ namespace Senapp.Engine.Renderer
             {   
                 PrepareSprite(texture);
                 sprites.TryGetValue(texture, out List<GameObject> batch);
+                batch.Sort(Sprite.SortBySortingLayer);
                 foreach (GameObject element in batch)
                 {
                     var sprite = element.GetComponent<Sprite>();

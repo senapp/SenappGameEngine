@@ -183,7 +183,7 @@ namespace Senapp.Engine.Base
 
         /// <summary>
         /// Rotate transformation towards target
-        /// Blend: No change on call = 0 <-> 1 = Instantly rotate to target
+        /// Blend: No change on call = 0 - 1 = Instantly rotate to target
         /// </summary>
         public void RotateTowardsTarget(Vector3 target, float blend, float rotationOffset = 0)
         {

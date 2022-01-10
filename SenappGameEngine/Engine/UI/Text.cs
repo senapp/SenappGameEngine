@@ -10,8 +10,6 @@ namespace Senapp.Engine.UI
 {
     public class Text : UIElement
     {
-        public static readonly float TextYOffset = 6;
-
         public GameFont Font;
 
         public List<double> textCharactersID = new List<double>();
@@ -35,6 +33,7 @@ namespace Senapp.Engine.UI
         }
 
         public Text() { }
+
         public Text(string _text, GameFont _font, int _fontSize = 28, Capitalization capitalization = Capitalization.Regularcase)
         {
             Font = _font;
@@ -42,6 +41,7 @@ namespace Senapp.Engine.UI
             textCapitalzation = capitalization;
             UpdateText(_text);
         }
+
         public void UpdateText(string _text)
         {
             textCharactersID.Clear();
@@ -85,10 +85,10 @@ namespace Senapp.Engine.UI
                     data.textureCoords[6] = (float)(character.x + character.width) / Font.fontAtlas.Width;
                     data.textureCoords[7] = (float)character.y / Font.fontAtlas.Height;
 
-                    data.positions[4] = data.positions[1] - (float)character.height * fontSize / Sprite.UIScalingConst;
-                    data.positions[6] = data.positions[0] + (float)character.width * fontSize / Sprite.UIScalingConst;
-                    data.positions[7] = data.positions[1] - (float)character.height * fontSize / Sprite.UIScalingConst;
-                    data.positions[9] = data.positions[0] + (float)character.width * fontSize / Sprite.UIScalingConst;
+                    data.positions[4] = data.positions[1] - (float)character.height * fontSize / UIScalingConst;
+                    data.positions[6] = data.positions[0] + (float)character.width * fontSize / UIScalingConst;
+                    data.positions[7] = data.positions[1] - (float)character.height * fontSize / UIScalingConst;
+                    data.positions[9] = data.positions[0] + (float)character.width * fontSize / UIScalingConst;
                     RawModel charData = Loader.LoadToVAO(data, $"Character_{Font.file}_{characterID}");
 
                     Font.characterRawModels.Add(characterID, charData);
@@ -103,6 +103,11 @@ namespace Senapp.Engine.UI
                 textLength += character.xadvance - 5;
                 textHeight = Math.Max(textHeight, character.height + 5);
             }
+        }
+
+        public static int SortBySortingLayer(GameObject a, GameObject b)
+        {
+            return a.GetComponent<Text>().SortingLayer.CompareTo(b.GetComponent<Text>().SortingLayer);
         }
     }
 }

@@ -57,12 +57,13 @@ namespace Senapp.Programs
             plane.isStatic = true;
             plane.transform = new Transform(size / 2, 2, size / 2);
             plane.AddComponent(new RigidEntity(plane.transform.position));
+            MainScene.AddGameObject(plane);
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 100; i++)
             {
                 GameObject obj = new GameObject();
                 obj.AddComponent(new Entity(Geometries.Cube, ""));
-                obj.transform.position = new Vector3(0,i == 0 ? 4 : 8, 0);
+                obj.transform.position = new Vector3(Randomize.RangeFloat(1, 10), Randomize.RangeFloat(1, 10), Randomize.RangeFloat(1, 10));
                 obj.GetComponent<Entity>().model.shineDamper = 0.1f;
                 obj.GetComponent<Entity>().model.reflectivity = 0.1f;
                 obj.GetComponent<Entity>().model.luminosity = 0.8f;
@@ -79,13 +80,14 @@ namespace Senapp.Programs
                         lockToMouseObject = null;
                     }
                 }));
+                MainScene.AddGameObject(obj);
             }
 
-            sunLight.transform = new Transform(0, 25, 0, 0, 0, 0, 2f, 2f, 2f);
-            sunLight.AddComponent(new Entity(Geometries.Sphere));
-            sunLight.GetComponent<Entity>().model.luminosity = 1;
+            SunLight.gameObject.transform = new Transform(0, 25, 0, 0, 0, 0, 2f, 2f, 2f);
+            SunLight.gameObject.AddComponent(new Entity(Geometries.Sphere));
+            SunLight.gameObject.GetComponent<Entity>().model.luminosity = 1;
 
-            mainCamera.transform = new Transform(0, 4, 10);
+            MainCamera.gameObject.transform = new Transform(0, 4, 10);
 
             float offset = 30;
 
@@ -93,14 +95,17 @@ namespace Senapp.Programs
             ProfilerScreen.transform.localScale = new Vector3(0.6f, 0.2f, 0.5f);
             ProfilerScreen.transform.position = new Vector3(0, 7 + offset, 0);
             ProfilerScreen.GetComponent<Sprite>().UIConstriant = UIPosition.Left;
+            MainScene.AddGameObject(ProfilerScreen);
 
             text1.AddComponent(new Text("FPS", font, 8));
             text1.transform.position = new Vector3(0, -35 + offset, 0);
-            text1.GetComponent<Sprite>().UIConstriant = UIPosition.Left;
+            text1.GetComponent<Text>().UIConstriant = UIPosition.Left;
+            MainScene.AddGameObject(text1);
 
             text2.AddComponent(new Text("Memory", font, 8));
             text2.transform.position = new Vector3(0, -43 + offset, 0);
-            text2.GetComponent<Sprite>().UIConstriant = UIPosition.Left;
+            text2.GetComponent<Text>().UIConstriant = UIPosition.Left;
+            MainScene.AddGameObject(text2);
         }
 
 
@@ -116,7 +121,7 @@ namespace Senapp.Programs
         private void DebugScreenTexts()
         {
             text1.GetComponent<Text>().UpdateText("FPS: " + FrameRate.Get().ToString());
-            text2.GetComponent<Text>().UpdateText("GameObjects: " + GameObjects.Count);
+            text2.GetComponent<Text>().UpdateText("GameObjects: " + GetAllGameObjects().Count);
         }
 
         private void Update(object sender, GameUpdatedEventArgs args)
@@ -205,30 +210,30 @@ namespace Senapp.Programs
             const float cameraSpeed = 5;
 
             if (Input.GetKey(Key.Space))
-                mainCamera.transform.position += mainCamera.transform.Up * cameraSpeed * args.DeltaTime;
+                MainCamera.gameObject.transform.position += MainCamera.gameObject.transform.Up * cameraSpeed * args.DeltaTime;
             if (Input.GetKey(Key.ShiftLeft))
-                mainCamera.transform.position -= mainCamera.transform.Up * cameraSpeed * args.DeltaTime;
+                MainCamera.gameObject.transform.position -= MainCamera.gameObject.transform.Up * cameraSpeed * args.DeltaTime;
             if (ControllerManager.ControllerExists(0) && ControllerManager.GetController(0).GetButton(Buttons.A))
-                mainCamera.transform.position += mainCamera.transform.Up * cameraSpeed * args.DeltaTime;
+                MainCamera.gameObject.transform.position += MainCamera.gameObject.transform.Up * cameraSpeed * args.DeltaTime;
             if (ControllerManager.ControllerExists(0) && ControllerManager.GetController(0).GetButton(Buttons.B))
-                mainCamera.transform.position -= mainCamera.transform.Up * cameraSpeed * args.DeltaTime;
+                MainCamera.gameObject.transform.position -= MainCamera.gameObject.transform.Up * cameraSpeed * args.DeltaTime;
 
             if (Input.GetKey(Key.A))
-                mainCamera.transform.position -= mainCamera.transform.Right * cameraSpeed * args.DeltaTime;
+                MainCamera.gameObject.transform.position -= MainCamera.gameObject.transform.Right * cameraSpeed * args.DeltaTime;
             if (Input.GetKey(Key.D))
-                mainCamera.transform.position += mainCamera.transform.Right * cameraSpeed * args.DeltaTime;
+                MainCamera.gameObject.transform.position += MainCamera.gameObject.transform.Right * cameraSpeed * args.DeltaTime;
             if (ControllerManager.ControllerExists(0))
             {
-                mainCamera.transform.position += mainCamera.transform.Right * cameraSpeed * args.DeltaTime * ControllerManager.GetController(0).GetAxis(Controller.Axis.HorizontalLeft);
+                MainCamera.gameObject.transform.position += MainCamera.gameObject.transform.Right * cameraSpeed * args.DeltaTime * ControllerManager.GetController(0).GetAxis(Controller.Axis.HorizontalLeft);
             }
 
             if (Input.GetKey(Key.W))
-                mainCamera.transform.position += mainCamera.transform.Front * cameraSpeed * args.DeltaTime;
+                MainCamera.gameObject.transform.position += MainCamera.gameObject.transform.Front * cameraSpeed * args.DeltaTime;
             if (Input.GetKey(Key.S))
-                mainCamera.transform.position -= mainCamera.transform.Front * cameraSpeed * args.DeltaTime;
+                MainCamera.gameObject.transform.position -= MainCamera.gameObject.transform.Front * cameraSpeed * args.DeltaTime;
             if (ControllerManager.ControllerExists(0))
             {
-                mainCamera.transform.position += mainCamera.transform.Front * cameraSpeed * args.DeltaTime * ControllerManager.GetController(0).GetAxis(Controller.Axis.VerticalLeft);
+                MainCamera.gameObject.transform.position += MainCamera.gameObject.transform.Front * cameraSpeed * args.DeltaTime * ControllerManager.GetController(0).GetAxis(Controller.Axis.VerticalLeft);
             }
 
             if (CameraFollowMouse)
@@ -247,8 +252,8 @@ namespace Senapp.Programs
 
                 if (Input.GetLockCursor()) Input.SetMousePositionScreenCenter(0, 0);
 
-                mainCamera.transform.Rotate(-delta.Y * sensitivity, -delta.X * sensitivity, 0);
-                mainCamera.transform.rotation = new Vector3(Math.Clamp(mainCamera.transform.rotation.X, -89f, 89f), mainCamera.transform.rotation.Y, mainCamera.transform.rotation.Z);
+                MainCamera.gameObject.transform.Rotate(-delta.Y * sensitivity, -delta.X * sensitivity, 0);
+                MainCamera.gameObject.transform.rotation = new Vector3(Math.Clamp(MainCamera.gameObject.transform.rotation.X, -89f, 89f), MainCamera.gameObject.transform.rotation.Y, MainCamera.gameObject.transform.rotation.Z);
             }
         }
         private void Render(object sender, GameRenderedEventArgs e) { }
@@ -261,7 +266,7 @@ namespace Senapp.Programs
         }
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
-            mainCamera.GetComponent<Camera>().Fov -= e.DeltaPrecise;
+            MainCamera.Fov -= e.DeltaPrecise;
             base.OnMouseWheel(e);
         }
     }

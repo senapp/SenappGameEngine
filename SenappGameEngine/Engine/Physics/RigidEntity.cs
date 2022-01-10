@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using OpenTK;
 
 using Senapp.Engine.Base;
 using Senapp.Engine.Entities;
+using Senapp.Engine.Events;
 using Senapp.Engine.Utilities;
 using static Senapp.Engine.Physics.PhysicsExtensions;
 
@@ -12,22 +12,24 @@ namespace Senapp.Engine.Physics
 {
     public class RigidEntity : Component
     {
-        public static List<RigidEntity> colliders = new List<RigidEntity>();
+        private Vector3 maxVector;
+        private Vector3 minVector;
+         
+        private Vector3 maxVertex;
+        private Vector3 minVertex;
+         
+        private Vector3 weight;
+        private Vector3 lastPosition;
 
-        Vector3 maxVector;
-        Vector3 minVector;
-
-        Vector3 maxVertex;
-        Vector3 minVertex;
-
-        Vector3 weight;
-        Vector3 lastPosition;
+        private float mass = 1;
+        public float MovedDistance = 0;
 
         public RigidEntity() { }
 
-        public RigidEntity(Vector3 lastPosition) 
+        public RigidEntity(Vector3 lastPosition, float mass = 0.1f) 
         {
             this.lastPosition = lastPosition;
+            this.mass = mass;
         }
 
         public override bool ComponentConditions(GameObject gameObject)
@@ -37,8 +39,13 @@ namespace Senapp.Engine.Physics
 
         public override void Awake()
         {
-            colliders.Add(this);
+            Game.Instance.PhysicsManager.rigidEntities.Add(this);
             CalculateBoundingBox();
+        }
+
+        public void GravityUpdate(GameUpdatedEventArgs args)
+        {
+            gameObject.transform.Translate(0, PhysicsManager.gravity * args.DeltaTime * mass, 0);
         }
 
         public Vector3 GetEntityDirection()
@@ -102,19 +109,24 @@ namespace Senapp.Engine.Physics
             }
         }
 
-        public void UpdateBoundingBox(out bool newPosition)
+        public void UpdatePosition(out bool boundingBoxUpdated)
         {
             var worldVerticeMin = gameObject.transform.GetVerticePosition(new Vector3(minVertex.X, minVertex.Y, minVertex.Z));
             var worldVerticeMax = gameObject.transform.GetVerticePosition(new Vector3(maxVertex.X, maxVertex.Y, maxVertex.Z));
 
-            newPosition = minVector != worldVerticeMin || maxVector != worldVerticeMax;
-
+            boundingBoxUpdated = minVector != worldVerticeMin || maxVector != worldVerticeMax;    
+            
             minVector.X = worldVerticeMin.X;
             minVector.Y = worldVerticeMin.Y;
             minVector.Z = worldVerticeMin.Z;
             maxVector.X = worldVerticeMax.X;
             maxVector.Y = worldVerticeMax.Y;
             maxVector.Z = worldVerticeMax.Z;
+
+            if (lastPosition != gameObject.transform.position)
+            {
+                MovedDistance = Vector3.Distance(lastPosition, gameObject.transform.position);
+            }
         }
 
         public bool CheckCollision(RigidEntity col, out Vector3 colliderPosition)

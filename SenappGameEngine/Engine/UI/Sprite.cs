@@ -11,7 +11,8 @@ namespace Senapp.Engine.UI
         public Texture texture { get; set; }
         public RawModel quad { get; set; }
 
-        public Sprite() { }
+        public Sprite() : this("") { }
+
         public Sprite(RawModel quad, Texture texture)
         {
             this.quad = quad;
@@ -27,6 +28,11 @@ namespace Senapp.Engine.UI
         public void BindTexture()
         {
             texture.Bind(OpenTK.Graphics.OpenGL4.TextureUnit.Texture0);
+        }
+
+        public static int SortBySortingLayer(GameObject a, GameObject b)
+        {
+            return a.GetComponent<Sprite>().SortingLayer.CompareTo(b.GetComponent<Sprite>().SortingLayer);
         }
     }
 }

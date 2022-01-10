@@ -13,13 +13,13 @@ using Senapp.Engine.PlayerInput;
 using Senapp.Engine.Renderer;
 using Senapp.Engine.Events;
 using Senapp.Engine.Physics;
+using System.Linq;
 
 namespace Senapp.Engine.Base
 {
     public abstract class Game : GameWindow
     {
         public static Game Instance { get; private set; }
-        public static List<GameObject> GameObjects = new List<GameObject>();
 
         public static readonly int WINDOW_BORDER_SIZE = 9;
         public float AspectRatio;
@@ -42,34 +42,84 @@ namespace Senapp.Engine.Base
         protected Game (int width, int height, GraphicsMode gMode, string title) : base(width, height, gMode, title, GameWindowFlags.Default, DisplayDevice.Default, 4, 5, GraphicsContextFlags.ForwardCompatible)
         {
             if (Instance != null) Console.WriteLine("You should not have more then one Game class");
-            Instance = this;
 
-            //TargetRenderFrequency = 60;
-            //TargetUpdateFrequency = 30;
+            Instance = this;
         }
 
-        private MasterRenderer renderer = new MasterRenderer();
-        private RaycastManager raycastManager = new RaycastManager();
-        private PhysicsManager physicsManager = new PhysicsManager();
+        public MasterRenderer Renderer;
+        public RaycastManager RaycastManager;
+        public PhysicsManager PhysicsManager;
+        public SceneManager SceneManager;
 
-        public static GameObject sunLight = new GameObject();
-        public static GameObject mainCamera = new GameObject();
+        public Scene MainScene;
+        public Light SunLight;
+        public Camera MainCamera;
+
+        /// <summary>
+        /// Gets scene game objects. 
+        /// </summary>
+        /// <returns>All GameObjects at the root of each scene, children of these GameObjects should be gotten by calling GetChildren() on the gameObject</returns>
+        public static List<GameObject> GetSceneGameObjects()
+        {
+            var total = new List<GameObject>();
+            foreach (var scene in Instance.SceneManager.scenes.Values)
+            {
+                total.AddRange(scene.GetGameObjects());
+            }
+            return total;
+        }
+
+        /// <summary>
+        /// Gets all GameObjects
+        /// </summary>
+        /// <returns>All GameObjects currently being used.</returns>
+        public static List<GameObject> GetAllGameObjects()
+        {
+            var total = new List<GameObject>();
+            foreach (var scene in Instance.SceneManager.scenes.Values)
+            {
+                total.AddRange(scene.GetAllGameObjects());
+            }
+            return total;
+        }
+
+        private void EssentialSetup()
+        {
+            SunLight = new GameObject()
+                .WithName("Sun Light")
+                .WithColour(Vector3.One)
+                .AddComponent(new Light());
+
+            MainCamera = new GameObject()
+                .WithName("Main Camera")
+                .AddComponent(new Camera(Width / (float)Height, 60));
+
+            MainScene = new Scene()
+                .WithGameObject(SunLight.gameObject)
+                .WithGameObject(MainCamera.gameObject);
+
+            Renderer = new MasterRenderer();
+            RaycastManager = new RaycastManager(MainCamera);
+            PhysicsManager = new PhysicsManager();
+            SceneManager = new SceneManager();
+
+            SceneManager.AddScene(MainScene);
+        }
 
         protected override void OnClosed(EventArgs e)
         {
-            renderer.Dispose();
+            Renderer.Dispose();
             Loader.Dispose();
             OnGameClosed();
+            SceneManager.Dispose();
             Dispose();
         }
         protected override void OnLoad(EventArgs e)
         {
-            mainCamera.AddComponent(new Camera(Width / (float)Height, 60));
-            sunLight.AddComponent(new Light());
-            sunLight.SetColour(Vector3.One);
+            EssentialSetup();
 
             MasterRenderer.Initialize();
-            renderer.Initiliaze(mainCamera.GetComponent<Camera>());
+            Renderer.Initiliaze(MainCamera);
 
             GL.Enable(EnableCap.Texture2D);
             GL.Ortho(0, Width, Height, 0, 0, 1);
@@ -79,29 +129,28 @@ namespace Senapp.Engine.Base
         }
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
-            var time = new GameUpdatedEventArgs((float)e.Time);
+            var args = new GameUpdatedEventArgs((float)e.Time);
+
             Input.Update();
             ControllerManager.Update();
-            OnGameUpdated(time);
 
-            foreach (var gameObject in GameObjects)
+            OnGameUpdated(args);
+
+            foreach (var gameObject in GetSceneGameObjects())
             {
-                if (!gameObject.enabled) continue;
-                foreach (var component in gameObject.componentManager.GetComponents())
-                {
-                    component.Value.Update(time);
-                } 
+                gameObject.Update(args);
             }
-            physicsManager.PhysicsUpdate(time);
+
+            PhysicsManager.PhysicsUpdate(args);
         }
         protected override void OnMouseMove(MouseMoveEventArgs e)
         {
-            raycastManager.RaycastUISendingUpdate(e);
-            raycastManager.RaycastSendingUpdate(e);
+            RaycastManager.RaycastUISendingUpdate(e);
+            RaycastManager.RaycastSendingUpdate(e);
         }
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
-            raycastManager.RaycastClickCheck();
+            RaycastManager.RaycastClickCheck();
         }
         protected override void OnResize(EventArgs e)
         {
@@ -109,6 +158,7 @@ namespace Senapp.Engine.Base
             int screenWidth = ClientSize.Width;
             if (screenHeight <= 0 || screenWidth <= 0)
                 return;
+
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
             GL.Ortho(0.0, screenWidth, screenHeight, 0.0, 1.0, -1.0);
@@ -123,7 +173,7 @@ namespace Senapp.Engine.Base
             GL.MatrixMode(MatrixMode.Modelview);
             GL.LoadIdentity();
             AspectRatio = Width / (float)Height;
-            mainCamera.GetComponent<Camera>().AspectRatio = AspectRatio;
+            MainCamera.AspectRatio = AspectRatio;
             OnResize();
         }
         protected override void OnRenderFrame(FrameEventArgs e)
@@ -134,7 +184,7 @@ namespace Senapp.Engine.Base
             GL.Disable(EnableCap.Blend);
             GL.Enable(EnableCap.Blend);
 
-            renderer.Render(sunLight.GetComponent<Light>(), mainCamera.GetComponent<Camera>());
+            Renderer.Render(SunLight, MainCamera);
             OnGameRendered(new GameRenderedEventArgs((float)e.Time));
 
             SwapBuffers();

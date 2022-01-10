@@ -15,10 +15,7 @@ namespace Senapp.Engine.Entities
         private float minFov = 0.1f;
         private float maxFov = 120f;
 
-        public Camera()
-        {
-
-        }
+        public Camera() {}
         public Camera(float aspectRatio,float fov)
         {
             AspectRatio = aspectRatio;

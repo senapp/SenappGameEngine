@@ -33,7 +33,7 @@ namespace Senapp
                     buffers: 2,
                     stereo: false);
 
-                var gameStartup = new TestGame(mode);
+                var gameStartup = new MobaGame(mode);
             }
         }   
     }

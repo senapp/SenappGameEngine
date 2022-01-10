@@ -28,6 +28,7 @@ namespace Senapp.Engine.Renderer
             {
                 PrepareTexture(font.fontAtlas);
                 texts.TryGetValue(font, out List<GameObject> batch);
+                batch.Sort(Text.SortBySortingLayer);
                 foreach (GameObject text in batch)
                 {
                     var textComponent = text.GetComponent<Text>();

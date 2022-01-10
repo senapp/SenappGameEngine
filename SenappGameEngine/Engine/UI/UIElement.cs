@@ -9,6 +9,7 @@ namespace Senapp.Engine.UI
         public static readonly float UIScalingConst = 10000;
         public static readonly float TextYOffset = 6;
 
+        public int SortingLayer = 0;
         public UIPosition UIConstriant { get; set; } = UIPosition.Center;
 
         public Vector4 GetUIDimensionsPixels(bool isText, Text text = null)

@@ -9,6 +9,7 @@ using Senapp.Engine.Shaders;
 using Senapp.Engine.Terrains;
 using Senapp.Engine.UI;
 using Senapp.Engine.Base;
+using System.Linq;
 
 namespace Senapp.Engine.Renderer
 {
@@ -75,12 +76,12 @@ namespace Senapp.Engine.Renderer
         }
         public void Render(Light sun, Camera camera)
         {
-            foreach (var gameObject in Game.GameObjects)
+            foreach (var gameObject in Game.GetSceneGameObjects())
             {
-                if (gameObject.HasComponent<Entity>() && gameObject.enabled) ProcessEntity(gameObject);
-                else if (gameObject.HasComponent<Terrain>() && gameObject.enabled) ProcessTerrain(gameObject);
-                else if (gameObject.HasComponent<Sprite>() && gameObject.enabled) ProcessSprite(gameObject);
-                else if (gameObject.HasComponent<Text>() && gameObject.enabled) ProcessText(gameObject);
+                gameObject.ProccessRender<Entity>(ProcessEntity);
+                gameObject.ProccessRender<Terrain>(ProcessTerrain);
+                gameObject.ProccessRender<Sprite>(ProcessSprite);
+                gameObject.ProccessRender<Text>(ProcessText);
             }
 
             skyboxRenderer.Render(camera);

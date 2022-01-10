@@ -12,9 +12,16 @@ namespace Senapp.Engine.Physics
 {
     public class RaycastManager
     {
+        public Camera mainCamera;
+
+        public RaycastManager(Camera mainCamera)
+        {
+            this.mainCamera = mainCamera;
+        }
+
         private int SortByDistanceToCamera(GameObject a, GameObject b)
         {
-            return Vector3.Distance(a.transform.position, Game.mainCamera.transform.position).CompareTo(Vector3.Distance(b.transform.position, Game.mainCamera.transform.position));
+            return Vector3.Distance(a.transform.position, mainCamera.gameObject.transform.position).CompareTo(Vector3.Distance(b.transform.position, mainCamera.gameObject.transform.position));
         }
         private int SortByZ(GameObject a, GameObject b)
         {
@@ -26,15 +33,14 @@ namespace Senapp.Engine.Physics
 
         public void RaycastSendingUpdate(MouseMoveEventArgs e)
         {
-            var cam = Game.mainCamera.GetComponent<Camera>();
-            var sortedObjects = new List<GameObject>(Game.GameObjects);
+            var sortedObjects = new List<GameObject>(Game.GetAllGameObjects());
             sortedObjects.Sort(SortByDistanceToCamera);
             foreach (var gameObject in sortedObjects)
             {
                 if (gameObject.HasComponent<RaycastTarget>() && gameObject.enabled)
                 {
                     var target = gameObject.GetComponent<RaycastTarget>();
-                    float dist = Raycast.DistanceFromPoint(new Vector2(e.X, e.Y), new Vector3(0, 0, 0), gameObject.transform.TransformationMatrix() * cam.GetViewMatrix(), cam.GetProjectionMatrix());
+                    float dist = Raycast.DistanceFromPoint(new Vector2(e.X, e.Y), new Vector3(0, 0, 0), gameObject.transform.TransformationMatrix() * mainCamera.GetViewMatrix(), mainCamera.GetProjectionMatrix());
 
                     if (dist <= target.hitRadius && !target.hovering && currentTarget == null && currentTargetUI == null)
                     {
@@ -45,7 +51,7 @@ namespace Senapp.Engine.Physics
                     }
                     else if (dist <= target.hitRadius && !target.hovering && currentTarget != null && currentTargetUI == null)
                     {
-                        if (Vector3.Distance(currentTarget.gameObject.transform.position, Game.mainCamera.transform.position) > Vector3.Distance(target.gameObject.transform.position, Game.mainCamera.transform.position))
+                        if (Vector3.Distance(currentTarget.gameObject.transform.position, mainCamera.gameObject.transform.position) > Vector3.Distance(target.gameObject.transform.position, mainCamera.gameObject.transform.position))
                         {
                             if (currentTarget.onExit != null) currentTarget.onExit();
                             currentTarget.hovering = false;
@@ -67,7 +73,7 @@ namespace Senapp.Engine.Physics
         }
         public void RaycastUISendingUpdate(MouseMoveEventArgs e)
         {
-            var sortedObjects = new List<GameObject>(Game.GameObjects);
+            var sortedObjects = new List<GameObject>(Game.GetAllGameObjects());
             sortedObjects.Sort(SortByZ);
             foreach (var gameObject in sortedObjects)
             {
@@ -159,7 +165,7 @@ namespace Senapp.Engine.Physics
                 }
             }
 
-            foreach (var gameObject in Game.GameObjects.Where(obj => obj.enabled))
+            foreach (var gameObject in Game.GetAllGameObjects().Where(obj => obj.enabled))
             {
                 if (gameObject.HasComponent<RaycastTargetUI>())
                 {
