@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "dgSpecHash": "IMCVN13u6gmRL+0u5eG37NXwVTGgujxAFP5gj3pv7wRugqYTLsAh4I8kVhNiC0CNPc+7FfX4OSjtVxAL74YH5g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Senapp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\albin\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\opentk\\3.3.2\\opentk.3.3.2.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\system.resources.extensions\\6.0.0\\system.resources.extensions.6.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'OpenTK 3.3.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "OpenTK",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    }
+  ]
+}
