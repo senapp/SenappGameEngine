@@ -24,3 +24,4 @@ C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\obj\Re
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\obj\Release\net5.0\ref\Senapp.dll
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\obj\Release\net5.0\Senapp.pdb
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\obj\Release\net5.0\Senapp.genruntimeconfig.cache
+C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Release\net5.0\Newtonsoft.Json.dll

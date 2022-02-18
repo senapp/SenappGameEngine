@@ -1,40 +1,43 @@
-﻿using OpenTK;
-using OpenTK.Input;
-using Senapp.Engine.Base;
+﻿using OpenTK.Input;
+
+using Senapp.Engine.Core.GameObjects;
 using Senapp.Engine.Events;
 using Senapp.Engine.PlayerInput;
 using Senapp.Engine.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Senapp.Engine.UI.Components;
 
 namespace Senapp.Programs.Moba
 {
-    public class MobaUI : Component
+    public class MobaUI : ComponentUI
     {
-        public MainMenu MainMenu;
+        public MobaMainMenu MobaMainMenu;
+        public MobaHUD MobaHUD;
 
         public MobaUI() { }
         public MobaUI(GameFont font)
         {
-            MainMenu = new MainMenu(font);
+            MobaMainMenu = new MobaMainMenu(font);
+            MobaHUD = new MobaHUD(font);
         }
         public override void Awake()
         {
-            MainMenu = new GameObject()
-                .WithName("Main Menu")
+            MobaMainMenu = new GameObjectUI()
                 .WithParent(gameObject)
+                .WithName("Moba Main Menu")
                 .WithEnable(false)
-                .AddComponent(MainMenu);
+                .AddComponent(MobaMainMenu);
+
+            MobaHUD = new GameObjectUI()
+               .WithParent(gameObject)
+               .WithName("Moba HUD")
+               .AddComponent(MobaHUD);
         }
 
         public override void Update(GameUpdatedEventArgs args)
         {
             if (Input.GetKeyDown(Key.Escape) || ControllerManager.ControllerExists(0) && ControllerManager.GetController(0).GetButtonDown(Buttons.Start))
             {
-                MainMenu.gameObject.enabled = !MainMenu.gameObject.enabled;
+                MobaMainMenu.gameObject.enabled = !MobaMainMenu.gameObject.enabled;
             }
         }
     }

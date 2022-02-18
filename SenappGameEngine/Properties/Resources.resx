@@ -121,11 +121,11 @@
   <data name="alduin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Models\alduin.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="alduin_img" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\alduin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="alduin_n" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\alduin_n.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="alduin_tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Textures\alduin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="arial" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Fonts\arial.fnt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
@@ -136,53 +136,26 @@
   <data name="back" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="blendMap" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\blendMap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="blend_map" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\textures\blend_map.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\bottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="default_back" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\textures\cubemap\default_back.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="default_bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\textures\cubemap\default_bottom.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="default_front" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\textures\cubemap\default_front.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="default_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\textures\cubemap\default_left.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="default_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\textures\cubemap\default_right.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cameraButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\camerabutton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="default_texture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Defaults\default_texture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="default_top" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\textures\cubemap\default_top.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="dragon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Models\dragon.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="earth" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\earth.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="entityFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\entityfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="earth2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\earth2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="earth8K" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\earth8K.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="earthNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\earthNormal.tif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="entityFragmentShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\entityfragmentshader.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="entityVertexShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\entityvertexshader.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="entityVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\entityvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="enviroback" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\enviroback.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -205,41 +178,56 @@
   <data name="front" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\front.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="grassy2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\grassy2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="grid" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\grid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="healthbar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\healthbar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Defaults\icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="jupiter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\jupiter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="left" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mars" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\mars.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="levelUpDisabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\levelupdisabled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mercury" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\mercury.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="levelUpEnabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\levelupenabled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lux" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\lux.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lux_dae" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\lux.dae;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lux_face" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\lux_face.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lux_tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\lux.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="magicInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\magicinfo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="map" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\map.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mapButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\mapbutton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mapView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\map.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="marker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\marker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="minimap" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\minimap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="moon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\moon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="neptune" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\neptune.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="new_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Defaults\new_icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="noItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\noitem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="opensans" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\fonts\opensans.fnt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -247,79 +235,70 @@
   <data name="opensans_img" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\fonts\opensans_img.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pyramid" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\pyramid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="overlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\overlay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overlayExt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\overlayext.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="postProcessingOutputFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\postprocessing\postprocessingoutputfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="postProcessingOutputVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\postprocessing\postprocessingoutputvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="right" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="saturn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\saturn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="saturnring" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\saturnring.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\defaults\settings.ini;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="skyboxFragmentShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Shaders\skyboxFragmentShader.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="settingsButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\settingsbutton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="skyboxVertexShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Shaders\skyboxVertexShader.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="skyboxFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\skyboxfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="sphere" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Models\sphere.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="skyboxVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\skyboxvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="spriteFragmentShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\spritefragmentshader.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="spriteFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\spritefs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="spriteVertexShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\spritevertexshader.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="spriteVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\spritevs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="stall" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Models\stall.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="SSAOFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\postprocessing\ssaofs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="stallTexture" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\stallTexture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SSAOVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\postprocessing\ssaovs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="stars" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\stars.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="statsInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\statsinfo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="starsMilky" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\starsMilky.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="store" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\mobaassets\store.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="sun" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\sun.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="terrainFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\terrainfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="terrainFragmentShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Shaders\terrainFragmentShader.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="terrainVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\terrainvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="terrainVertexShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Shaders\terrainVertexShader.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="textFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\textfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="textFragmentShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Shaders\textFragmentShader.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="textVertexShader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Shaders\textVertexShader.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="textVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\textvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="top" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\top.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="uranus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\uranus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="venus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\venus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="venus2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Textures\venus2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="witcher" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Models\witcher.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="witcher_img" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="witcher_tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\witcher.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -9,10 +9,12 @@ namespace Senapp.Engine.Utilities
         {
             return (Bitmap)Properties.Resources.ResourceManager.GetObject(fileName);
         }
+
         public static Icon GetIcon(string fileName)
         {
             return (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
         }
+
         public static string GetFile(string fileName)
         {
             try

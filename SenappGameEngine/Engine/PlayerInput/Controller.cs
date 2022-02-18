@@ -4,38 +4,47 @@ using System.Collections.Generic;
 using OpenTK;
 using OpenTK.Input;
 
-using Senapp.Engine.Base;
+using Senapp.Engine.Core;
 using Senapp.Engine.Events;
 
 namespace Senapp.Engine.PlayerInput
 {
+    public enum Axis 
+    { 
+        HorizontalLeft, 
+        VerticalLeft, 
+        HorizontalRight, 
+        VerticalRight 
+    }
+
     public class Controller
     {
-        public bool IsConnected = false;
-        public string Name = "Controller";
-        public int ActiveDevice = 0;
+        public const float JOYSTICK_MIN = 0.1f;
 
-        private GamePadState gamepad;
-        private JoystickState joystick;
+        public static readonly string[] ControllerButtons = Enum.GetNames(typeof(Buttons));
 
-        public enum Axis { HorizontalLeft, VerticalLeft, HorizontalRight, VerticalRight }
+        public GamePadCapabilities CapabilitiesGamePad => GamePad.GetCapabilities(ActiveDevice);
+        public JoystickCapabilities CapabilitiesJoystick => Joystick.GetCapabilities(ActiveDevice);
+
+        public List<Buttons> currentButtons = new();
+        public List<Buttons> downButtons = new();
+        public List<Buttons> upButtons = new();
+
+        public bool IsConnected;
+        public string Name;
+        public int ActiveDevice;
 
         public Controller(int controllerID)
         {
             ActiveDevice = controllerID;
+            Name = $"Controller - {ActiveDevice}";
             gamepad = GamePad.GetState(ActiveDevice);
             joystick = Joystick.GetState(ActiveDevice);
         }
-        public GamePadCapabilities CapabilitiesGamePad { get { return GamePad.GetCapabilities(ActiveDevice); } }
-        public JoystickCapabilities CapabilitiesJoystick { get { return Joystick.GetCapabilities(ActiveDevice); } }
-
-        public List<Buttons> currentButtons = new List<Buttons>();
-        public List<Buttons> downButtons = new List<Buttons>();
-        public List<Buttons> upButtons = new List<Buttons>();
 
         public void Update()
         {
-            ActionEventArgs args = new ActionEventArgs(ActiveDevice);
+            ActionEventArgs args = new(ActiveDevice);
             if (!args.GamePadState.Equals(gamepad))
             {
                 gamepad = args.GamePadState;
@@ -45,33 +54,26 @@ namespace Senapp.Engine.PlayerInput
                 joystick = args.JoystickState;
             }
 
-            var buttonsValues = Enum.GetValues(typeof(Buttons));
-
             downButtons.Clear();
-            for (int i = 0; i < buttonsValues.Length; i++)
-            {
-                if (GetButton((Buttons)buttonsValues.GetValue(i)) && !currentButtons.Contains((Buttons)buttonsValues.GetValue(i)))
-                {
-                    downButtons.Add((Buttons)buttonsValues.GetValue(i));
-                }
-            }
             upButtons.Clear();
-            for (int i = 0; i < buttonsValues.Length; i++)
+            for (int i = 0; i < ControllerButtons.Length; i++)
             {
-                if (!GetButton((Buttons)buttonsValues.GetValue(i)) && currentButtons.Contains((Buttons)buttonsValues.GetValue(i)))
+                var button = (Buttons)i;
+                var buttonPressed = GetButtonOnController(button);
+
+                if (buttonPressed && !currentButtons.Contains(button))
                 {
-                    upButtons.Add((Buttons)buttonsValues.GetValue(i));
+                    downButtons.Add(button);
+                    currentButtons.Add(button);
                 }
-            }
-            currentButtons.Clear();
-            for (int i = 0; i < buttonsValues.Length; i++)
-            {
-                if (GetButton((Buttons)buttonsValues.GetValue(i)))
+                else if (!buttonPressed && currentButtons.Contains(button))
                 {
-                    currentButtons.Add((Buttons)buttonsValues.GetValue(i));
+                    upButtons.Add(button);
+                    currentButtons.Remove(button);
                 }
             }
         }
+
         public float GetAxis(Axis axis)
         {
             switch (axis)
@@ -96,12 +98,33 @@ namespace Senapp.Engine.PlayerInput
             float nX = 0;
             float nY = 0;
 
-            if (x > ControllerManager.JOYSTICK_MIN || x < -ControllerManager.JOYSTICK_MIN) nX = x;
-            if (y > ControllerManager.JOYSTICK_MIN || y < -ControllerManager.JOYSTICK_MIN) nY = y;
+            if (x > JOYSTICK_MIN || x < -JOYSTICK_MIN) nX = x;
+            if (y > JOYSTICK_MIN || y < -JOYSTICK_MIN) nY = y;
 
             return new Vector2(nX, nY);
         }
+
         public bool GetButton(Buttons button)
+        {
+            if (!Game.Instance.Focused)
+                return false;
+
+            return currentButtons.Contains(button);
+        }
+        public bool GetButtonDown(Buttons button)
+        {
+            if (!Game.Instance.Focused)
+                return false;
+            return downButtons.Contains(button);
+        }
+        public bool GetButtonUp(Buttons button)
+        {
+            if (!Game.Instance.Focused)
+                return false;
+            return upButtons.Contains(button);
+        }
+
+        private bool GetButtonOnController(Buttons button)
         {
             if (!Game.Instance.Focused)
                 return false;
@@ -141,17 +164,8 @@ namespace Senapp.Engine.PlayerInput
                     return false;
             }
         }
-        public bool GetButtonDown(Buttons button)
-        {
-            if (!Game.Instance.Focused)
-                return false;
-            return downButtons.Contains(button);
-        }
-        public bool GetButtonUp(Buttons button)
-        {
-            if (!Game.Instance.Focused)
-                return false;
-            return upButtons.Contains(button);
-        }
+
+        private GamePadState gamepad;
+        private JoystickState joystick;
     }
 }

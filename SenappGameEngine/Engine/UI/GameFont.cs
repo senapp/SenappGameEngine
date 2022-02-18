@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 using OpenTK;
-
+using Senapp.Engine.Loaders;
 using Senapp.Engine.Models;
 using Senapp.Engine.Utilities;
 
@@ -11,7 +11,7 @@ namespace Senapp.Engine.UI
 {
     public class GameFont
     {
-        // Use bmfont1.14a to get fnt and image file, preferable with transparent background and white characthers
+        // Use bmfont1.14a to get .fnt and .png files, preferable with transparent background and white characthers
 
         public string face;
         public int size;
@@ -33,9 +33,10 @@ namespace Senapp.Engine.UI
         public int pageID;
         public string file;
         public Texture fontAtlas;
-        public Dictionary<double, RawModel> characterRawModels = new Dictionary<double, RawModel>();
 
-        public List<Character> characters = new List<Character>();
+        public Dictionary<double, RawModel> characterRawModels = new();
+
+        public List<Character> characters = new();
         public Character GetCharacter(double id)
         {
             foreach (var item in characters)
@@ -110,6 +111,7 @@ namespace Senapp.Engine.UI
             sr.Close();
             fontAtlas = Loader.LoadTexture($"{fontName}_img");
         }
+
         private string GetString(string identifier, string text)
         {
             int dynVal = 0;
@@ -141,6 +143,7 @@ namespace Senapp.Engine.UI
             else return true;
         }
     }
+
     public class Character
     {
         public double id;

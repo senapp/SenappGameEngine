@@ -1,22 +1,23 @@
-﻿using Senapp.Engine.Base;
+﻿using Senapp.Engine.Core.Components;
+using Senapp.Engine.Loaders;
 using Senapp.Engine.Models;
 
 namespace Senapp.Engine.Terrains
 {
     public class Terrain : Component
     {
-        public static readonly int VERTEX_COUNT = 128;
+        public const int VERTEX_COUNT = 128;
 
-		public RawModel model { get; set; }
-		public TerrainTexture texturePack { get; set; }
-		public bool isPackage = false;
-		public int ID = 0;
+		public RawModel Model { get; set; }
+		public TerrainTexture TexturePack { get; set; }
+
 		public Terrain() { }
 		public Terrain(float size, TerrainTexture _textures)
         {
-            texturePack = _textures;
-			model = GenerateTerrain(size);
+            TexturePack = _textures;
+			Model = GenerateTerrain(size);
 		}
+
         public static RawModel GenerateTerrain(float SIZE)
         {
             int count = VERTEX_COUNT * VERTEX_COUNT;

@@ -1,89 +1,117 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
 
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 
+using Senapp.Engine.Core;
 using Senapp.Engine.Entities;
 using Senapp.Engine.Models;
+using Senapp.Engine.Renderer.ComponentRenderers;
+using Senapp.Engine.Renderer.PostProcessing;
 using Senapp.Engine.Shaders;
+using Senapp.Engine.Shaders.Components;
 using Senapp.Engine.Terrains;
 using Senapp.Engine.UI;
-using Senapp.Engine.Base;
-using System.Linq;
+using Senapp.Engine.UI.Components;
+using Senapp.Engine.Utilities;
 
 namespace Senapp.Engine.Renderer
 {
     public class MasterRenderer
     {
-        private EntityShader entityShader;
-        private TerrainShader terrainShader;
-        private SpriteShader shaderUI;
-        private TextShader textShader;
-        private SkyboxShader skyboxShader;
-
-        private EntityRenderer entityRenderer;
-        private TerrainRenderer terrainRenderer;
-        private SpriteRenderer spriteRenderer;
-        private TextRenderer textRenderer;
-        private SkyboxRenderer skyboxRenderer;
-
-        private Dictionary<string, List<GameObject>> entities = new Dictionary<string, List<GameObject>>();
-        private List<GameObject> terrains = new List<GameObject>();
-        private Dictionary<Texture, List<GameObject>> sprites = new Dictionary<Texture, List<GameObject>>();
-        private Dictionary<GameFont, List<GameObject>> texts = new Dictionary<GameFont, List<GameObject>>();
-
-        public static void Initialize(float red = 0.0f, float green = 0.0f, float blue = 0.0f, float alpha = 0.0f)
+        public static void ClearScreen()    
         {
-            GL.Enable(EnableCap.DepthTest);
-            GL.Enable(EnableCap.Texture2D);
-            EnableCulling();
-        }
-        public static void SetClearColour255(float red = 0, float green = 0, float blue = 0, float alpha = 0)
-        {
-            red = red / 255;
-            green = green / 255;
-            blue = blue / 255;
-            alpha = alpha / 255;
-            GL.ClearColor(red, green, blue, alpha);
-        }
-        public static void SetClearColour(float red = 0, float green = 0, float blue = 0, float alpha = 0)
-        {
-            GL.ClearColor(red, green, blue, alpha);
-        }
-        public static void SetClearColour(Color colour)
-        {
-            GL.ClearColor(colour);
-        }
-        public static void ClearScreen()
-        {
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.ClearColor(0, 0, 0, 1);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+        }
+        public static void EnableCulling()
+        {
+            GL.Enable(EnableCap.CullFace);
+            GL.CullFace(CullFaceMode.Back);
+        }
+        public static void DisableCulling()
+        {
+            GL.Disable(EnableCap.CullFace);
+            GL.CullFace(CullFaceMode.Back);
         }
 
-        public void Initiliaze(Camera camera)
+        public MasterRenderer(Camera camera)
         {
+            GL.Ortho(0, Game.Instance.Width, Game.Instance.Height, 0, 0, 1);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+
+            GL.Enable(EnableCap.Texture2D);
+            GL.Enable(EnableCap.DepthTest);
+            GL.Enable(EnableCap.Multisample);
+
+            EnableCulling();
+
             entityShader = new EntityShader();
             terrainShader = new TerrainShader();
-            shaderUI = new SpriteShader();
+            spriteShader = new SpriteShader();
             textShader = new TextShader();
             skyboxShader = new SkyboxShader();
 
             entityRenderer = new EntityRenderer(entityShader);
             terrainRenderer = new TerrainRenderer(terrainShader);
-            spriteRenderer = new SpriteRenderer(shaderUI);
+            spriteRenderer = new SpriteRenderer(spriteShader);
             textRenderer = new TextRenderer(textShader);
             skyboxRenderer = new SkyboxRenderer(skyboxShader, camera.GetProjectionMatrix());
+
+            int width = Game.Instance.Width;
+            int height = Game.Instance.Height;
+
+            postProcessingMultisampledFbo = new Fbo(width, height);
+            postProcessingOutputFbo = new Fbo(width, height, DepthBufferType.DEPTH_TEXTURE);
+            postProcessingManager = new PostProcessingManager();
         }
+
+        public void OnScreenResize(int screenWidth, int screenHeight)
+        {
+            GL.MatrixMode(MatrixMode.Projection);
+            GL.LoadIdentity();
+            GL.Ortho(0.0, screenWidth, screenHeight, 0.0, 1.0, -1.0);
+
+            var ratioX = Game.Instance.Width / (float)screenWidth;
+            var ratioY = Game.Instance.Height / (float)screenHeight;
+            var ratio = ratioX < ratioY ? ratioX : ratioY;
+            var viewWidth = Convert.ToInt32(screenWidth * ratio);
+            var viewHeight = Convert.ToInt32(screenHeight * ratio);
+            var viewX = Convert.ToInt32((Game.Instance.Width - screenWidth * ratio) / 2);
+            var viewY = Convert.ToInt32((Game.Instance.Height - screenHeight * ratio) / 2);
+
+            GL.Viewport(viewX, viewY, viewWidth, viewHeight);
+            GL.MatrixMode(MatrixMode.Modelview);
+            GL.LoadIdentity();
+
+            RecalculateSize(Game.Instance.Width, Game.Instance.Height);
+        }
+        public void RecalculateSize(int width, int height)
+        {
+            postProcessingMultisampledFbo?.Dispose();
+            postProcessingOutputFbo?.Dispose();
+            postProcessingMultisampledFbo = new Fbo(width, height);
+            postProcessingOutputFbo = new Fbo(width, height, DepthBufferType.DEPTH_TEXTURE);
+
+            postProcessingManager.OnResize(width, height);
+        }
+
         public void Render(Light sun, Camera camera)
         {
-            foreach (var gameObject in Game.GetSceneGameObjects())
+            foreach (var gameObject in Game.Instance.GetSceneGameObjects())
             {
-                gameObject.ProccessRender<Entity>(ProcessEntity);
-                gameObject.ProccessRender<Terrain>(ProcessTerrain);
-                gameObject.ProccessRender<Sprite>(ProcessSprite);
-                gameObject.ProccessRender<Text>(ProcessText);
+                gameObject.ProccessRenderHierarchy<Entity>(ProcessEntity);
+                gameObject.ProccessRenderHierarchy<Terrain>(ProcessTerrain);
+                gameObject.ProccessRenderHierarchy<Sprite>(ProcessSprite);
+                gameObject.ProccessRenderHierarchy<Text>(ProcessText);
             }
 
+            if (GraphicsSettings.PostProcessingRequired)
+            {
+                postProcessingMultisampledFbo.Bind();
+                ClearScreen();
+            }
+            #region 3D / World
             skyboxRenderer.Render(camera);
 
             entityShader.Start();
@@ -97,58 +125,139 @@ namespace Senapp.Engine.Renderer
             terrainRenderer.Render(terrains);
             terrainShader.LoadLight(sun);
             terrainShader.Stop();
+            #endregion
+            if (GraphicsSettings.PostProcessingRequired)
+            {
+                postProcessingMultisampledFbo.Unbind();
+                postProcessingMultisampledFbo.ResolveToFbo(postProcessingOutputFbo);
+                postProcessingManager.ApplyPostProcessing(postProcessingOutputFbo.ColourTexture);
+            }
 
-            shaderUI.Start();
-            shaderUI.UpdateCamera(camera);
-            spriteRenderer.Render(sprites, camera.gameObject.transform.position);
-            shaderUI.Stop();
+            #region 2D / UI
+            SortingLayers.Sort();
 
+            spriteShader.Start();
+            spriteShader.UpdateCamera(camera);
             textShader.Start();
             textShader.UpdateCamera(camera);
-            textRenderer.Render(texts, camera.gameObject.transform.position);
+            foreach (var sortingLayer in SortingLayers)
+            {
+                spriteRenderer.Render(CreateSpriteRenderList(sortingLayer));
+                textRenderer.Render(CreateTextRenderList(sortingLayer));
+            }
+            spriteShader.Stop();
             textShader.Stop();
+            #endregion
 
             terrains.Clear();
             entities.Clear();
             sprites.Clear();
             texts.Clear();
         }
-        private bool TextureModelCompare(TexturedModel a, TexturedModel b)
-        {
-            var equal = (a.texture == b.texture &&
-                a.shineDamper == b.shineDamper &&
-                a.reflectivity == b.reflectivity &&
-                a.luminosity == b.luminosity);
 
-            return equal;
+        public void Dispose()
+        {
+            entityShader.Dispose();
+            terrainShader.Dispose();
+            spriteShader.Dispose();
+            textShader.Dispose();
+            skyboxShader.Dispose();
+
+            skyboxRenderer.Dispose();
+
+            postProcessingMultisampledFbo.Dispose();
+            postProcessingOutputFbo.Dispose();
+            postProcessingManager.Dispose();
         }
 
-        private Dictionary<TexturedModel, List<GameObject>> CreateEntityRenderList()
+        private void ProcessTerrain(Terrain terrain)
         {
-            var output = new Dictionary<TexturedModel, List<GameObject>>();
+            terrains.TryGetValue(terrain, out List<Terrain> batch);
+            if (batch != null)
+            {
+                batch.Add(terrain);
+            }
+            else
+            {
+                List<Terrain> newBatch = new();
+                newBatch.Add(terrain);
+                terrains[terrain] = newBatch;
+            }
+        }
+        private void ProcessEntity(Entity entity)
+        {
+            entities.TryGetValue(entity.model.rawModel.Name, out List<Entity> batch);
+            if (batch!= null)
+            {
+                batch.Add(entity);
+            }
+            else
+            {
+                List<Entity> newBatch = new();
+                newBatch.Add(entity);
+                entities[entity.model.rawModel.Name] = newBatch;
+            }
+        }
+        private void ProcessSprite(Sprite sprite)
+        {
+            sprites.TryGetValue(sprite.texture, out List<Sprite> batch);
+            if (batch != null)
+            {
+                batch.Add(sprite);
+            }
+            else
+            {
+                List<Sprite> newBatch = new();
+                newBatch.Add(sprite);
+                sprites[sprite.texture] = newBatch;
+            }
+
+            SortingLayers.UniqueAdd(sprite.SortingLayer);
+        }
+        private void ProcessText(Text text)
+        {
+            texts.TryGetValue(text.font, out List<Text> batch);
+            if (batch != null)
+            {
+                batch.Add(text);
+            }
+            else
+            {
+                List<Text> newBatch = new();
+                newBatch.Add(text);
+                texts[text.font] = newBatch;
+            }
+
+            SortingLayers.UniqueAdd(text.SortingLayer);
+        }
+
+        private Dictionary<TexturedModel, List<Entity>> CreateEntityRenderList()
+        {
+            var output = new Dictionary<TexturedModel, List<Entity>>();
             foreach (string modelName in entities.Keys)
             {
-                var modelNameOuput = new Dictionary<TexturedModel, List<GameObject>>();
-                entities.TryGetValue(modelName, out List<GameObject> batch);
+                var modelNameOuput = new Dictionary<TexturedModel, List<Entity>>();
+                entities.TryGetValue(modelName, out List<Entity> batch);
 
-                foreach (var gameObject in batch)
+                foreach (var entity in batch)
                 {
-                    var gameObjectModel = gameObject.GetComponent<Entity>().model;
                     var found = false;
                     foreach (var model in modelNameOuput.Keys)
                     {
-                        if (TextureModelCompare(model, gameObjectModel))
+                        if (model.Equals(entity.model))
                         {
-                            modelNameOuput[model].Add(gameObject);
+                            modelNameOuput[model].Add(entity);
                             found = true;
                             break;
                         }
                     }       
                     if (!found)
                     {
-                        var newEntry = new List<GameObject>();
-                        newEntry.Add(gameObject);
-                        modelNameOuput.Add(gameObjectModel, newEntry);
+                        var newEntry = new List<Entity>
+                        {
+                            entity
+                        };
+                        modelNameOuput.Add(entity.model, newEntry);
                     }
                 }
                 foreach (var key in modelNameOuput.Keys)
@@ -158,74 +267,64 @@ namespace Senapp.Engine.Renderer
             }
             return output;
         }
-        public void ProcessTerrain(GameObject terrain)
+        private Dictionary<GameFont, List<Text>> CreateTextRenderList(int sortingLayer)
         {
-            terrains.Add(terrain);
+            var output = new Dictionary<GameFont, List<Text>>();
+            foreach (var font in texts.Keys)
+            {
+                texts.TryGetValue(font, out List<Text> batch);
+                var newBatch = new List<Text>();
+                foreach (var text in batch)
+                {
+                    if (text.SortingLayer == sortingLayer)
+                    {
+                        newBatch.Add(text);
+                    }
+                }
+                output.Add(font, newBatch);
+            }
+            return output;
         }
-        public void ProcessEntity(GameObject entity)
+        private Dictionary<Texture, List<Sprite>> CreateSpriteRenderList(int sortingLayer)
         {
-            TexturedModel entityModel = entity.GetComponent<Entity>().model;
-            string rawModelName = entityModel.rawModel.rawModelName;
-            entities.TryGetValue(rawModelName, out List<GameObject> batch);
-            if (batch!= null)
+            var output = new Dictionary<Texture, List<Sprite>>();
+            foreach (var texture in sprites.Keys)
             {
-                batch.Add(entity);
+                sprites.TryGetValue(texture, out List<Sprite> batch);
+                var newBatch = new List<Sprite>();
+                foreach (var sprite in batch)
+                {
+                    if (sprite.SortingLayer == sortingLayer)
+                    {
+                        newBatch.Add(sprite);
+                    }
+                }
+                output.Add(texture, newBatch);
             }
-            else
-            {
-                List<GameObject> newBatch = new List<GameObject>();
-                newBatch.Add(entity);
-                entities[rawModelName] = newBatch;
-            }
-        }
-        public void ProcessSprite(GameObject element)
-        {
-            Texture texture = element.GetComponent<Sprite>().texture;
-            sprites.TryGetValue(texture, out List<GameObject> batch);
-            if (batch != null)
-            {
-                batch.Add(element);
-            }
-            else
-            {
-                List<GameObject> newBatch = new List<GameObject>();
-                newBatch.Add(element);
-                sprites[texture] = newBatch;
-            }
-        }
-        public void ProcessText(GameObject text)
-        {
-            GameFont font = text.GetComponent<Text>().Font;
-            texts.TryGetValue(font, out List<GameObject> batch);
-            if (batch != null)
-            {
-                batch.Add(text);
-            }
-            else
-            {
-                List<GameObject> newBatch = new List<GameObject>();
-                newBatch.Add(text);
-                texts[font] = newBatch;
-            }
+            return output;
         }
 
-        public void Dispose()
-        {
-            entityShader.CleanUp();
-            terrainShader.CleanUp();
-            shaderUI.CleanUp();
-            textShader.CleanUp();
-            skyboxShader.CleanUp();
-        }
+        private EntityShader entityShader;
+        private TerrainShader terrainShader;
+        private SpriteShader spriteShader;
+        private TextShader textShader;
+        private SkyboxShader skyboxShader;
 
-        public static void EnableCulling()
-        {
-            GL.Enable(EnableCap.CullFace);
-            GL.CullFace(CullFaceMode.Back);
-        }
-        public static void DisableCulling()
-        {
-            GL.Disable(EnableCap.CullFace);
-        }
+        private EntityRenderer entityRenderer;
+        private TerrainRenderer terrainRenderer;
+        private SpriteRenderer spriteRenderer;
+        private TextRenderer textRenderer;
+        private SkyboxRenderer skyboxRenderer;
+
+        private PostProcessingManager postProcessingManager;
+        private Fbo postProcessingMultisampledFbo;
+        private Fbo postProcessingOutputFbo;
+
+        private readonly Dictionary<string, List<Entity>> entities = new();
+        private readonly Dictionary<Terrain, List<Terrain>> terrains = new();
+        private readonly Dictionary<Texture, List<Sprite>> sprites = new();
+        private readonly Dictionary<GameFont, List<Text>> texts = new();
+
+        private readonly List<int> SortingLayers = new();
     }
 }

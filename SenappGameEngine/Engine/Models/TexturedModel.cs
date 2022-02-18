@@ -1,4 +1,6 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using OpenTK.Graphics.OpenGL;
+
+using Senapp.Engine.Loaders;
 
 namespace Senapp.Engine.Models
 {
@@ -24,7 +26,25 @@ namespace Senapp.Engine.Models
         }
         public void Dispose()
         {
-            Loader.DisposeModelAndTexture(this);
+            Loader.DisposeModel(rawModel);
+            Loader.DisposeTexture(texture);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType().Equals(typeof(TexturedModel)))
+            {
+                var model = (TexturedModel)obj;
+
+                var equal = (this.texture == model.texture &&
+                    this.shineDamper == model.shineDamper &&
+                    this.reflectivity == model.reflectivity &&
+                    this.luminosity == model.luminosity);
+
+                return equal;
+            }
+
+            return base.Equals(obj);
         }
     }
 }

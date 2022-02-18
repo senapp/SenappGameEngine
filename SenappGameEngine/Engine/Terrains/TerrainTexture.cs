@@ -1,4 +1,5 @@
-﻿using Senapp.Engine.Models;
+﻿using Senapp.Engine.Loaders;
+using Senapp.Engine.Models;
 
 namespace Senapp.Engine.Terrains
 {
@@ -10,21 +11,21 @@ namespace Senapp.Engine.Terrains
         public Texture bTexture;
         public Texture blendMap;
 
-        public TerrainTexture(Texture _backgroundTexture, Texture _rTexture, Texture _gTexture, Texture _bTexture, Texture _blendMap)
+        public TerrainTexture(Texture backgroundTexture, Texture rTexture, Texture gTexture, Texture bTexture, Texture blendMap)
         {
-            backgroundTexture = _backgroundTexture;
-            rTexture = _rTexture;
-            gTexture = _gTexture;
-            bTexture = _bTexture;
-            blendMap = _blendMap;
+            this.backgroundTexture = backgroundTexture;
+            this.rTexture = rTexture;
+            this.gTexture = gTexture;
+            this.bTexture = bTexture;
+            this.blendMap = blendMap;
         }
-        public TerrainTexture(string _backgroundTexture, string _rTexture, string _gTexture, string _bTexture, string _blendMap)
+        public TerrainTexture(string backgroundTexture, string rTexture, string gTexture, string bTexture, string blendMap)
         {
-            backgroundTexture = Loader.LoadTexture(_backgroundTexture);
-            rTexture = Loader.LoadTexture(_rTexture);
-            gTexture = Loader.LoadTexture(_gTexture);
-            bTexture = Loader.LoadTexture(_bTexture);
-            blendMap = Loader.LoadTexture(_blendMap);
+            this.backgroundTexture = Loader.LoadTexture(backgroundTexture);
+            this.rTexture = Loader.LoadTexture(rTexture);
+            this.gTexture = Loader.LoadTexture(gTexture);
+            this.bTexture = Loader.LoadTexture(bTexture);
+            this.blendMap = Loader.LoadTexture(blendMap);
         }
     }
 }

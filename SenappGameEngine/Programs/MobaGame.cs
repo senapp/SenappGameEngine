@@ -1,17 +1,11 @@
-﻿using System;
-using System.Drawing;
-
-using OpenTK;
+﻿using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Input;
 
-using Senapp.Engine.Base;
-using Senapp.Engine.Entities;
+using Senapp.Engine.Core;
+using Senapp.Engine.Core.GameObjects;
+using Senapp.Engine.Core.Scenes;
 using Senapp.Engine.Events;
-using Senapp.Engine.Physics;
-using Senapp.Engine.PlayerInput;
-using Senapp.Engine.Renderer;
-using Senapp.Engine.Terrains;
 using Senapp.Engine.UI;
 using Senapp.Engine.Utilities;
 using Senapp.Programs.Moba;
@@ -20,7 +14,10 @@ namespace Senapp.Programs
 {
     public class MobaGame : Game
     {
-        public MobaGame(GraphicsMode gMode) : base(WIDTH, HEIGHT, gMode, TITLE)
+        // Assets and gameplay features in this program are owned by Riot Games and their game League of Legends. 
+        // This is just a recreation with no commercial gain of the previous game mode Twisted Treelines from League of Legends.
+        // MobaGame was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.
+        public MobaGame(GraphicsMode GRAPHICS_MODE) : base(WIDTH, HEIGHT, GRAPHICS_MODE, TITLE)
         {
             GameInitializedEvent += Initialize;
             GameUpdatedEvent += Update;
@@ -32,7 +29,10 @@ namespace Senapp.Programs
         public static readonly string TITLE = "League Of Legends";
 
         public MobaUI MobaUI;
-        public GameFont font = new GameFont();
+        public MobaView MobaView;
+        public Scene UIScene = new();
+        public Scene GameScene = new();
+        public GameFont font = new();
 
         private void Initialize(object sender)
         {
@@ -41,16 +41,31 @@ namespace Senapp.Programs
 
             font.LoadFont("opensans");
 
-            MobaUI = new GameObject()
+            MobaUI = new GameObjectUI()
                 .WithName("Moba UI")
-                .WithParent(MainScene)
+                .WithParent(UIScene)
                 .AddComponent(new MobaUI(font));
+
+            MobaView = new GameObject()
+                .WithName("Moba View")
+                .WithParent(GameScene)
+                .AddComponent(new MobaView());
+
+            SceneManager.AddScene(UIScene);
+            SceneManager.AddScene(GameScene);
+
+            MainCamera.gameObject.transform.SetPosition(new Vector3(0, 20, 0));
         }
 
         private void Update(object sender, GameUpdatedEventArgs args)
         {
             if (!Focused)
                 return;
+        }
+
+        protected override void OnMouseWheel(MouseWheelEventArgs e)
+        {
+            MobaPlayerController.Instance?.OnScroll(-e.DeltaPrecise);
         }
     }
 }
