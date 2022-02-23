@@ -16,24 +16,24 @@ The main idea behind the engine was to explore game engine programming and make 
 - Scenes & scene management
 - Game object relation hierarchy
 - Transformation with translation, rotation & scaling with relation hierarchy
+- [UI] Font class with loading
+- [UI] Texts
+- [UI] Sprites
+- [UI] Buttons
+- [UI] TextButtons
+- [UI] Input fields
+- RaycastTarget/UI, enter/exit/click/unfocus with pixel precision for game objects
+- Keyboard input
+- Mouse input
+- Controller input
 - Model & texture loader
 - OBJ & DAE loader
 - Really basic server & client networking with HTTP
 - Box collisions
-- Keyboard input
-- Mouse input
-- Controller input
-- RaycastTarget/UI, enter/exit/click/unfocus with pixel precision for game objects
 - Component renderers & shaders
 - Skybox rendering & shader
 - FrameBuffer & FrameBuffer rendering
 - Deferred rendering
-- Font class with loading
-- Texts
-- Sprites
-- Buttons
-- TextButtons
-- Input fields
 - Frame rate info
 - Wire frame rendering
 - Settings class & file
