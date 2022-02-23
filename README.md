@@ -5,7 +5,7 @@ Senapp Game Engine is a simple game engine written in C# with OpenGL through Ope
 <br />
 The main idea behind the engine was to explore game engine programming and make something that would be easy to use when creating a game and give quite good performance, basically modeled like a simple Unity3D but in your code editor. 
 
-### Main tutorials/guides used:
+### Tutorials used:
 - [GalacticGlum - Game Engine Tutorials](https://www.youtube.com/watch?v=ztyoJfyOz5k)
 - [ThinMatrix - OpenGL 3D Game Tutorials](https://www.youtube.com/watch?v=VS8wlS9hF8E&list=PLRIWtICgwaX0u7Rf9zkZhLoLuZVfUksDP)
 - [Cherno - Game Engine](https://www.youtube.com/watch?v=JxIZbV_XjAs&list=PLlrATfBNZ98dC-V-N3m0Go4deliWHPFwT)
