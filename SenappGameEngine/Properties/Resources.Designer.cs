@@ -73,9 +73,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap alduin_img {
+        public static System.Drawing.Bitmap alduin_n {
             get {
-                object obj = ResourceManager.GetObject("alduin_img", resourceCulture);
+                object obj = ResourceManager.GetObject("alduin_n", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap alduin_n {
+        public static System.Drawing.Bitmap alduin_tex {
             get {
-                object obj = ResourceManager.GetObject("alduin_n", resourceCulture);
+                object obj = ResourceManager.GetObject("alduin_tex", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -128,9 +128,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap blendMap {
+        public static System.Drawing.Bitmap blend_map {
             get {
-                object obj = ResourceManager.GetObject("blendMap", resourceCulture);
+                object obj = ResourceManager.GetObject("blend_map", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -148,49 +148,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap default_back {
+        public static System.Drawing.Bitmap cameraButton {
             get {
-                object obj = ResourceManager.GetObject("default_back", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap default_bottom {
-            get {
-                object obj = ResourceManager.GetObject("default_bottom", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap default_front {
-            get {
-                object obj = ResourceManager.GetObject("default_front", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap default_left {
-            get {
-                object obj = ResourceManager.GetObject("default_left", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap default_right {
-            get {
-                object obj = ResourceManager.GetObject("default_right", resourceCulture);
+                object obj = ResourceManager.GetObject("cameraButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -206,16 +166,6 @@ namespace Senapp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap default_top {
-            get {
-                object obj = ResourceManager.GetObject("default_top", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         public static byte[] dragon {
@@ -226,51 +176,11 @@ namespace Senapp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap earth {
-            get {
-                object obj = ResourceManager.GetObject("earth", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap earth2 {
-            get {
-                object obj = ResourceManager.GetObject("earth2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap earth8K {
-            get {
-                object obj = ResourceManager.GetObject("earth8K", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap earthNormal {
-            get {
-                object obj = ResourceManager.GetObject("earthNormal", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] entityFragmentShader {
+        public static byte[] entityFS {
             get {
-                object obj = ResourceManager.GetObject("entityFragmentShader", resourceCulture);
+                object obj = ResourceManager.GetObject("entityFS", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -278,9 +188,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] entityVertexShader {
+        public static byte[] entityVS {
             get {
-                object obj = ResourceManager.GetObject("entityVertexShader", resourceCulture);
+                object obj = ResourceManager.GetObject("entityVS", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -346,31 +256,31 @@ namespace Senapp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] finalFS {
+            get {
+                object obj = ResourceManager.GetObject("finalFS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] finalVS {
+            get {
+                object obj = ResourceManager.GetObject("finalVS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap front {
             get {
                 object obj = ResourceManager.GetObject("front", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap grassy2 {
-            get {
-                object obj = ResourceManager.GetObject("grassy2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap grid {
-            get {
-                object obj = ResourceManager.GetObject("grid", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -398,16 +308,6 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap jupiter {
-            get {
-                object obj = ResourceManager.GetObject("jupiter", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap left {
             get {
                 object obj = ResourceManager.GetObject("left", resourceCulture);
@@ -418,9 +318,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap mars {
+        public static System.Drawing.Bitmap levelUpDisabled {
             get {
-                object obj = ResourceManager.GetObject("mars", resourceCulture);
+                object obj = ResourceManager.GetObject("levelUpDisabled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -428,9 +328,119 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap mercury {
+        public static System.Drawing.Bitmap levelUpEnabled {
             get {
-                object obj = ResourceManager.GetObject("mercury", resourceCulture);
+                object obj = ResourceManager.GetObject("levelUpEnabled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] lightingFS {
+            get {
+                object obj = ResourceManager.GetObject("lightingFS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] lightingVS {
+            get {
+                object obj = ResourceManager.GetObject("lightingVS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] lux {
+            get {
+                object obj = ResourceManager.GetObject("lux", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] lux_dae {
+            get {
+                object obj = ResourceManager.GetObject("lux_dae", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap lux_face {
+            get {
+                object obj = ResourceManager.GetObject("lux_face", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap lux_tex {
+            get {
+                object obj = ResourceManager.GetObject("lux_tex", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap magicInfo {
+            get {
+                object obj = ResourceManager.GetObject("magicInfo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap map {
+            get {
+                object obj = ResourceManager.GetObject("map", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap mapButton {
+            get {
+                object obj = ResourceManager.GetObject("mapButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap mapView {
+            get {
+                object obj = ResourceManager.GetObject("mapView", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap marker {
+            get {
+                object obj = ResourceManager.GetObject("marker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -446,32 +456,22 @@ namespace Senapp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap moon {
-            get {
-                object obj = ResourceManager.GetObject("moon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap neptune {
-            get {
-                object obj = ResourceManager.GetObject("neptune", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon new_icon {
             get {
                 object obj = ResourceManager.GetObject("new_icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap noItem {
+            get {
+                object obj = ResourceManager.GetObject("noItem", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -498,9 +498,19 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap pyramid {
+        public static System.Drawing.Bitmap overlay {
             get {
-                object obj = ResourceManager.GetObject("pyramid", resourceCulture);
+                object obj = ResourceManager.GetObject("overlay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap overlayExt {
+            get {
+                object obj = ResourceManager.GetObject("overlayExt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -516,27 +526,14 @@ namespace Senapp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap saturn {
-            get {
-                object obj = ResourceManager.GetObject("saturn", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap saturnring {
-            get {
-                object obj = ResourceManager.GetObject("saturnring", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SKYBOX_FILE_PREFIX=.
+        ///   Looks up a localized string similar to [WINDOW]
+        ///COLOUR_BITS=24
+        ///DEPTH_BITS=16
+        ///STENCIL_BITS=8
+        ///ACCUM_BITS=32
+        ///
+        ///[FILES]
+        ///SKYBOX_FILE_PREFIX=.
         /// </summary>
         public static string settings {
             get {
@@ -545,11 +542,21 @@ namespace Senapp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap settingsButton {
+            get {
+                object obj = ResourceManager.GetObject("settingsButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] skyboxFragmentShader {
+        public static byte[] skyboxFS {
             get {
-                object obj = ResourceManager.GetObject("skyboxFragmentShader", resourceCulture);
+                object obj = ResourceManager.GetObject("skyboxFS", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -557,9 +564,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] skyboxVertexShader {
+        public static byte[] skyboxVS {
             get {
-                object obj = ResourceManager.GetObject("skyboxVertexShader", resourceCulture);
+                object obj = ResourceManager.GetObject("skyboxVS", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -577,9 +584,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] spriteFragmentShader {
+        public static byte[] spriteFS {
             get {
-                object obj = ResourceManager.GetObject("spriteFragmentShader", resourceCulture);
+                object obj = ResourceManager.GetObject("spriteFS", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -587,19 +594,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] spriteVertexShader {
+        public static byte[] spriteVS {
             get {
-                object obj = ResourceManager.GetObject("spriteVertexShader", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        public static byte[] stall {
-            get {
-                object obj = ResourceManager.GetObject("stall", resourceCulture);
+                object obj = ResourceManager.GetObject("spriteVS", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -607,9 +604,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap stallTexture {
+        public static System.Drawing.Bitmap statsInfo {
             get {
-                object obj = ResourceManager.GetObject("stallTexture", resourceCulture);
+                object obj = ResourceManager.GetObject("statsInfo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -617,29 +614,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap stars {
+        public static System.Drawing.Bitmap store {
             get {
-                object obj = ResourceManager.GetObject("stars", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap starsMilky {
-            get {
-                object obj = ResourceManager.GetObject("starsMilky", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap sun {
-            get {
-                object obj = ResourceManager.GetObject("sun", resourceCulture);
+                object obj = ResourceManager.GetObject("store", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -647,9 +624,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] terrainFragmentShader {
+        public static byte[] textFS {
             get {
-                object obj = ResourceManager.GetObject("terrainFragmentShader", resourceCulture);
+                object obj = ResourceManager.GetObject("textFS", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -657,29 +634,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] terrainVertexShader {
+        public static byte[] textVS {
             get {
-                object obj = ResourceManager.GetObject("terrainVertexShader", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        public static byte[] textFragmentShader {
-            get {
-                object obj = ResourceManager.GetObject("textFragmentShader", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        public static byte[] textVertexShader {
-            get {
-                object obj = ResourceManager.GetObject("textVertexShader", resourceCulture);
+                object obj = ResourceManager.GetObject("textVS", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -690,36 +647,6 @@ namespace Senapp.Properties {
         public static System.Drawing.Bitmap top {
             get {
                 object obj = ResourceManager.GetObject("top", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap uranus {
-            get {
-                object obj = ResourceManager.GetObject("uranus", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap venus {
-            get {
-                object obj = ResourceManager.GetObject("venus", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap venus2 {
-            get {
-                object obj = ResourceManager.GetObject("venus2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -737,9 +664,9 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap witcher_img {
+        public static System.Drawing.Bitmap witcher_tex {
             get {
-                object obj = ResourceManager.GetObject("witcher_img", resourceCulture);
+                object obj = ResourceManager.GetObject("witcher_tex", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

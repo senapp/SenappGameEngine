@@ -2,6 +2,7 @@
 using OpenTK.Graphics.OpenGL4;
 
 using Senapp.Engine.Entities;
+using Senapp.Engine.Loaders;
 using Senapp.Engine.Models;
 using Senapp.Engine.Shaders;
 using Senapp.Engine.Utilities;
@@ -10,90 +11,97 @@ namespace Senapp.Engine.Renderer
 {
     public class SkyboxRenderer
     {
-		private static float SIZE = 500;	
-		public static int skyboxTextureID;
+		private const float SIZE = 500;	
+		public static int SkyboxTextureID;
 
-		private static float[] VERTICES = {
-		-SIZE,  SIZE, -SIZE,
-		-SIZE, -SIZE, -SIZE,
-		 SIZE, -SIZE, -SIZE,
-		 SIZE, -SIZE, -SIZE,
-		 SIZE,  SIZE, -SIZE,
-		-SIZE,  SIZE, -SIZE,
-
-		-SIZE, -SIZE,  SIZE,
-		-SIZE, -SIZE, -SIZE,
-		-SIZE,  SIZE, -SIZE,
-		-SIZE,  SIZE, -SIZE,
-		-SIZE,  SIZE,  SIZE,
-		-SIZE, -SIZE,  SIZE,
-
-		 SIZE, -SIZE, -SIZE,
-		 SIZE, -SIZE,  SIZE,
-		 SIZE,  SIZE,  SIZE,
-		 SIZE,  SIZE,  SIZE,
-		 SIZE,  SIZE, -SIZE,
-		 SIZE, -SIZE, -SIZE,
-
-		-SIZE, -SIZE,  SIZE,
-		-SIZE,  SIZE,  SIZE,
-		 SIZE,  SIZE,  SIZE,
-		 SIZE,  SIZE,  SIZE,
-		 SIZE, -SIZE,  SIZE,
-		-SIZE, -SIZE,  SIZE,
-
-		-SIZE,  SIZE, -SIZE,
-		 SIZE,  SIZE, -SIZE,
-		 SIZE,  SIZE,  SIZE,
-		 SIZE,  SIZE,  SIZE,
-		-SIZE,  SIZE,  SIZE,
-		-SIZE,  SIZE, -SIZE,
-
-		-SIZE, -SIZE, -SIZE,
-		-SIZE, -SIZE,  SIZE,
-		 SIZE, -SIZE, -SIZE,
-		 SIZE, -SIZE, -SIZE,
-		-SIZE, -SIZE,  SIZE,
-		 SIZE, -SIZE,  SIZE
-	};
-		// 
-		private static string[] TEXTURES_FILES = { "right", "left", "top", "bottom", "front", "back" };
-		
-		private string start = "";
-
-		private RawModel cube;
-		private SkyboxShader shader;
-
-		public SkyboxRenderer(SkyboxShader _shader, Matrix4 projectionMatrix)
+		public SkyboxRenderer(Matrix4 projectionMatrix)
 		{
-			start = Settings.GetSetting(Settings.ConfigSettings.SKYBOX_FILE_PREFIX);
-			cube = Loader.LoadToVAO(VERTICES, 3);
-			skyboxTextureID = Loader.LoadCubeMap(TEXTURES_FILES, start);
+			skyboxPrefix = Settings.GetSetting<string>(ConfigSettings.SKYBOX_FILE_PREFIX);
+			cube = Loader.LoadPositionsToVAO(VERTICES, 3, skyboxPrefix + "_SKYBOX");
+			SkyboxTextureID = Loader.LoadCubeMap(TEXTURES_FILES, skyboxPrefix);
 
-			shader = _shader;
+			shader = new SkyboxShader();
+
 			shader.Start();
 			shader.LoadProjectionMatrix(projectionMatrix);
 			shader.Stop();
 		}
-		public void Render(Camera camera)
+
+		public void Render(bool isColourPass, Camera camera)
 		{
 			MasterRenderer.DisableCulling();
+
 			shader.Start();
+
 			shader.LoadViewMatrix(camera.GetViewMatrix());
 			shader.LoadTransformationMatrix(camera.gameObject.transform.TransformationMatrixTranslation());
-			GL.BindVertexArray(cube.vaoID);
+			shader.LoadIsColourPass(isColourPass);
+
+			GL.BindVertexArray(cube.VaoId);
 			GL.EnableVertexAttribArray(0);
 			GL.ActiveTexture(TextureUnit.Texture0);
-			GL.BindTexture(TextureTarget.TextureCubeMap, skyboxTextureID);
-			GL.DrawArrays(PrimitiveType.Triangles, 0, cube.vertexCount);
+			GL.BindTexture(TextureTarget.TextureCubeMap, SkyboxTextureID);
+			GL.DrawArrays(PrimitiveType.Triangles, 0, cube.VertexCount);
 			GL.DisableVertexAttribArray(0);
 			GL.BindVertexArray(0);
+
 			shader.Stop();
+
 			MasterRenderer.EnableCulling();
 		}
-		public void CleanUp()
+
+		public void Dispose()
         {
-			shader.CleanUp();
+			shader.Dispose();
         }
+	
+		private readonly RawModel cube;
+		private readonly SkyboxShader shader;
+
+		private readonly string skyboxPrefix = "";
+		private static readonly string[] TEXTURES_FILES = { "right", "left", "top", "bottom", "front", "back" };
+		private static readonly float[] VERTICES = {
+			-SIZE,  SIZE, -SIZE,
+			-SIZE, -SIZE, -SIZE,
+			 SIZE, -SIZE, -SIZE,
+			 SIZE, -SIZE, -SIZE,
+			 SIZE,  SIZE, -SIZE,
+			-SIZE,  SIZE, -SIZE,
+
+			-SIZE, -SIZE,  SIZE,
+			-SIZE, -SIZE, -SIZE,
+			-SIZE,  SIZE, -SIZE,
+			-SIZE,  SIZE, -SIZE,
+			-SIZE,  SIZE,  SIZE,
+			-SIZE, -SIZE,  SIZE,
+
+			 SIZE, -SIZE, -SIZE,
+			 SIZE, -SIZE,  SIZE,
+			 SIZE,  SIZE,  SIZE,
+			 SIZE,  SIZE,  SIZE,
+			 SIZE,  SIZE, -SIZE,
+			 SIZE, -SIZE, -SIZE,
+
+			-SIZE, -SIZE,  SIZE,
+			-SIZE,  SIZE,  SIZE,
+			 SIZE,  SIZE,  SIZE,
+			 SIZE,  SIZE,  SIZE,
+			 SIZE, -SIZE,  SIZE,
+			-SIZE, -SIZE,  SIZE,
+
+			-SIZE,  SIZE, -SIZE,
+			 SIZE,  SIZE, -SIZE,
+			 SIZE,  SIZE,  SIZE,
+			 SIZE,  SIZE,  SIZE,
+			-SIZE,  SIZE,  SIZE,
+			-SIZE,  SIZE, -SIZE,
+
+			-SIZE, -SIZE, -SIZE,
+			-SIZE, -SIZE,  SIZE,
+			 SIZE, -SIZE, -SIZE,
+			 SIZE, -SIZE, -SIZE,
+			-SIZE, -SIZE,  SIZE,
+			 SIZE, -SIZE,  SIZE
+		};
 	}
 }

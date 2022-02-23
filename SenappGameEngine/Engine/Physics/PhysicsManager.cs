@@ -1,9 +1,9 @@
-﻿using System.Drawing;
-using System.Linq;
-using Senapp.Engine.Events;
+﻿using System.Linq;
 using System.Collections.Generic;
 
 using OpenTK;
+
+using Senapp.Engine.Events;
 
 namespace Senapp.Engine.Physics
 {
@@ -11,20 +11,7 @@ namespace Senapp.Engine.Physics
     {
         public static readonly float gravity = -9.81f;
 
-        public List<RigidEntity> rigidEntities = new List<RigidEntity>();
-
-        private int SortByMovedDistance(RigidEntity a, RigidEntity b)
-        {
-            var val = a.MovedDistance.CompareTo(b.MovedDistance);
-
-            if (val == 0) return SortByY(a, b);
-            else return val;
-        }
-
-        private int SortByY(RigidEntity a, RigidEntity b)
-        {
-            return a.gameObject.transform.position.Y.CompareTo(b.gameObject.transform.position.Y);
-        }
+        public List<RigidEntity> rigidEntities = new();
 
         public void PhysicsUpdate(GameUpdatedEventArgs args)
         {
@@ -45,35 +32,16 @@ namespace Senapp.Engine.Physics
 
             foreach (var mesh in movedColliders)
             {
-                bool collision = false;
                 foreach (var col in colliders)
                 {
                     if (col != mesh && col.CheckCollision(mesh, out Vector3 position))
                     {
-                        mesh.gameObject.SetColour(Color.Blue);
-                        mesh.gameObject.transform.position = position;
+                        mesh.gameObject.transform.SetPosition(position);
                         mesh.UpdatePosition(out bool newPosition);
-                        collision = true;
                     }
                 }
 
-                if (!collision)
-                {
-                    if (mesh.gameObject.HasComponent<RaycastTarget>())
-                    {
-                        var component = mesh.gameObject.GetComponent<RaycastTarget>();
-                        if (component.focused)
-                        {
-                            mesh.gameObject.SetColour(Color.Red);
-                        }
-                        else
-                        {
-                            mesh.gameObject.SetColour(Color.White);
-                        }
-                    }
-                }
-
-                mesh.SetLastPosition(mesh.gameObject.transform.position);
+                mesh.SetLastPosition(mesh.gameObject.transform.GetWorldPosition());
             }
         }
     }

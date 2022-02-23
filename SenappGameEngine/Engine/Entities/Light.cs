@@ -1,4 +1,4 @@
-﻿using Senapp.Engine.Base;
+﻿using Senapp.Engine.Core.Components;
 
 namespace Senapp.Engine.Entities
 {

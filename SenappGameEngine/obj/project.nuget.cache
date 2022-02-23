@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "IMCVN13u6gmRL+0u5eG37NXwVTGgujxAFP5gj3pv7wRugqYTLsAh4I8kVhNiC0CNPc+7FfX4OSjtVxAL74YH5g==",
+  "dgSpecHash": "5ChUfBxsWKfvO2baLoGAKdnscoXuuadVA6LoSH69Mbihq3iCGYe/VAfEQcCpQVi1I/a5P3SNsTDw9WzMS7slvw==",
   "success": true,
   "projectFilePath": "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Senapp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\albin\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\albin\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\albin\\.nuget\\packages\\opentk\\3.3.2\\opentk.3.3.2.nupkg.sha512",
     "C:\\Users\\albin\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
     "C:\\Users\\albin\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",

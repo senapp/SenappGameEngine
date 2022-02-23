@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Text;
 
 namespace Senapp.Engine.Utilities
@@ -9,20 +10,35 @@ namespace Senapp.Engine.Utilities
         {
             return (Bitmap)Properties.Resources.ResourceManager.GetObject(fileName);
         }
+
         public static Icon GetIcon(string fileName)
         {
             return (Icon)Properties.Resources.ResourceManager.GetObject(fileName);
         }
+
         public static string GetFile(string fileName)
         {
-            try
+            var returnData = string.Empty;
+            var data = Properties.Resources.ResourceManager.GetObject(fileName);
+            if (data != null)
             {
-                return (string)Properties.Resources.ResourceManager.GetObject(fileName);
+                if (data.GetType().Equals(typeof(string)))
+                {
+                    returnData = (string)data;
+                }
+                else
+                {
+                    returnData = Encoding.Default.GetString((byte[])data);
+                }
             }
-            catch
+
+            if (data == null || string.IsNullOrEmpty(returnData))
             {
-                return Encoding.Default.GetString((byte[])Properties.Resources.ResourceManager.GetObject(fileName));
+                Console.WriteLine($"[ENGINE][ERROR] Error trying to read file '{fileName}' from resources.");
+                return null;
             }
+
+            return returnData;
         }
     }
 }

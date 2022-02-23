@@ -2,26 +2,18 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 
-using OpenTK.Graphics.OpenGL4;
-using PixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat;
-
-using Senapp.Engine.Utilities;
+using Senapp.Engine.Loaders;
+using OpenTK.Graphics.OpenGL;
 
 namespace Senapp.Engine.Models
 {
-    public enum TextureCoordinate
-    {
-        S = TextureParameterName.TextureWrapS,
-        T = TextureParameterName.TextureWrapT,
-        R = TextureParameterName.TextureWrapR
-    }
-
-    public class Texture : IDisposable
+    public class Texture
     {
         public const SizedInternalFormat Srgb8Alpha8 = (SizedInternalFormat)All.Srgb8Alpha8;
         public const SizedInternalFormat RGB32F = (SizedInternalFormat)All.Rgb32f;
 
         public const GetPName MAX_TEXTURE_MAX_ANISOTROPY = (GetPName)0x84FF;
+        public const TextureParameterName TEXTURE_MAX_ANISOTROPY = (TextureParameterName)0x84FE;
 
         public static readonly float MaxAniso;
 
@@ -32,7 +24,8 @@ namespace Senapp.Engine.Models
 
         public readonly string Name;
         public readonly int GLTexture;
-        public readonly int Width, Height;
+        public readonly int Width;
+        public readonly int Height;
         public readonly int MipmapLevels;
         public readonly SizedInternalFormat InternalFormat;
 
@@ -47,51 +40,36 @@ namespace Senapp.Engine.Models
             {
                 MipmapLevels = (int)Math.Floor(Math.Log(Math.Max(Width, Height), 2));
             }
-            else MipmapLevels = 1;
+            else
+            {
+                MipmapLevels = 1;
+            }
 
-            OpenGlUtils.CheckGLError("Clear");
-
-            OpenGlUtils.CreateTexture(TextureTarget.Texture2D, Name, out GLTexture);
+            GLTexture = GL.GenTexture();
+            GL.BindTexture(TextureTarget.Texture2D, GLTexture);
             GL.TextureStorage2D(GLTexture, MipmapLevels, InternalFormat, Width, Height);
-            OpenGlUtils.CheckGLError("Storage2d");
 
             BitmapData data = image.LockBits(new Rectangle(0, 0, Width, Height),
-                ImageLockMode.ReadOnly, global::System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             
-            GL.TextureSubImage2D(GLTexture, 0, 0, 0, Width, Height, PixelFormat.Bgra, PixelType.UnsignedByte, data.Scan0);
-            OpenGlUtils.CheckGLError("SubImage");
+            GL.TextureSubImage2D(GLTexture, 0, 0, 0, Width, Height, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, data.Scan0);
 
             image.UnlockBits(data);
 
             if (generateMipmaps) GL.GenerateTextureMipmap(GLTexture);
 
             GL.TextureParameter(GLTexture, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
-            OpenGlUtils.CheckGLError("WrapS");
             GL.TextureParameter(GLTexture, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
-            OpenGlUtils.CheckGLError("WrapT");
 
             GL.TextureParameter(GLTexture, TextureParameterName.TextureMinFilter, (int)(generateMipmaps ? TextureMinFilter.Linear : TextureMinFilter.LinearMipmapLinear));
             GL.TextureParameter(GLTexture, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
-            OpenGlUtils.CheckGLError("Filtering");
 
             GL.TextureParameter(GLTexture, TextureParameterName.TextureMaxLevel, MipmapLevels - 1);
 
             GL.TexParameter(TextureTarget.Texture2D, (TextureParameterName)OpenTK.Graphics.ES11.ExtTextureFilterAnisotropic.TextureMaxAnisotropyExt, MaxAniso);
-            OpenGlUtils.CheckGLError("Anisotropic");
 
             image.Dispose();
         }
-
-        public Texture(string name, int GLTex, int width, int height, int mipmaplevels, SizedInternalFormat internalFormat)
-        {
-            Name = name;
-            GLTexture = GLTex;
-            Width = width;
-            Height = height;
-            MipmapLevels = mipmaplevels;
-            InternalFormat = internalFormat;
-        }
-
         public Texture(string name, int width, int height, IntPtr data, bool generateMipmaps = false, bool srgb = false)
         {
             Name = name;
@@ -100,15 +78,15 @@ namespace Senapp.Engine.Models
             InternalFormat = srgb ? Srgb8Alpha8 : SizedInternalFormat.Rgba8;
             MipmapLevels = generateMipmaps == false ? 1 : (int)Math.Floor(Math.Log(Math.Max(Width, Height), 2));
 
-            OpenGlUtils.CreateTexture(TextureTarget.Texture2D, Name, out GLTexture);
+            GLTexture = GL.GenTexture();
             GL.TextureStorage2D(GLTexture, MipmapLevels, InternalFormat, Width, Height);
 
-            GL.TextureSubImage2D(GLTexture, 0, 0, 0, Width, Height, PixelFormat.Bgra, PixelType.UnsignedByte, data);
+            GL.TextureSubImage2D(GLTexture, 0, 0, 0, Width, Height, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, data);
 
             if (generateMipmaps) GL.GenerateTextureMipmap(GLTexture);
 
-            SetWrap(TextureCoordinate.S, TextureWrapMode.Repeat);
-            SetWrap(TextureCoordinate.T, TextureWrapMode.Repeat);
+            SetWrap(TextureParameterName.TextureWrapS, TextureWrapMode.Repeat);
+            SetWrap(TextureParameterName.TextureWrapT, TextureWrapMode.Repeat);
 
             GL.TextureParameter(GLTexture, TextureParameterName.TextureMaxLevel, MipmapLevels - 1);
         }
@@ -117,29 +95,25 @@ namespace Senapp.Engine.Models
         {
             GL.TextureParameter(GLTexture, TextureParameterName.TextureMinFilter, (int)filter);
         }
-
         public void SetMagFilter(TextureMagFilter filter)
         {
             GL.TextureParameter(GLTexture, TextureParameterName.TextureMagFilter, (int)filter);
         }
-
         public void SetAnisotropy(float level)
         {
-            const TextureParameterName TEXTURE_MAX_ANISOTROPY = (TextureParameterName)0x84FE;
-            GL.TextureParameter(GLTexture, TEXTURE_MAX_ANISOTROPY, OpenGlUtils.Clamp(level, 1, MaxAniso));
+            GL.TextureParameter(GLTexture, TEXTURE_MAX_ANISOTROPY, Math.Clamp(level, 1, MaxAniso));
         }
-
-        public void SetLod(int @base, int min, int max)
+        public void SetLod(int lod, int min, int max)
         {
-            GL.TextureParameter(GLTexture, TextureParameterName.TextureLodBias, @base);
+            GL.TextureParameter(GLTexture, TextureParameterName.TextureLodBias, lod);
             GL.TextureParameter(GLTexture, TextureParameterName.TextureMinLod, min);
             GL.TextureParameter(GLTexture, TextureParameterName.TextureMaxLod, max);
         }
-        
-        public void SetWrap(TextureCoordinate coord, TextureWrapMode mode)
+        public void SetWrap(TextureParameterName name, TextureWrapMode mode)
         {
-            GL.TextureParameter(GLTexture, (TextureParameterName)coord, (int)mode);
+            GL.TextureParameter(GLTexture, name, (int)mode);
         }
+
         public void Bind(TextureUnit textureUnit)
         {
             GL.ActiveTexture(textureUnit);

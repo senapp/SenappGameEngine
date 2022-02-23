@@ -26,6 +26,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Properties\launchSettings.json" />
+    <None Remove="Resources\MobaAssets\cameraButton.psd" />
+    <None Remove="Resources\MobaAssets\levelUpDisabled.psd" />
+    <None Remove="Resources\MobaAssets\levelUpEnabled.psd" />
+    <None Remove="Resources\MobaAssets\lolAssets.psd" />
+    <None Remove="Resources\MobaAssets\magicInfo.psd" />
+    <None Remove="Resources\MobaAssets\map.psd" />
+    <None Remove="Resources\MobaAssets\mapButton.psd" />
+    <None Remove="Resources\MobaAssets\noItem.psd" />
+    <None Remove="Resources\MobaAssets\overlay.psd" />
+    <None Remove="Resources\MobaAssets\overlayExt.psd" />
+    <None Remove="Resources\MobaAssets\settingsButton.psd" />
+    <None Remove="Resources\MobaAssets\statsInfo.psd" />
+    <None Remove="Resources\MobaAssets\store.psd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
   </ItemGroup>
 

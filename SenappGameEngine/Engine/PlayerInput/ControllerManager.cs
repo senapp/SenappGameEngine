@@ -6,10 +6,8 @@ namespace Senapp.Engine.PlayerInput
 {
     public class ControllerManager
     {
-        public static readonly int MAX_CONNECTED_CONTROLLERS = 4;
-        public static readonly float JOYSTICK_MIN = 0.1f;
+        public const int MAX_CONNECTED_CONTROLLERS = 4;
 
-        private static List<Controller> activeControllers = new List<Controller>();
         public static Controller GetController(int id)
         {
             foreach (var controller in activeControllers)
@@ -26,11 +24,13 @@ namespace Senapp.Engine.PlayerInput
             }
             return false;
         }
+
         public static void Update()
         {
             GetActiveControllers();
             GetControllerInput();
         }
+
         private static void GetActiveControllers()
         {
             for (int i = 0; i < MAX_CONNECTED_CONTROLLERS; i++)
@@ -46,5 +46,7 @@ namespace Senapp.Engine.PlayerInput
                 controller.Update();
             }
         }
+
+        private static readonly List<Controller> activeControllers = new();
     }
 }

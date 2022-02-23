@@ -2,7 +2,9 @@
 
 using OpenTK;
 
-using Senapp.Engine.Base;
+using Senapp.Engine.Core;
+using Senapp.Engine.Core.Components;
+using Senapp.Engine.Core.GameObjects;
 using Senapp.Engine.Entities;
 using Senapp.Engine.Events;
 using Senapp.Engine.Utilities;
@@ -21,7 +23,7 @@ namespace Senapp.Engine.Physics
         private Vector3 weight;
         private Vector3 lastPosition;
 
-        private float mass = 1;
+        private readonly float mass = 1;
         public float MovedDistance = 0;
 
         public RigidEntity() { }
@@ -33,8 +35,8 @@ namespace Senapp.Engine.Physics
         }
 
         public override bool ComponentConditions(GameObject gameObject)
-        {
-            return gameObject.HasComponent<Entity>();
+        {           
+            return base.ComponentConditions(gameObject) && gameObject.HasComponent<Entity>();
         }
 
         public override void Awake()
@@ -50,7 +52,7 @@ namespace Senapp.Engine.Physics
 
         public Vector3 GetEntityDirection()
         {
-            var direction = gameObject.transform.position - lastPosition;
+            var direction = gameObject.transform.GetWorldPosition() - lastPosition;
             return direction / (float)direction.Magnitude();
         }
 
@@ -64,11 +66,11 @@ namespace Senapp.Engine.Physics
             var entity = gameObject.GetComponent<Entity>();
             Vector3 currentVertice = Vector3.Zero;
 
-            for (int i = 0; i < entity.model.rawModel.modelData.positions.Length; i++)
+            for (int i = 0; i < entity.model.rawModel.ModelData.positions.Length; i++)
             {
-                currentVertice.X = entity.model.rawModel.modelData.positions[i];
-                currentVertice.Y = entity.model.rawModel.modelData.positions[i + 1];
-                currentVertice.Z = entity.model.rawModel.modelData.positions[i + 2];
+                currentVertice.X = entity.model.rawModel.ModelData.positions[i];
+                currentVertice.Y = entity.model.rawModel.ModelData.positions[i + 1];
+                currentVertice.Z = entity.model.rawModel.ModelData.positions[i + 2];
 
                 maxVertex.X = Math.Max(maxVertex.X, currentVertice.X);
                 maxVertex.Y = Math.Max(maxVertex.Y, currentVertice.Y);
@@ -78,7 +80,7 @@ namespace Senapp.Engine.Physics
                 minVertex.Y = Math.Min(minVertex.Y, currentVertice.Y);
                 minVertex.Z = Math.Min(minVertex.Z, currentVertice.Z);
 
-                var worldVertice = gameObject.transform.GetVerticePosition(currentVertice);
+                var worldVertice = gameObject.transform.GetWorldVerticePosition(currentVertice);
 
                 if (i == 0)
                 {
@@ -111,8 +113,8 @@ namespace Senapp.Engine.Physics
 
         public void UpdatePosition(out bool boundingBoxUpdated)
         {
-            var worldVerticeMin = gameObject.transform.GetVerticePosition(new Vector3(minVertex.X, minVertex.Y, minVertex.Z));
-            var worldVerticeMax = gameObject.transform.GetVerticePosition(new Vector3(maxVertex.X, maxVertex.Y, maxVertex.Z));
+            var worldVerticeMin = gameObject.transform.GetWorldVerticePosition(new Vector3(minVertex.X, minVertex.Y, minVertex.Z));
+            var worldVerticeMax = gameObject.transform.GetWorldVerticePosition(new Vector3(maxVertex.X, maxVertex.Y, maxVertex.Z));
 
             boundingBoxUpdated = minVector != worldVerticeMin || maxVector != worldVerticeMax;    
             
@@ -123,9 +125,9 @@ namespace Senapp.Engine.Physics
             maxVector.Y = worldVerticeMax.Y;
             maxVector.Z = worldVerticeMax.Z;
 
-            if (lastPosition != gameObject.transform.position)
+            if (lastPosition != gameObject.transform.GetWorldPosition())
             {
-                MovedDistance = Vector3.Distance(lastPosition, gameObject.transform.position);
+                MovedDistance = Vector3.Distance(lastPosition, gameObject.transform.GetWorldPosition());
             }
         }
 
@@ -136,7 +138,7 @@ namespace Senapp.Engine.Physics
             bool z = maxVector.Z > col.minVector.Z && minVector.Z < col.maxVector.Z;
 
             if (x && y && z) colliderPosition = GetColliderPosition(col);
-            else colliderPosition = col.gameObject.transform.position;
+            else colliderPosition = col.gameObject.transform.GetWorldPosition();
 
             return x && y && z;
         }
@@ -194,31 +196,21 @@ namespace Senapp.Engine.Physics
                 }
             }
 
-            if (colX == 0)
+            var colPos = col.gameObject.transform.GetWorldPosition();
+
+            if (colX == 0 || colY != 0 && colX > colY || colZ != 0 && colX > colZ)
             {
-                finalX = col.gameObject.transform.position.X;
-            }
-            else if (colY != 0 && colX > colY || colZ != 0 && colX > colZ)
-            {
-                finalX = col.gameObject.transform.position.X;
+                finalX = colPos.X;
             }
 
-            if (colY == 0)
+            if (colY == 0 || colX != 0 && colY > colX || colZ != 0 && colY > colZ)
             {
-                finalY = col.gameObject.transform.position.Y;
-            }
-            else if (colX != 0 && colY > colX || colZ != 0 && colY > colZ)
-            {
-                finalY = col.gameObject.transform.position.Y;
+                finalY = colPos.Y;
             }
 
-            if (colZ == 0)
+            if (colZ == 0 || colX != 0 && colZ > colX || colY != 0 && colZ > colY)
             {
-                finalZ = col.gameObject.transform.position.Z;
-            }
-            else if (colX != 0 && colZ > colX || colY != 0 && colZ > colY)
-            {
-                finalZ = col.gameObject.transform.position.Z;
+                finalZ = colPos.Z;
             }
 
             return new Vector3(finalX, finalY, finalZ);
