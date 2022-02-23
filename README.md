@@ -10,6 +10,38 @@ The main idea behind the engine was to explore game engine programming and make 
 - [ThinMatrix - OpenGL 3D Game Tutorials](https://www.youtube.com/watch?v=VS8wlS9hF8E&list=PLRIWtICgwaX0u7Rf9zkZhLoLuZVfUksDP)
 - [Cherno - Game Engine](https://www.youtube.com/watch?v=JxIZbV_XjAs&list=PLlrATfBNZ98dC-V-N3m0Go4deliWHPFwT)
 
+### Features:
+- Game object system
+- Component system
+- Scenes & scene management
+- Game object relation hierarchy
+- Transformation with translation, rotation & scaling with relation hierarchy
+- Model & texture loader
+- OBJ & DAE loader
+- Really basic server & client networking with HTTP
+- Box collisions
+- Keyboard input
+- Mouse input
+- Controller input
+- RaycastTarget/UI, enter/exit/click/unfocus with pixel precision for game objects
+- Component renderers & shaders
+- Skybox rendering & shader
+- FrameBuffer & FrameBuffer rendering
+- Deferred rendering
+- Font class with loading
+- Texts
+- Sprites
+- Buttons
+- TextButtons
+- Input fields
+- Frame rate info
+- Wire frame rendering
+- Settings class & file
+- GraphicSettings, extension of Settings
+- Resource loading
+- Extension methods for vectors, math, & randomizing
+- Example programs
+
 ### Simple guide:
 The engine works on a component architecture, where you basically just create a `GameObject` and assign the components it will work with.
 Create your own main C# file that inherits from `Game` and add it to `Program.cs`, look at the files in `/Programs` for setup.
@@ -39,11 +71,6 @@ Example `Text` setup code:
 <br />
 <br />
 Look at implementations in `/Programs` for more detailed setups.
-
-### Features:
-- Scenes
-- Components
-- More...
 
 #### INFORMATION REGARDING MODELS AND TEXTURES
 
