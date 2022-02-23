@@ -7,10 +7,7 @@ using Senapp.Engine.Core;
 using Senapp.Engine.Entities;
 using Senapp.Engine.Models;
 using Senapp.Engine.Renderer.ComponentRenderers;
-using Senapp.Engine.Renderer.PostProcessing;
-using Senapp.Engine.Shaders;
-using Senapp.Engine.Shaders.Components;
-using Senapp.Engine.Terrains;
+using Senapp.Engine.Renderer.FrameBuffers;
 using Senapp.Engine.UI;
 using Senapp.Engine.UI.Components;
 using Senapp.Engine.Utilities;
@@ -35,6 +32,13 @@ namespace Senapp.Engine.Renderer
             GL.CullFace(CullFaceMode.Back);
         }
 
+        public readonly EntityRenderer entityRenderer;
+        public readonly SpriteRenderer spriteRenderer;
+        public readonly TextRenderer textRenderer;
+        public readonly SkyboxRenderer skyboxRenderer;
+        public readonly LightingRenderer lightingRenderer;
+        public readonly FinalRenderer finalRenderer;
+
         public MasterRenderer(Camera camera)
         {
             GL.Ortho(0, Game.Instance.Width, Game.Instance.Height, 0, 0, 1);
@@ -46,24 +50,14 @@ namespace Senapp.Engine.Renderer
 
             EnableCulling();
 
-            entityShader = new EntityShader();
-            terrainShader = new TerrainShader();
-            spriteShader = new SpriteShader();
-            textShader = new TextShader();
-            skyboxShader = new SkyboxShader();
+            entityRenderer = new EntityRenderer();
+            spriteRenderer = new SpriteRenderer();
+            textRenderer = new TextRenderer();
+            skyboxRenderer = new SkyboxRenderer(camera.GetProjectionMatrix());
+            lightingRenderer = new LightingRenderer();
+            finalRenderer = new FinalRenderer();
 
-            entityRenderer = new EntityRenderer(entityShader);
-            terrainRenderer = new TerrainRenderer(terrainShader);
-            spriteRenderer = new SpriteRenderer(spriteShader);
-            textRenderer = new TextRenderer(textShader);
-            skyboxRenderer = new SkyboxRenderer(skyboxShader, camera.GetProjectionMatrix());
-
-            int width = Game.Instance.Width;
-            int height = Game.Instance.Height;
-
-            postProcessingMultisampledFbo = new Fbo(width, height);
-            postProcessingOutputFbo = new Fbo(width, height, DepthBufferType.DEPTH_TEXTURE);
-            postProcessingManager = new PostProcessingManager();
+            SetupFrameBuffers();
         }
 
         public void OnScreenResize(int screenWidth, int screenHeight)
@@ -88,102 +82,147 @@ namespace Senapp.Engine.Renderer
         }
         public void RecalculateSize(int width, int height)
         {
-            postProcessingMultisampledFbo?.Dispose();
-            postProcessingOutputFbo?.Dispose();
-            postProcessingMultisampledFbo = new Fbo(width, height);
-            postProcessingOutputFbo = new Fbo(width, height, DepthBufferType.DEPTH_TEXTURE);
-
-            postProcessingManager.OnResize(width, height);
+            geometryColourFbo?.Resize(width, height);
+            geometryDataFbo?.Resize(width, height);
+            finalFbo?.Resize(width, height);
         }
 
         public void Render(Light sun, Camera camera)
         {
+            #region Process gameobjects
             foreach (var gameObject in Game.Instance.GetSceneGameObjects())
             {
                 gameObject.ProccessRenderHierarchy<Entity>(ProcessEntity);
-                gameObject.ProccessRenderHierarchy<Terrain>(ProcessTerrain);
                 gameObject.ProccessRenderHierarchy<Sprite>(ProcessSprite);
                 gameObject.ProccessRenderHierarchy<Text>(ProcessText);
             }
-
-            if (GraphicsSettings.PostProcessingRequired)
-            {
-                postProcessingMultisampledFbo.Bind();
-                ClearScreen();
-            }
-            #region 3D / World
-            skyboxRenderer.Render(camera);
-
-            entityShader.Start();
-            entityShader.UpdateCamera(camera);
-            entityRenderer.Render(CreateEntityRenderList());
-            entityShader.LoadLight(sun);
-            entityShader.Stop();
-
-            terrainShader.Start();
-            terrainShader.UpdateCamera(camera);
-            terrainRenderer.Render(terrains);
-            terrainShader.LoadLight(sun);
-            terrainShader.Stop();
             #endregion
-            if (GraphicsSettings.PostProcessingRequired)
-            {
-                postProcessingMultisampledFbo.Unbind();
-                postProcessingMultisampledFbo.ResolveToFbo(postProcessingOutputFbo);
-                postProcessingManager.ApplyPostProcessing(postProcessingOutputFbo.ColourTexture);
-            }
 
-            #region 2D / UI
+            #region Geometry Colour Pass
+            geometryColourFbo.Bind();
+            ClearScreen();
+
+            entityRenderer.Render(isMultisample: true, camera, CreateEntityRenderList());
+
+            geometryColourFbo.Unbind();
+            #endregion
+
+            #region Geometry Data Pass
+            geometryDataFbo.Bind();
+            ClearScreen();
+            
+            skyboxRenderer.Render(isColourPass: false, camera);
+            entityRenderer.Render(isMultisample: false, camera, CreateEntityRenderList());
+            
+            geometryDataFbo.Unbind();
+            Game.Instance.SetGeometryDataFbo(geometryDataFbo);
+
+            // Resolve colour to geometryDataFbo
+            geometryColourFbo.ResolveToFbo(geometryDataFbo);
+            #endregion
+            
+            #region Lighting Pass
+            finalFbo.Bind();
+            ClearScreen();
+            
+            skyboxRenderer.Render(isColourPass: true, camera);
+            lightingRenderer.Render(geometryDataFbo);
+            
+            finalFbo.Unbind();
+            #endregion
+            
+            #region Final Pass
+            finalRenderer.Render(finalFbo);
+            #endregion
+
+            #region UI Pass
             SortingLayers.Sort();
 
-            spriteShader.Start();
-            spriteShader.UpdateCamera(camera);
-            textShader.Start();
-            textShader.UpdateCamera(camera);
+            spriteRenderer.Start(camera);
+            textRenderer.Start(camera);
             foreach (var sortingLayer in SortingLayers)
             {
                 spriteRenderer.Render(CreateSpriteRenderList(sortingLayer));
                 textRenderer.Render(CreateTextRenderList(sortingLayer));
             }
-            spriteShader.Stop();
-            textShader.Stop();
+            spriteRenderer.Stop();
+            textRenderer.Stop();
             #endregion
 
-            terrains.Clear();
+            #region Clear processed gameobjects
             entities.Clear();
             sprites.Clear();
             texts.Clear();
+            #endregion
         }
 
         public void Dispose()
         {
-            entityShader.Dispose();
-            terrainShader.Dispose();
-            spriteShader.Dispose();
-            textShader.Dispose();
-            skyboxShader.Dispose();
-
+            entityRenderer.Dispose();
+            spriteRenderer.Dispose();
+            textRenderer.Dispose();
             skyboxRenderer.Dispose();
+            lightingRenderer.Dispose();
+            finalRenderer.Dispose();
 
-            postProcessingMultisampledFbo.Dispose();
-            postProcessingOutputFbo.Dispose();
-            postProcessingManager.Dispose();
+            geometryColourFbo.Dispose();
+            finalFbo.Dispose();
+            geometryDataFbo.Dispose();
         }
 
-        private void ProcessTerrain(Terrain terrain)
+        private void SetupFrameBuffers()
         {
-            terrains.TryGetValue(terrain, out List<Terrain> batch);
-            if (batch != null)
+            int width = Game.Instance.Width;
+            int height = Game.Instance.Height;
+
+            #region Geometry Colour FrameBuffer
+            geometryColourFbo = new FrameBuffer();
+
+            geometryColourFbo.Width = width;
+            geometryColourFbo.Height = height;
+            geometryColourFbo.ColourAttachments = new List<ColourAttachment>()
             {
-                batch.Add(terrain);
-            }
-            else
+                new ColourAttachment(), // Colour Buffer
+            };
+            geometryColourFbo.DepthAttachment = new DepthAttachment();
+
+            geometryColourFbo.Create();
+            #endregion
+
+            #region Geometry Data FrameBuffer
+            geometryDataFbo = new FrameBuffer();
+
+            geometryDataFbo.Width = width;
+            geometryDataFbo.Height = height;
+            geometryDataFbo.ColourAttachments = new List<ColourAttachment>()
             {
-                List<Terrain> newBatch = new();
-                newBatch.Add(terrain);
-                terrains[terrain] = newBatch;
-            }
+                new ColourAttachment(), // Colour Buffer
+                new ColourAttachment(), // Normal Buffer
+                new ColourAttachment(), // Position Buffer
+                new ColourAttachment(), // Model Buffer
+                new ColourAttachment(PixelInternalFormat.Rgba32i, PixelFormat.RedInteger, PixelType.Int), // InstanceId Buffer
+            };
+            geometryDataFbo.DepthAttachment = new DepthAttachment();
+
+            geometryDataFbo.Create();
+            #endregion
+
+            #region Final FrameBuffer
+            finalFbo = new FrameBuffer();
+            
+            finalFbo.Width = width;
+            finalFbo.Height = height;
+            finalFbo.ColourAttachments = new List<ColourAttachment>()
+            {
+                new ColourAttachment(), // Colour Buffer
+            };
+
+            finalFbo.DepthAttachment = new DepthAttachment();
+            
+            finalFbo.Create();
+            #endregion
         }
+
         private void ProcessEntity(Entity entity)
         {
             entities.TryGetValue(entity.model.rawModel.Name, out List<Entity> batch);
@@ -304,24 +343,11 @@ namespace Senapp.Engine.Renderer
             return output;
         }
 
-        private EntityShader entityShader;
-        private TerrainShader terrainShader;
-        private SpriteShader spriteShader;
-        private TextShader textShader;
-        private SkyboxShader skyboxShader;
-
-        private EntityRenderer entityRenderer;
-        private TerrainRenderer terrainRenderer;
-        private SpriteRenderer spriteRenderer;
-        private TextRenderer textRenderer;
-        private SkyboxRenderer skyboxRenderer;
-
-        private PostProcessingManager postProcessingManager;
-        private Fbo postProcessingMultisampledFbo;
-        private Fbo postProcessingOutputFbo;
+        private FrameBuffer geometryColourFbo;
+        private FrameBuffer geometryDataFbo;
+        private FrameBuffer finalFbo;
 
         private readonly Dictionary<string, List<Entity>> entities = new();
-        private readonly Dictionary<Terrain, List<Terrain>> terrains = new();
         private readonly Dictionary<Texture, List<Sprite>> sprites = new();
         private readonly Dictionary<GameFont, List<Text>> texts = new();
 

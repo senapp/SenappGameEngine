@@ -14,10 +14,13 @@ namespace Senapp.Engine.Core.GameObjects
 {
     public class GameObject
     {
+        public static int InstanceCounter = 0;
+
         public bool IsGameObjectUI { get; protected set; } = false;
         public bool IsGameObjectUpdated = false;
 
         public Guid Id { get; private set; } = Guid.NewGuid();
+        public int InstanceId { get; private set; }
         public GameObject Parent { get; private set; }
         public Dictionary<Guid, GameObject> Children { get; } = new();
         public ComponentManager ComponentManager { get; private set; } = new();
@@ -31,6 +34,9 @@ namespace Senapp.Engine.Core.GameObjects
 
         public GameObject() 
         {
+            InstanceCounter++;
+            InstanceId = InstanceCounter;
+
             transform = new Transform(this);
             IsGameObjectUpdated = true;
         }

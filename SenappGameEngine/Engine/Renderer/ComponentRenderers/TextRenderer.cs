@@ -9,23 +9,32 @@ using Senapp.Engine.Models;
 using Senapp.Engine.UI;
 using Senapp.Engine.UI.Components;
 using Senapp.Engine.Utilities;
-using Senapp.Engine.Renderer.Abstractions;
 using Senapp.Engine.Renderer.Helper;
 using Senapp.Engine.Core;
 using Senapp.Engine.Shaders.Components;
+using Senapp.Engine.Entities;
 
 namespace Senapp.Engine.Renderer.ComponentRenderers
 {   
-    public class TextRenderer : IComponentRenderer<Text, GameFont>
+    public class TextRenderer
     {
-        public TextRenderer(TextShader shader)
+        public TextRenderer()
         {
             UIQuad = Loader.LoadToVAO(Geometry.GetVertex(Geometries.Quad), Geometry.GetVertexName(Geometries.Quad));
-            this.shader = shader;
-            this.shader.Start();
-            this.shader.Stop();
+            shader = new TextShader();
+            shader.Start();
+            shader.Stop();
         }
 
+        public void Start(Camera camera)
+        {
+            shader.Start();
+            shader.LoadCameraMatrix(camera);
+        }
+        public void Stop()
+        {
+            shader.Stop();
+        }
         public void Render(Dictionary<GameFont, List<Text>> texts)
         {
             foreach (var font in texts.Keys)
@@ -96,7 +105,6 @@ namespace Senapp.Engine.Renderer.ComponentRenderers
             GL.EnableVertexAttribArray(0);
             GL.EnableVertexAttribArray(1);
         }
-        public void UnbindCommon() { }
         public void UnbindCharacter()
         {
             GL.DisableVertexAttribArray(0);
@@ -104,11 +112,15 @@ namespace Senapp.Engine.Renderer.ComponentRenderers
             GL.BindVertexArray(0);
             GL.Enable(EnableCap.DepthTest);
         }
-        public void PrepareInstance(Text text) { }
         public void PrepareCharacter(Vector3 colour, Matrix4 matrix)
         {
             shader.LoadTransformationMatrix(matrix);
             shader.LoadColour(colour);
+        }
+        public void Dispose()
+        {
+            shader.Dispose();
+            UIQuad.Dispose();
         }
 
         private readonly TextShader shader;

@@ -4,35 +4,35 @@ in vec3 position;
 in vec2 textureCoords;
 in vec3 normal;
 
+out float pass_isMultisample;
 out vec2 pass_textureCoords;
+out vec3 fragPos;
 out vec3 surfaceNormal;
-out vec3 toLightVector;
-out vec3 reflectedVector;
 
 uniform mat4 transformationMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
-uniform vec3 cameraPosition;
 
-uniform vec3 lightPosition;
-uniform float useFakeLighting;
+uniform bool useFakeLighting;
+uniform bool isMultisample;
 
 void main() 
 {
      vec4 worldPosition = vec4(position, 1.0) * transformationMatrix;
 	 vec4 positionRealtiveToCamera = worldPosition * viewMatrix;
- 	 gl_Position =  positionRealtiveToCamera * projectionMatrix;
-	 pass_textureCoords = textureCoords;
+ 	 gl_Position = positionRealtiveToCamera * projectionMatrix;
 
-	 vec3 actualNormal = normal;
-	 if (useFakeLighting > 0.5)
-	 {
-		actualNormal = vec3(0,1,0);
+	 pass_isMultisample = int(isMultisample);
+	 if (isMultisample) {
+		 pass_textureCoords = textureCoords;
+	 } else {
+		vec3 actualNormal = normal;
+		if (useFakeLighting)
+		{
+			actualNormal = vec3(0,1,0);
+		}
+
+		fragPos = vec3(worldPosition);
+		surfaceNormal = normalize(actualNormal * mat3(transpose(inverse(transformationMatrix))));
 	 }
-
-	 surfaceNormal = actualNormal * mat3(transpose(inverse(transformationMatrix)));
-
-	 toLightVector = lightPosition - worldPosition.xyz; 
-	 vec3 viewVector = normalize(worldPosition.xyz - cameraPosition);
-	 reflectedVector = reflect(viewVector, normalize(surfaceNormal));
 }

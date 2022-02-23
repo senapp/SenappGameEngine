@@ -8,9 +8,6 @@ namespace Senapp.Engine.Utilities
     public enum ConfigSettings
     {
         SKYBOX_FILE_PREFIX,
-        ANTI_ALIASING,
-        FXAA_SAMPLES,
-        MSAA_SAMPLES,
         COLOUR_BITS,
         DEPTH_BITS,
         STENCIL_BITS,

@@ -70,6 +70,26 @@ namespace Senapp.Engine.Models
 
             image.Dispose();
         }
+        public Texture(string name, int width, int height, IntPtr data, bool generateMipmaps = false, bool srgb = false)
+        {
+            Name = name;
+            Width = width;
+            Height = height;
+            InternalFormat = srgb ? Srgb8Alpha8 : SizedInternalFormat.Rgba8;
+            MipmapLevels = generateMipmaps == false ? 1 : (int)Math.Floor(Math.Log(Math.Max(Width, Height), 2));
+
+            GLTexture = GL.GenTexture();
+            GL.TextureStorage2D(GLTexture, MipmapLevels, InternalFormat, Width, Height);
+
+            GL.TextureSubImage2D(GLTexture, 0, 0, 0, Width, Height, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, data);
+
+            if (generateMipmaps) GL.GenerateTextureMipmap(GLTexture);
+
+            SetWrap(TextureParameterName.TextureWrapS, TextureWrapMode.Repeat);
+            SetWrap(TextureParameterName.TextureWrapT, TextureWrapMode.Repeat);
+
+            GL.TextureParameter(GLTexture, TextureParameterName.TextureMaxLevel, MipmapLevels - 1);
+        }
 
         public void SetMinFilter(TextureMinFilter filter)
         {
@@ -88,7 +108,11 @@ namespace Senapp.Engine.Models
             GL.TextureParameter(GLTexture, TextureParameterName.TextureLodBias, lod);
             GL.TextureParameter(GLTexture, TextureParameterName.TextureMinLod, min);
             GL.TextureParameter(GLTexture, TextureParameterName.TextureMaxLod, max);
-        }      
+        }
+        public void SetWrap(TextureParameterName name, TextureWrapMode mode)
+        {
+            GL.TextureParameter(GLTexture, name, (int)mode);
+        }
 
         public void Bind(TextureUnit textureUnit)
         {

@@ -37,5 +37,10 @@ namespace Senapp.Engine.Entities
             model.reflectivity = reflectivity;
             return this;
         }
+        public Entity WithLightable(bool lightable)
+        {
+            model.lightable = lightable;
+            return this;
+        }
     }
 }

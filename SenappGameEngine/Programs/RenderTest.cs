@@ -1,11 +1,13 @@
 ﻿using OpenTK;
 using OpenTK.Graphics;
-
+using OpenTK.Input;
 using Senapp.Engine.Core;
 using Senapp.Engine.Core.GameObjects;
+using Senapp.Engine.Entities;
 using Senapp.Engine.Events;
+using Senapp.Engine.PlayerInput;
+using Senapp.Engine.Renderer.Helper;
 using Senapp.Engine.UI;
-using Senapp.Engine.UI.Components;
 using Senapp.Engine.Utilities;
 
 namespace Senapp.Programs
@@ -32,22 +34,21 @@ namespace Senapp.Programs
 
             font.LoadFont("opensans");
 
-            var text1 = new GameObjectUI()
-                .WithName("Test text1")
+            var sphere = new GameObject()
                 .WithParent(MainScene)
-                .AddComponent(new Text("Test text1", font));
-
-            var text2 = new GameObjectUI()
-              .WithName("Test text2")
-              .WithPosition(new Vector3(25))
-              .WithParent(MainScene)
-              .AddComponent(new Text("Test text2", font));
+                .WithPosition(new Vector3(0, 0, -5))
+                .AddComponent(new Entity(Geometries.Sphere));
         }
 
         private void Update(object sender, GameUpdatedEventArgs args)
         {
             if (!Focused)
                 return;
+
+            if (Input.GetKeyDown(Key.Q))
+            {
+                Renderer.finalRenderer.ColourAttachmentId++;
+            }
         }
     }
 }

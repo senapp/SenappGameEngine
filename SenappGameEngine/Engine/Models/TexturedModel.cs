@@ -11,6 +11,7 @@ namespace Senapp.Engine.Models
         public float shineDamper = 1;
         public float reflectivity = 0.01f;
         public float luminosity = 0.3f;
+        public bool lightable = true;
 
         public bool hasTransparency = false;
         public bool useFakeLighting = false;
@@ -39,7 +40,8 @@ namespace Senapp.Engine.Models
                 var equal = (this.texture == model.texture &&
                     this.shineDamper == model.shineDamper &&
                     this.reflectivity == model.reflectivity &&
-                    this.luminosity == model.luminosity);
+                    this.luminosity == model.luminosity &&
+                    this.lightable == model.lightable);
 
                 return equal;
             }

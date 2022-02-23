@@ -2,28 +2,28 @@
 
 using Senapp.Engine.Entities;
 using Senapp.Engine.Utilities;
+using System.Reflection;
 
 namespace Senapp.Engine.Shaders.Components
 {
     public class EntityShader : ShaderProgram
     {
-        private static readonly string VERTEX_SHADER_FILE = "entityVS";
-        private static readonly string FRAGMENT_SHADER_FILE = "entityFS";
+        private static readonly string VERTEX_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\Components\\" + "entityVS" + ".glsl";
+        private static readonly string FRAGMENT_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\Components\\" + "entityFS" + ".glsl";
+        private static readonly bool FROM_RESOURCES = false;
 
         private int location_transformationMatrix;
         private int location_projectionMatrix;
         private int location_viewMatrix;
-        private int location_lightPosition;
-        private int location_lightColour;
         private int location_shineDamper;
         private int location_reflectivity;
         private int location_luminosity;
         private int location_useFakeLighting;
-        private int location_enviroMap;
-        private int location_cameraPosition;
         private int location_colour;
+        private int location_isMultisample;
+        private int location_instanceId;
 
-        public EntityShader() : base(VERTEX_SHADER_FILE, FRAGMENT_SHADER_FILE) { }
+        public EntityShader() : base(VERTEX_SHADER_FILE, FRAGMENT_SHADER_FILE, FROM_RESOURCES) { }
 
         protected override void BindAttributes()
         {
@@ -34,18 +34,19 @@ namespace Senapp.Engine.Shaders.Components
 
         protected override void GetAllUniformLocations()
         {
+            // VS
             location_transformationMatrix = base.GetUniformLocation("transformationMatrix");
             location_projectionMatrix = base.GetUniformLocation("projectionMatrix");
             location_viewMatrix = base.GetUniformLocation("viewMatrix");
-            location_lightPosition = base.GetUniformLocation("lightPosition");
-            location_lightColour = base.GetUniformLocation("lightColour");
+            location_useFakeLighting = base.GetUniformLocation("useFakeLighting");
+            location_isMultisample = base.GetUniformLocation("isMultisample");
+
+            // FS
             location_shineDamper = base.GetUniformLocation("shineDamper");
             location_reflectivity = base.GetUniformLocation("reflectivity");
             location_luminosity = base.GetUniformLocation("luminosity");
-            location_useFakeLighting = base.GetUniformLocation("useFakeLighting");
-            location_cameraPosition = base.GetUniformLocation("cameraPosition");
-            location_enviroMap = base.GetUniformLocation("enviroMap");
             location_colour = base.GetUniformLocation("colour");
+            location_instanceId = base.GetUniformLocation("instanceId");
         }
 
         public void LoadColour(Vector3 colour)
@@ -74,25 +75,18 @@ namespace Senapp.Engine.Shaders.Components
         {
             base.LoadMatrix(location_viewMatrix, matrix);
         }
-        public void LoadLight(Light light)
-        {
-            base.LoadVector(location_lightPosition, light.gameObject.transform.GetWorldPosition());
-            base.LoadVector(location_lightColour, light.gameObject.colour.ToVector());
-
-        }
-        public void LoadCameraPosition(Vector3 pos)
-        {
-            base.LoadVector(location_cameraPosition, pos);
-        }
-        public void LoadEnviromentMap(int textureID)
-        {
-            base.LoadInt(location_enviroMap, textureID);
-        }
-        public void UpdateCamera(Camera camera)
+        public void LoadCameraMatrix(Camera camera)
         {
             LoadProjectionMatrix(camera.GetProjectionMatrix());
             LoadViewMatrix(camera.GetViewMatrix());
-            LoadCameraPosition(camera.gameObject.transform.GetWorldPosition());
+        }
+        public void LoadIsMultisample(bool isMultisample)
+        {
+            base.LoadBoolean(location_isMultisample, isMultisample);
+        }
+        public void LoadInstanceId(int instanceId)
+        {
+            base.LoadInt(location_instanceId, instanceId);
         }
     }
 }

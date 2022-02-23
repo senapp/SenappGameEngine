@@ -15,37 +15,6 @@ namespace Senapp.Engine.Raycasts
             this.mainCamera = mainCamera;
         }
 
-        public void RaycastSendingUpdate(Vector2 mousePosition)
-        {
-            var raycastTargets = Game.Instance.GetAllComponents<RaycastTarget>();
-            raycastTargets.Sort(SortByDistanceToCamera);
-
-            foreach (var target in raycastTargets)
-            {
-                var dist = Raycast.DistanceFromPoint(mousePosition, target.gameObject.transform.GetWorldPosition());
-                var inRadius = dist <= target.hitRadius;
-
-                if (inRadius && currentTargetUI == null && currentTarget != target)
-                {
-                    if (currentTarget != null)
-                    {
-                        currentTarget.onExit?.Invoke();
-                        currentTarget.hovering = false;
-                        currentTarget = null;
-                    }
-
-                    target.onEnter?.Invoke();
-                    target.hovering = true;
-                    currentTarget = target;
-                }
-                else if (!inRadius && currentTargetUI == null && currentTarget == target)
-                {
-                    target.onExit?.Invoke();
-                    target.hovering = false;
-                    currentTarget = null;
-                }
-            }
-        }
         public void RaycastUISendingUpdate(Vector2 mousePosition)
         {
             var raycastTargetsUI = Game.Instance.GetAllComponents<RaycastTargetUI>();
@@ -113,6 +82,33 @@ namespace Senapp.Engine.Raycasts
                 }
             }
         }
+        public void InstanceIdUpdate(int id)
+        {
+            var raycastTargets = Game.Instance.GetAllComponents<RaycastTarget>();
+            foreach (var target in raycastTargets)
+            {
+                if (target.gameObject.InstanceId == id && currentTargetUI == null && currentTarget != target)
+                {
+                    if (currentTarget != null)
+                    {
+                        currentTarget.onExit?.Invoke();
+                        currentTarget.hovering = false;
+                        currentTarget = null;
+                    }
+
+                    target.onEnter?.Invoke();
+                    target.hovering = true;
+                    currentTarget = target;
+                }
+                else if (target.gameObject.InstanceId != id && currentTargetUI == null && currentTarget == target)
+                {
+                    target.onExit?.Invoke();
+                    target.hovering = false;
+                    currentTarget = null;
+                }
+            }
+        }
+
 
         public void RaycastDown()
         {
@@ -165,11 +161,6 @@ namespace Senapp.Engine.Raycasts
                     currentTarget.onClick?.Invoke();
                 }
             }
-        }
-
-        private int SortByDistanceToCamera(RaycastTarget a, RaycastTarget b)
-        {
-            return -Vector3.Distance(a.gameObject.transform.GetWorldPosition(), mainCamera.gameObject.transform.GetWorldPosition()).CompareTo(Vector3.Distance(b.gameObject.transform.GetWorldPosition(), mainCamera.gameObject.transform.GetWorldPosition()));
         }
 
         private readonly Camera mainCamera;

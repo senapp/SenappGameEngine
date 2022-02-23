@@ -11,11 +11,12 @@ namespace Senapp.Engine.Shaders
 {
     public abstract class ShaderProgram
     {
-        public ShaderProgram(string vertexFileName, string fragmentFileName)
+        public ShaderProgram(string vertexFileName, string fragmentFileName, bool fromResources)
         {
             programID = GL.CreateProgram();
             vertexShaderID = LoadShader(vertexFileName, ShaderType.VertexShader);
             fragmentShaderID = LoadShader(fragmentFileName, ShaderType.FragmentShader);
+            this.fromResources = fromResources;
 
             GL.AttachShader(programID, vertexShaderID);
             GL.AttachShader(programID, fragmentShaderID);
@@ -91,12 +92,28 @@ namespace Senapp.Engine.Shaders
         protected abstract void GetAllUniformLocations();
         protected abstract void BindAttributes();
 
-        private static int LoadShader(string fileName, ShaderType type)
+        private int LoadShader(string fileName, ShaderType type)
         {
             StringBuilder shaderSource = new();
             try
             {
-                var reader = new StringReader(Resources.GetFile(fileName));
+                var data = string.Empty;
+                if (this.fromResources)
+                {
+                    data = Resources.GetFile(fileName);
+                }
+                else
+                {
+                    var lines = File.ReadAllLines(fileName);
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var line in lines)
+                    {
+                        sb.AppendLine(line);
+                    }
+                    data = sb.ToString();
+                }
+
+                var reader = new StringReader(data);
                 while(reader.Peek() != -1)
                 {
                     string line = reader.ReadLine();
@@ -131,5 +148,6 @@ namespace Senapp.Engine.Shaders
         private readonly int programID;
         private readonly int vertexShaderID;
         private readonly int fragmentShaderID;
+        private readonly bool fromResources;
     }
 }

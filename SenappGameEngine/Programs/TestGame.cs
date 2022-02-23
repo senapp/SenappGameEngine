@@ -14,12 +14,12 @@ using Senapp.Engine.Physics;
 using Senapp.Engine.PlayerInput;
 using Senapp.Engine.Raycasts;
 using Senapp.Engine.Renderer.Helper;
-using Senapp.Engine.Terrains;
 using Senapp.Engine.UI;
 using Senapp.Engine.UI.Components;
 using Senapp.Engine.Utilities;
 using Senapp.Engine.Utilities.Testing;
 using Senapp.Engine.Controllers;
+using Senapp.Engine.Models;
 
 namespace Senapp.Programs
 {
@@ -59,7 +59,7 @@ namespace Senapp.Programs
         {
             GameObject plane = new();
             int size = 100;
-            plane.AddComponent(new Entity(Terrain.GenerateTerrain(size), ""));
+            plane.AddComponent(new Entity(RawModel.GenerateTerrain(size), ""));
             plane.isStatic = true;
             plane.transform = new Transform(plane, size / 2, 0, size / 2);
             plane.AddComponent(new RigidEntity(plane.transform.GetWorldPosition()));
@@ -191,11 +191,6 @@ namespace Senapp.Programs
             if (!Focused)
                 return;
             DebugScreenTexts();
-
-            if (Input.GetKeyDown(Key.T))
-            {
-                GraphicsSettings.SetAntiAliasing(GraphicsSettings.AntiAliasing == AntiAliasingTypes.FXAA ? AntiAliasingTypes.MSAA : AntiAliasingTypes.FXAA);
-            }
 
             if (Input.GetKeyDown(Key.Escape) || ControllerManager.ControllerExists(0) && ControllerManager.GetController(0).GetButtonDown(Buttons.Back))
             {

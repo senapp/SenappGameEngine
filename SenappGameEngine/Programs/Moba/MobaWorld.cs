@@ -3,7 +3,7 @@
 using Senapp.Engine.Core.Components;
 using Senapp.Engine.Core.GameObjects;
 using Senapp.Engine.Entities;
-using Senapp.Engine.Terrains;
+using Senapp.Engine.Models;
 
 namespace Senapp.Programs.Moba
 {
@@ -13,7 +13,7 @@ namespace Senapp.Programs.Moba
 
         public MobaWorld() 
         {
-            Ground = new Entity(Terrain.GenerateTerrain(TerrainSize), "map");
+            Ground = new Entity(RawModel.GenerateTerrain(TerrainSize), "map");
         }
 
         public override void Awake()

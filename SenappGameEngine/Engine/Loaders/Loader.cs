@@ -127,6 +127,11 @@ namespace Senapp.Engine.Loaders
         }
         public static RawModel LoadPositionsToVAO(float[] positions, int dimensions, string modelName)
         {
+            if (rawModelTable.TryGetValue(modelName, out var rawModel))
+            {
+                return rawModel;
+            }
+
             int vaoID = CreateVAO();
 
             vaos.Add(vaoID);

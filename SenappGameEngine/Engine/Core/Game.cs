@@ -20,6 +20,7 @@ using Senapp.Engine.Core.Components;
 using Senapp.Engine.Loaders;
 using Senapp.Engine.Renderer.Helper;
 using Senapp.Engine.Networking.Client;
+using Senapp.Engine.Renderer.FrameBuffers;
 
 namespace Senapp.Engine.Core
 {
@@ -75,6 +76,11 @@ namespace Senapp.Engine.Core
             }
         }
 
+        public void SetGeometryDataFbo(FrameBuffer fbo)
+        {
+            lastGeometryFbo = fbo;
+        }
+
         protected Game (int width, int height, GraphicsMode graphicsMode, string title) : base(width, height, graphicsMode, title, GameWindowFlags.Default, DisplayDevice.Default, 4, 5, GraphicsContextFlags.ForwardCompatible)
         {
             if (Instance != null)
@@ -127,7 +133,8 @@ namespace Senapp.Engine.Core
             MasterRenderer.ClearScreen();
             Renderer.Render(SunLight, MainCamera);
 
-            OnGameRendered(new GameRenderedEventArgs((float)e.Time));
+            var args = new GameRenderedEventArgs((float)e.Time);
+            OnGameRendered(args);
 
             SwapBuffers();
         }
@@ -151,19 +158,19 @@ namespace Senapp.Engine.Core
 
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
-            mousePos = new Vector2(e.X, e.Y);
+            lastKnowMousePositionOnWindow = new Vector2(e.X, e.Y);
             RaycastUpdate(null, true);
             RaycastManager.RaycastDown();
         }
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
-            mousePos = new Vector2(e.X, e.Y);
+            lastKnowMousePositionOnWindow = new Vector2(e.X, e.Y);
             RaycastUpdate(null, true);
             RaycastManager.RaycastUp();
         }
         protected override void OnMouseMove(MouseMoveEventArgs e)
         {
-            mousePos = new Vector2(e.X, e.Y);
+            lastKnowMousePositionOnWindow = new Vector2(e.X, e.Y);
         }
 
         protected event GameInitializedEventHandler GameInitializedEvent;
@@ -205,10 +212,12 @@ namespace Senapp.Engine.Core
             if (force || raycastUpdateDeltaTime + args.DeltaTime > raycastUpdateFrequency)
             {
                 raycastUpdateDeltaTime = 0;
-                if (Input.IsMouseOnWindow(mousePos))
+                if (Input.IsMouseOnWindow(lastKnowMousePositionOnWindow))
                 {
-                    RaycastManager.RaycastUISendingUpdate(mousePos);
-                    RaycastManager.RaycastSendingUpdate(mousePos);
+                    RaycastManager.RaycastUISendingUpdate(lastKnowMousePositionOnWindow);
+
+                    lastInstanceId = lastGeometryFbo.ReadPixel(4, new Vector2(lastKnowMousePositionOnWindow.X, Height - lastKnowMousePositionOnWindow.Y));
+                    RaycastManager.InstanceIdUpdate(lastInstanceId);
                 }
             }
             else
@@ -247,7 +256,9 @@ namespace Senapp.Engine.Core
         private void OnGameClosed() { GameClosedEvent?.Invoke(this); }
         private void OnResize() { GameResizeEvent?.Invoke(this); }
 
-        private Vector2 mousePos;
+        private FrameBuffer lastGeometryFbo;
+        private Vector2 lastKnowMousePositionOnWindow;
+        private int lastInstanceId;
 
         private const float raycastUpdateFrequency = 0.01666666666f; // 60 updates per second
         private const float physicsUpdateFrequency = 0.01666666666f; // 60 updates per second

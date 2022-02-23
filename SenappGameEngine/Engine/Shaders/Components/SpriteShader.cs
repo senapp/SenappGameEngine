@@ -6,15 +6,16 @@ namespace Senapp.Engine.Shaders.Components
 {
     public class SpriteShader : ShaderProgram
     {
-        private static readonly string VERTEX_SHADER_FILE = "spriteVS";
-        private static readonly string FRAGMENT_SHADER_FILE = "spriteFS";
+        private static readonly string VERTEX_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\Components\\" + "spriteVS" + ".glsl";
+        private static readonly string FRAGMENT_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\Components\\" + "spriteFS" + ".glsl";
+        private static readonly bool FROM_RESOURCES = false;
 
         private int location_transformationMatrix;
         private int location_viewMatrix;
         private int location_projectionMatrix;
         private int location_colour;
 
-        public SpriteShader() : base(VERTEX_SHADER_FILE, FRAGMENT_SHADER_FILE) { }
+        public SpriteShader() : base(VERTEX_SHADER_FILE, FRAGMENT_SHADER_FILE, FROM_RESOURCES) { }
 
         protected override void BindAttributes()
         {
@@ -46,7 +47,7 @@ namespace Senapp.Engine.Shaders.Components
         {
             base.LoadMatrix(location_projectionMatrix, matrix);
         }
-        public void UpdateCamera(Camera camera)
+        public void LoadCameraMatrix(Camera camera)
         {
             LoadViewMatrix(camera.GetViewMatrixUI());
             LoadProjectionMatrix(camera.GetProjectionMatrixUI());

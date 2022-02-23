@@ -104,11 +104,13 @@ namespace Senapp.Engine.PlayerInput
         {
             return new Vector2(Mouse.GetCursorState().X, Mouse.GetCursorState().Y);
         }
-        public static Vector2 GetMousePositionWindow()
+        public static Vector2 GetMousePositionWindow(bool clamp = true)
         {
-            var vec = new Vector2(Mouse.GetCursorState().X - Game.Instance.X - Game.WINDOW_BORDER_SIZE, Mouse.GetCursorState().Y - Game.Instance.Y - (Game.WINDOW_BORDER_SIZE * 4 +2));
-            vec = new Vector2(Math.Clamp(vec.X, 0, Game.Instance.Width), Math.Clamp(vec.Y, 0, Game.Instance.Height));
-            return vec;
+            var x = Mouse.GetCursorState().X - Game.Instance.X - Game.WINDOW_BORDER_SIZE;
+            var y = Mouse.GetCursorState().Y - Game.Instance.Y - (Game.WINDOW_BORDER_SIZE * 4 + 2);
+            return new Vector2(
+                Math.Clamp(x, 0, Game.Instance.Width), 
+                Math.Clamp(y, 0, Game.Instance.Height));
         }
         public static Vector2 GetMousePositionWindowCenter()
         {          

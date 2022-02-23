@@ -1,41 +1,36 @@
 ﻿#version 400
 
 in vec2 pass_textureCoords;
+in float pass_isMultisample;
+in vec3 fragPos;
 in vec3 surfaceNormal;
-in vec3 toLightVector;
-in vec3 reflectedVector;
 
-out vec4 out_Colour;
+layout(location = 0) out vec4 out_Colour;
+layout(location = 1) out vec4 out_Normal;
+layout(location = 2) out vec4 out_Position;
+layout(location = 3) out vec4 out_Model;
+layout(location = 4) out int out_InstanceId;
 
 uniform sampler2D textureSampler;
-uniform samplerCube enviroMap;
 
-uniform vec3 lightColour;
 uniform vec3 colour;
+uniform float luminosity;
 uniform float shineDamper;
 uniform float reflectivity;
-uniform float luminosity;
+uniform int instanceId;
 
 void main() {
-		vec3 unitNormal = normalize(surfaceNormal);
-		vec3 unitLightVector = normalize(toLightVector);
-
-		float nDotl = dot(unitLightVector, unitNormal);
-		float brightness = max(nDotl, luminosity);
-		vec3 diffuse = brightness * lightColour;	
-
-		vec3 finalSpecular = vec3(0,0,0);
-		if (nDotl > 0) {
-			float specularFactor = max(nDotl, 0);
-			finalSpecular = pow(specularFactor, shineDamper) * reflectivity * lightColour;
-		}	
-
 		vec4 textureColour = texture(textureSampler, pass_textureCoords);
-		if (textureColour.a <0.5) {
+		if (textureColour.a < 0.5){
 			discard;
 		}
 
-		out_Colour = vec4(diffuse, 1) * textureColour * vec4(colour, 1) + vec4(finalSpecular, 1);
-		vec4 reflectedColour = texture(enviroMap, reflectedVector);
-		out_Colour = mix(out_Colour, reflectedColour, reflectivity);
+		if (pass_isMultisample > 0.5) {
+			out_Colour = textureColour * vec4(colour, 1);
+		} else {
+			out_Position = vec4(fragPos, 1);
+			out_Normal = vec4(surfaceNormal, 1);
+			out_Model = vec4(luminosity, shineDamper, reflectivity, 1);
+			out_InstanceId = instanceId;	
+		}
 }

@@ -10,11 +10,11 @@ using Senapp.Engine.Core.GameObjects;
 using Senapp.Engine.Core.Transforms;
 using Senapp.Engine.Entities;
 using Senapp.Engine.Events;
+using Senapp.Engine.Models;
 using Senapp.Engine.Physics;
 using Senapp.Engine.PlayerInput;
 using Senapp.Engine.Raycasts;
 using Senapp.Engine.Renderer.Helper;
-using Senapp.Engine.Terrains;
 using Senapp.Engine.UI;
 using Senapp.Engine.UI.Components;
 using Senapp.Engine.Utilities;
@@ -55,7 +55,7 @@ namespace Senapp.Programs
         {
             GameObject plane = new();
             int size = 100;
-            plane.AddComponent(new Entity(Terrain.GenerateTerrain(size), ""));
+            plane.AddComponent(new Entity(RawModel.GenerateTerrain(size), ""));
             plane.isStatic = true;
             plane.transform = new Transform(plane, size / 2, 2, size / 2);
             plane.AddComponent(new RigidEntity(plane.transform.GetWorldPosition()));
@@ -70,11 +70,11 @@ namespace Senapp.Programs
                 obj.GetComponent<Entity>().model.reflectivity = 0.1f;
                 obj.GetComponent<Entity>().model.luminosity = 0.8f;
                 obj.AddComponent(new RigidEntity(obj.transform.GetWorldPosition()));
-                obj.AddComponent(new RaycastTarget(1, onClick: () =>
+                obj.AddComponent(new RaycastTarget(1, onEnter: () =>
                 {
                     obj.colour = Color.Red;
                     lockToMouseObject = obj;
-                }, onLoseFocus: () =>
+                }, onExit: () =>
                 {
                     obj.colour = Color.White;
                     if (lockToMouseObject == obj)
@@ -96,7 +96,7 @@ namespace Senapp.Programs
                 .WithName("profiler")
                 .WithColour(Color.Black)
                 .WithScale(new Vector3(0.6f, 0.15f, 0.5f))
-                .AddComponent(new Sprite("grid"));
+                .AddComponent(new Sprite());
 
             ProfilerScreen.UIConstriant = UIPosition.Left;
 
@@ -129,6 +129,7 @@ namespace Senapp.Programs
         {
             if (!Focused)
                 return;
+
             DebugScreenTexts();
             if (lockToMouseObject != null)
             {
@@ -143,19 +144,19 @@ namespace Senapp.Programs
 
                 if (!Input.GetKey(Key.R))
                 {
-                    var mult = 5.25f;
+                    var mult = 0.5f;
                     if (Input.GetKey(Key.Up))
-                        lockToMouseObject.transform.SetPosition(lockToMouseObject.transform.Up * args.DeltaTime * mult);
+                        lockToMouseObject.transform.Translate(lockToMouseObject.transform.Up * args.DeltaTime * mult);
                     if (Input.GetKey(Key.Down))
-                        lockToMouseObject.transform.SetPosition(-lockToMouseObject.transform.Up * args.DeltaTime * mult);
+                        lockToMouseObject.transform.Translate(-lockToMouseObject.transform.Up * args.DeltaTime * mult);
                     if (Input.GetKey(Key.Left))
-                        lockToMouseObject.transform.SetPosition(-lockToMouseObject.transform.Right * args.DeltaTime * mult);
+                        lockToMouseObject.transform.Translate(-lockToMouseObject.transform.Right * args.DeltaTime * mult);
                     if (Input.GetKey(Key.Right))
-                        lockToMouseObject.transform.SetPosition(lockToMouseObject.transform.Right * args.DeltaTime * mult);
+                        lockToMouseObject.transform.Translate(lockToMouseObject.transform.Right * args.DeltaTime * mult);
                     if (Input.GetKey(Key.ControlRight))
-                        lockToMouseObject.transform.SetPosition(-lockToMouseObject.transform.Front * args.DeltaTime * mult);
+                        lockToMouseObject.transform.Translate(-lockToMouseObject.transform.Front * args.DeltaTime * mult);
                     if (Input.GetKey(Key.ShiftRight))
-                        lockToMouseObject.transform.SetPosition(lockToMouseObject.transform.Front * args.DeltaTime * mult);
+                        lockToMouseObject.transform.Translate(lockToMouseObject.transform.Front * args.DeltaTime * mult);
                 }
                 else
                 {

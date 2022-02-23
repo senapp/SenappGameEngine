@@ -22,15 +22,13 @@ namespace Senapp
             GraphicsSettings.Initialize();
 
             using (Toolkit.Init())
-            {
+            {              
                 GraphicsMode mode = new(
                     color: new ColorFormat(GraphicsSettings.ColourBits),
                     depth: GraphicsSettings.DepthBits,
-                    stencil: GraphicsSettings.StencilBits, 
-                    // If we need to render the geometry to an Fbo then this is not needed.
-                    samples: GraphicsSettings.AntiAliasing == AntiAliasingTypes.FXAA && !GraphicsSettings.PostProcessingRequired
-                        ? GraphicsSettings.FXAASamples 
-                        : 0,
+                    stencil: GraphicsSettings.StencilBits,
+                    // Samples just costs performance because it is not applied to the quad rendered with frame buffers.
+                    samples: 0,
                     accum: new ColorFormat(GraphicsSettings.AccumBits),
                     buffers: 2,
                     stereo: false);

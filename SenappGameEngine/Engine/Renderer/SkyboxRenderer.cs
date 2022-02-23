@@ -14,26 +14,28 @@ namespace Senapp.Engine.Renderer
 		private const float SIZE = 500;	
 		public static int SkyboxTextureID;
 
-		public SkyboxRenderer(SkyboxShader shader, Matrix4 projectionMatrix)
+		public SkyboxRenderer(Matrix4 projectionMatrix)
 		{
 			skyboxPrefix = Settings.GetSetting<string>(ConfigSettings.SKYBOX_FILE_PREFIX);
 			cube = Loader.LoadPositionsToVAO(VERTICES, 3, skyboxPrefix + "_SKYBOX");
 			SkyboxTextureID = Loader.LoadCubeMap(TEXTURES_FILES, skyboxPrefix);
 
-			skyboxShader = shader;
+			shader = new SkyboxShader();
 
-			skyboxShader.Start();
-			skyboxShader.LoadProjectionMatrix(projectionMatrix);
-			skyboxShader.Stop();
+			shader.Start();
+			shader.LoadProjectionMatrix(projectionMatrix);
+			shader.Stop();
 		}
 
-		public void Render(Camera camera)
+		public void Render(bool isColourPass, Camera camera)
 		{
 			MasterRenderer.DisableCulling();
 
-			skyboxShader.Start();
-			skyboxShader.LoadViewMatrix(camera.GetViewMatrix());
-			skyboxShader.LoadTransformationMatrix(camera.gameObject.transform.TransformationMatrixTranslation());
+			shader.Start();
+
+			shader.LoadViewMatrix(camera.GetViewMatrix());
+			shader.LoadTransformationMatrix(camera.gameObject.transform.TransformationMatrixTranslation());
+			shader.LoadIsColourPass(isColourPass);
 
 			GL.BindVertexArray(cube.VaoId);
 			GL.EnableVertexAttribArray(0);
@@ -43,18 +45,18 @@ namespace Senapp.Engine.Renderer
 			GL.DisableVertexAttribArray(0);
 			GL.BindVertexArray(0);
 
-			skyboxShader.Stop();
+			shader.Stop();
 
 			MasterRenderer.EnableCulling();
 		}
 
 		public void Dispose()
         {
-			skyboxShader.Dispose();
+			shader.Dispose();
         }
 	
 		private readonly RawModel cube;
-		private readonly SkyboxShader skyboxShader;
+		private readonly SkyboxShader shader;
 
 		private readonly string skyboxPrefix = "";
 		private static readonly string[] TEXTURES_FILES = { "right", "left", "top", "bottom", "front", "back" };

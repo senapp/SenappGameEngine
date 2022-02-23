@@ -5,20 +5,22 @@ using OpenTK.Graphics.OpenGL;
 using Senapp.Engine.Models;
 using Senapp.Engine.Utilities;
 using Senapp.Engine.Entities;
-using Senapp.Engine.Renderer.Abstractions;
 using Senapp.Engine.Shaders.Components;
 
 namespace Senapp.Engine.Renderer.ComponentRenderers
 {
-    public class EntityRenderer : IComponentRenderer<Entity, TexturedModel>
+    public class EntityRenderer
     {
-        public EntityRenderer(EntityShader _shader)
+        public EntityRenderer()
         {
-            shader = _shader;
+            shader = new EntityShader();
         }
 
-        public void Render(Dictionary<TexturedModel, List<Entity>> entities)
+        public void Render(bool isMultisample, Camera camera, Dictionary<TexturedModel, List<Entity>> entities)
         {
+            shader.Start();
+            shader.LoadCameraMatrix(camera);
+            shader.LoadIsMultisample(isMultisample);
             foreach (TexturedModel model in entities.Keys)
             {
                 entities.TryGetValue(model, out List<Entity> batch);
@@ -30,7 +32,9 @@ namespace Senapp.Engine.Renderer.ComponentRenderers
                 }
                 UnbindCommon();
             }
+            shader.Stop();
         }
+
         public void BindCommon(TexturedModel texturedModel)
         {
             if (texturedModel.hasTransparency)
@@ -45,7 +49,6 @@ namespace Senapp.Engine.Renderer.ComponentRenderers
 
             shader.LoadUseFakeLightingVariable(texturedModel.useFakeLighting);
             shader.LoadShineVariables(texturedModel.shineDamper, texturedModel.reflectivity, texturedModel.luminosity);
-            shader.LoadEnviromentMap(1);
 
             texturedModel.BindTexture(TextureUnit.Texture0);
 
@@ -65,6 +68,12 @@ namespace Senapp.Engine.Renderer.ComponentRenderers
         {
             shader.LoadTransformationMatrix(entity.gameObject.transform.CalculateTransformationMatrix());
             shader.LoadColour(entity.gameObject.colour.ToVector());
+            shader.LoadInstanceId(entity.gameObject.InstanceId);
+            shader.LoadInstanceId(entity.gameObject.InstanceId);
+        }
+        public void Dispose()
+        {
+            shader.Dispose();
         }
 
         private readonly EntityShader shader;

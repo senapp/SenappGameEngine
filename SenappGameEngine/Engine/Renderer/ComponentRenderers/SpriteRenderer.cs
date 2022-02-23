@@ -3,9 +3,9 @@
 using OpenTK.Graphics.OpenGL;
 
 using Senapp.Engine.Core;
+using Senapp.Engine.Entities;
 using Senapp.Engine.Loaders;
 using Senapp.Engine.Models;
-using Senapp.Engine.Renderer.Abstractions;
 using Senapp.Engine.Renderer.Helper;
 using Senapp.Engine.Shaders.Components;
 using Senapp.Engine.UI.Components;
@@ -13,16 +13,23 @@ using Senapp.Engine.Utilities;
 
 namespace Senapp.Engine.Renderer.ComponentRenderers
 {
-    public class SpriteRenderer : IComponentRenderer<Sprite, Texture>
+    public class SpriteRenderer
     {
-        public SpriteRenderer(SpriteShader shader)
+        public SpriteRenderer()
         {
             UIQuad = Loader.LoadToVAO(Geometry.GetVertex(Geometries.Quad), Geometry.GetVertexName(Geometries.Quad));
-            this.shader = shader;
-            this.shader.Start();
-            this.shader.Stop();
+            shader = new SpriteShader();
         }
 
+        public void Start(Camera camera)
+        {
+            shader.Start();
+            shader.LoadCameraMatrix(camera);
+        }
+        public void Stop()
+        {
+            shader.Stop();
+        }
         public void Render(Dictionary<Texture, List<Sprite>> sprites)
         {
             foreach (Texture texture in sprites.Keys)
@@ -58,6 +65,11 @@ namespace Senapp.Engine.Renderer.ComponentRenderers
                 sprite.gameObject.transform.CalculateTransformationMatrix(
                     Game.Instance.MainCamera.gameObject.transform.GetWorldPosition(), null, sprite));
             shader.LoadColour(sprite.gameObject.colour.ToVector());
+        }
+        public void Dispose()
+        {
+            shader.Dispose();
+            UIQuad.Dispose();
         }
 
         private readonly SpriteShader shader;

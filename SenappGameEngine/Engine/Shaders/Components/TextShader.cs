@@ -6,15 +6,16 @@ namespace Senapp.Engine.Shaders.Components
 {
     public class TextShader : ShaderProgram
     {
-        private static readonly string VERTEX_SHADER_FILE = "textVS";
-        private static readonly string FRAGMENT_SHADER_FILE = "textFS";
+        private static readonly string VERTEX_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\Components\\" + "textVS" + ".glsl";
+        private static readonly string FRAGMENT_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\Components\\" + "textFS" + ".glsl";
+        private static readonly bool FROM_RESOURCES = false;
 
         private int location_transformationMatrix;
         private int location_viewMatrix;
         private int location_projectionMatrix;
         private int location_colour;
 
-        public TextShader() : base(VERTEX_SHADER_FILE, FRAGMENT_SHADER_FILE) { }
+        public TextShader() : base(VERTEX_SHADER_FILE, FRAGMENT_SHADER_FILE, FROM_RESOURCES) { }
 
         protected override void BindAttributes()
         {
@@ -46,7 +47,7 @@ namespace Senapp.Engine.Shaders.Components
         {
             base.LoadMatrix(location_projectionMatrix, matrix);
         }
-        public void UpdateCamera(Camera camera)
+        public void LoadCameraMatrix(Camera camera)
         {
             LoadViewMatrix(camera.GetViewMatrixUI());
             LoadProjectionMatrix(camera.GetProjectionMatrixUI());
