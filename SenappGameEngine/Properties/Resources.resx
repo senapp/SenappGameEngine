@@ -151,6 +151,12 @@
   <data name="dragon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Models\dragon.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="entityFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\entityfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="entityVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\entityvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="enviroback" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\enviroback.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -169,6 +175,12 @@
   <data name="envirotop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\envirotop.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="finalFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\finalfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="finalVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\finalvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="front" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\front.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -186,6 +198,12 @@
   </data>
   <data name="levelUpEnabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\levelupenabled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lightingFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\lightingfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lightingVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\lightingvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lux" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\lux.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -244,14 +262,32 @@
   <data name="settingsButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\settingsbutton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="skyboxFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\skyboxfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="skyboxVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\skyboxvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="sphere" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\models\sphere.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="spriteFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\spritefs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="spriteVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\spritevs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="statsInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\statsinfo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="store" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\store.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="textFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\textfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="textVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\shaders\components\textvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="top" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\top.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

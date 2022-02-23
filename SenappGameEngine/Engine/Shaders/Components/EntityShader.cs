@@ -8,9 +8,9 @@ namespace Senapp.Engine.Shaders.Components
 {
     public class EntityShader : ShaderProgram
     {
-        private static readonly string VERTEX_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\Components\\" + "entityVS" + ".glsl";
-        private static readonly string FRAGMENT_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\Components\\" + "entityFS" + ".glsl";
-        private static readonly bool FROM_RESOURCES = false;
+        private const string VERTEX_SHADER_FILE = "entityVS";
+        private const string FRAGMENT_SHADER_FILE = "entityFS";
+        private const bool FROM_RESOURCES = true;
 
         private int location_transformationMatrix;
         private int location_projectionMatrix;

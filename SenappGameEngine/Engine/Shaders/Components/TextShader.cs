@@ -6,9 +6,9 @@ namespace Senapp.Engine.Shaders.Components
 {
     public class TextShader : ShaderProgram
     {
-        private static readonly string VERTEX_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\Components\\" + "textVS" + ".glsl";
-        private static readonly string FRAGMENT_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\Components\\" + "textFS" + ".glsl";
-        private static readonly bool FROM_RESOURCES = false;
+        private const string VERTEX_SHADER_FILE = "textVS";
+        private const string FRAGMENT_SHADER_FILE = "textFS";
+        private const bool FROM_RESOURCES = true;
 
         private int location_transformationMatrix;
         private int location_viewMatrix;

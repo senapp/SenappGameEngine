@@ -176,6 +176,26 @@ namespace Senapp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] entityFS {
+            get {
+                object obj = ResourceManager.GetObject("entityFS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] entityVS {
+            get {
+                object obj = ResourceManager.GetObject("entityVS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap enviroback {
@@ -236,6 +256,26 @@ namespace Senapp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] finalFS {
+            get {
+                object obj = ResourceManager.GetObject("finalFS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] finalVS {
+            get {
+                object obj = ResourceManager.GetObject("finalVS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap front {
@@ -292,6 +332,26 @@ namespace Senapp.Properties {
             get {
                 object obj = ResourceManager.GetObject("levelUpEnabled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] lightingFS {
+            get {
+                object obj = ResourceManager.GetObject("lightingFS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] lightingVS {
+            get {
+                object obj = ResourceManager.GetObject("lightingVS", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -466,25 +526,14 @@ namespace Senapp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [RENDERING]
-        ///USING_FRAMEBUFFERS=True
-        ///
-        ///[GRAPHICS]
-        ///ANTI_ALIASING=MSAA
-        ///MSAA_SAMPLES=4
-        ///
-        ///[WINDOW]
-        ///FSAA_SAMPLES=8
+        ///   Looks up a localized string similar to [WINDOW]
         ///COLOUR_BITS=24
         ///DEPTH_BITS=16
         ///STENCIL_BITS=8
         ///ACCUM_BITS=32
         ///
         ///[FILES]
-        ///SKYBOX_FILE_PREFIX=
-        ///
-        ///[DEBUG]
-        ///ENABLE_IMGUI_EDITOR=True.
+        ///SKYBOX_FILE_PREFIX=.
         /// </summary>
         public static string settings {
             get {
@@ -505,9 +554,49 @@ namespace Senapp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] skyboxFS {
+            get {
+                object obj = ResourceManager.GetObject("skyboxFS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] skyboxVS {
+            get {
+                object obj = ResourceManager.GetObject("skyboxVS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] sphere {
             get {
                 object obj = ResourceManager.GetObject("sphere", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] spriteFS {
+            get {
+                object obj = ResourceManager.GetObject("spriteFS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] spriteVS {
+            get {
+                object obj = ResourceManager.GetObject("spriteVS", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -529,6 +618,26 @@ namespace Senapp.Properties {
             get {
                 object obj = ResourceManager.GetObject("store", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] textFS {
+            get {
+                object obj = ResourceManager.GetObject("textFS", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] textVS {
+            get {
+                object obj = ResourceManager.GetObject("textVS", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

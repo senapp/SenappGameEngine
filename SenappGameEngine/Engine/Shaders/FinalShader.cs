@@ -2,9 +2,9 @@
 {
     public class FinalShader : ShaderProgram
     {
-        private static readonly string VERTEX_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\" + "finalVS" + ".glsl";
-        private static readonly string FRAGMENT_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\" + "finalFS" + ".glsl";
-        private static readonly bool FROM_RESOURCES = false;
+        private const string VERTEX_SHADER_FILE = "finalVS";
+        private const string FRAGMENT_SHADER_FILE = "finalFS";
+        private const bool FROM_RESOURCES = true;
 
         public FinalShader() : base(VERTEX_SHADER_FILE, FRAGMENT_SHADER_FILE, FROM_RESOURCES) { }
 

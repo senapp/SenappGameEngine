@@ -13,10 +13,11 @@ namespace Senapp.Engine.Shaders
     {
         public ShaderProgram(string vertexFileName, string fragmentFileName, bool fromResources)
         {
+            this.fromResources = fromResources;
+
             programID = GL.CreateProgram();
             vertexShaderID = LoadShader(vertexFileName, ShaderType.VertexShader);
             fragmentShaderID = LoadShader(fragmentFileName, ShaderType.FragmentShader);
-            this.fromResources = fromResources;
 
             GL.AttachShader(programID, vertexShaderID);
             GL.AttachShader(programID, fragmentShaderID);

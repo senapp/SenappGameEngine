@@ -6,9 +6,9 @@ namespace Senapp.Engine.Shaders.Components
 {
     public class SpriteShader : ShaderProgram
     {
-        private static readonly string VERTEX_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\Components\\" + "spriteVS" + ".glsl";
-        private static readonly string FRAGMENT_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\Components\\" + "spriteFS" + ".glsl";
-        private static readonly bool FROM_RESOURCES = false;
+        private const string VERTEX_SHADER_FILE = "spriteVS";
+        private const string FRAGMENT_SHADER_FILE = "spriteFS";
+        private const bool FROM_RESOURCES = true;
 
         private int location_transformationMatrix;
         private int location_viewMatrix;

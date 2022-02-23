@@ -7,9 +7,9 @@ namespace Senapp.Engine.Shaders
 {
     public class LightingShader : ShaderProgram
     {
-        private static readonly string VERTEX_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\" + "lightingVS" + ".glsl";
-        private static readonly string FRAGMENT_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\" + "lightingFS" + ".glsl";
-        private static readonly bool FROM_RESOURCES = false;
+        private const string VERTEX_SHADER_FILE = "lightingVS";
+        private const string FRAGMENT_SHADER_FILE = "lightingFS";
+        private const bool FROM_RESOURCES = true;
 
         private int location_colourTexture;
         private int location_normalTexture;

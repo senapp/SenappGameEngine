@@ -5,9 +5,9 @@ namespace Senapp.Engine.Shaders
 {
     public class SkyboxShader : ShaderProgram
     {
-        private static readonly string VERTEX_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\" + "skyboxVS" + ".glsl";
-        private static readonly string FRAGMENT_SHADER_FILE = "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Resources\\Shaders\\" + "skyboxFS" + ".glsl";
-        private static readonly bool FROM_RESOURCES = false;
+        private const string VERTEX_SHADER_FILE = "skyboxVS";
+        private const string FRAGMENT_SHADER_FILE = "skyboxFS";
+        private const bool FROM_RESOURCES = true;
 
         private int location_transformationMatrix;
         private int location_viewMatrix;
