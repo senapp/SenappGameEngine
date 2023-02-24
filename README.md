@@ -28,7 +28,6 @@ The main idea behind the engine was to explore game engine programming and make 
 - Controller input
 - Model & texture loader
 - OBJ & DAE loader
-- Really basic server & client networking with HTTP
 - Box collisions
 - Component renderers & shaders
 - Skybox rendering & shader
