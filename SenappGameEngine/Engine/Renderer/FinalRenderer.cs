@@ -12,13 +12,10 @@ namespace Senapp.Engine.Renderer
             shader = new FinalShader();
         }
 
-        public int ColourAttachmentId = 0;
-
         public void Render(FrameBuffer frameBuffer)
         {
             shader.Start();
-            if (ColourAttachmentId >= frameBuffer.ColourAttachmentIds.Count || ColourAttachmentId < 0) ColourAttachmentId = 0;
-            Bind(frameBuffer.ColourAttachmentIds[ColourAttachmentId].Value);
+            Bind(frameBuffer.ColourAttachmentIds[0].Value);
             base.Render();
             Unbind();
 

@@ -8,15 +8,6 @@ namespace Senapp.Engine.Utilities.Testing
         public static void Enable(bool mode)
         {
             enabled = mode;
-
-            if (enabled)
-            {
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
-            }
-            else
-            {
-                GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
-            }
         }
 
         private static bool enabled = false;

@@ -72,22 +72,33 @@ namespace Senapp.Programs
                 obj.AddComponent(new RigidEntity(obj.transform.GetWorldPosition()));
                 obj.AddComponent(new RaycastTarget(1, onEnter: () =>
                 {
-                    obj.colour = Color.Red;
-                    lockToMouseObject = obj;
+                    if (!locked)
+                    {
+                        obj.colour = Color.Red;
+                        lockToMouseObject = obj;
+                    }
                 }, onExit: () =>
                 {
-                    obj.colour = Color.White;
-                    if (lockToMouseObject == obj)
+                    if (!locked)
                     {
-                        lockToMouseObject = null;
+                        obj.colour = Color.White;
+                        if (lockToMouseObject == obj)
+                        {
+                            lockToMouseObject = null;
+                        }
+                    }
+                }, onClick: () =>
+                {
+                    if (!locked)
+                    {
+                        lockToMouseObject = obj;
+                        locked = true;
                     }
                 }));
                 MainScene.AddGameObject(obj);
             }
 
-            SunLight.gameObject.transform = new Transform(SunLight.gameObject, 0, 25, 0, 0, 0, 0, 2f, 2f, 2f);
-            SunLight.gameObject.AddComponent(new Entity(Geometries.Sphere));
-            SunLight.gameObject.GetComponent<Entity>().model.luminosity = 1;
+            SunLight.gameObject.transform.SetPosition(new Vector3(0, 10, 20));
 
             MainCamera.gameObject.transform = new Transform(MainCamera.gameObject, 0, 4, 10);
 
@@ -118,6 +129,7 @@ namespace Senapp.Programs
         Sprite ProfilerScreen;
 
         GameObject lockToMouseObject;
+        bool locked = false;
 
         private void DebugScreenTexts()
         {
@@ -137,8 +149,9 @@ namespace Senapp.Programs
                 {
                     var component = lockToMouseObject.GetComponent<RaycastTarget>();
                     component.focused = false;
-                    component.onLoseFocus();
+                    component.onLoseFocus?.Invoke();
                     lockToMouseObject = null;
+                    locked = false;
                     return;
                 }
 

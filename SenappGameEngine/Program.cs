@@ -34,7 +34,7 @@ namespace Senapp
                     stereo: false);
 
                 // Place your inherited class of 'Game' here to start your game.
-                _ = new PhysicsTest(mode);
+                _ = new MobaGame(mode);
             }
         }   
     }

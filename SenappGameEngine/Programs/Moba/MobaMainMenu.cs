@@ -27,7 +27,7 @@ namespace Senapp.Programs.Moba
         public Text ScenesText;
         public TextButton MinimizeButton;
         public TextButton CloseButton;
-        public InputField IpAddressField;
+        public Text PlayerPosition;
 
         public MobaMainMenu() { }
         public MobaMainMenu(GameFont font)
@@ -90,13 +90,22 @@ namespace Senapp.Programs.Moba
                 .WithComponent(new RaycastTargetUI(onEnter: () => ScenesText.gameObject.colour = Color.Red, onExit: () => ScenesText.gameObject.colour = Color.White))
                 .GetComponent<Text>();
 
+            PlayerPosition = new GameObjectUI()
+              .WithParent(gameObject)
+              .WithName("PlayerPositionText")
+              .WithPosition(new Vector3(-70, 22.5f, 0))
+              .WithComponent(new Text("Player Position: ", font, 10)
+                  .WithSortingLayer(99))
+              .WithComponent(new RaycastTargetUI(onEnter: () => PlayerPosition.gameObject.colour = Color.Red, onExit: () => PlayerPosition.gameObject.colour = Color.White))
+              .GetComponent<Text>();
+
             MinimizeButton = new GameObjectUI()
                 .WithParent(Toolbar.gameObject)
                 .WithName("Minimize Button")
                 .WithPosition(new Vector3(100, 0, 0))
                 .AddComponent(new TextButton("_", font,
-                    onEnter: () => MinimizeButton.SetColour(Color.White, Color.DarkOliveGreen),
-                    onExit: () => MinimizeButton.SetColour(Color.White, Color.Green),
+                    onEnter: () => MinimizeButton.SetBackgroundColour(Color.DarkOliveGreen),
+                    onExit: () => MinimizeButton.SetBackgroundColour(Color.Green),
                     onClick: () => gameObject.enabled = false)
                     .WithSortingLayer(99));
 
@@ -109,23 +118,13 @@ namespace Senapp.Programs.Moba
                .WithName("Close Button")
                .WithPosition(new Vector3(115, 0, 0))
                .AddComponent(new TextButton("X", font,
-                    onEnter: () => CloseButton.SetColour(Color.White, Color.Crimson),
-                    onExit: () => CloseButton.SetColour(Color.White, Color.Red),
+                    onEnter: () => CloseButton.SetBackgroundColour(Color.Crimson),
+                    onExit: () => CloseButton.SetBackgroundColour(Color.Red),
                     onClick: () => Game.Instance.Exit())
                     .WithSortingLayer(99));
 
             CloseButton.SetColour(Color.White, Color.Red);
-            CloseButton.SetSize(0.4f, new Vector2(0.25f, 0.25f));
-
-            IpAddressField = new GameObjectUI()
-             .WithParent(gameObject)
-             .WithName("Ip Address Field")
-             .WithPosition(new Vector3(-82.5f, 0f, 0))
-             .AddComponent(new InputField("Text...", font, Dock.Left)
-             .WithSortingLayer(99));
-
-            IpAddressField.SetSize(0.25f, new Vector2(1.5f, 0.25f));
-            IpAddressField.SetColour(Color.Black, Color.White);
+            CloseButton.SetSize(0.4f, new Vector2(0.25f, 0.25f));     
         }
 
         public override void Update(GameUpdatedEventArgs args)
@@ -138,6 +137,7 @@ namespace Senapp.Programs.Moba
             GameObjectsText.UpdateText("GameObjects: " + Game.Instance.GetAllGameObjects().Count);
             FPSText.UpdateText("FPS: " + FrameRate.FPS);
             ScenesText.UpdateText("Scenes: " + Game.Instance.SceneManager.scenes.Count);
+            PlayerPosition.UpdateText("Player Position: " + MobaPlayerController.Instance.gameObject.transform.GetWorldPosition());
         }
 
         private readonly GameFont font;

@@ -31,7 +31,7 @@ namespace Senapp.Engine.UI.Combinations
             this.background = new Sprite();
             this.currentPosMarker = new Sprite();
             this.TextValue = text;
-            this.raycastTarget = new RaycastTargetUI(onClick: OnFocus, onLoseFocus: OnLoseFocus);
+            this.raycastTarget = new RaycastTargetUI(onClick: OnFocus, onLoseFocus: OnLoseFocus, onEnter: OnEnter, onExit: OnExit);
         }
 
         public override void Awake()
@@ -39,7 +39,7 @@ namespace Senapp.Engine.UI.Combinations
             background = new GameObjectUI()
                 .WithParent(gameObject)
                 .WithName($"{gameObject.name} Background")
-                .WithColour(defaultColour)
+                .WithColour(Color.White)
                 .WithComponent(background)
                 .WithComponent(raycastTarget)
                 .GetComponent<Sprite>();
@@ -115,11 +115,12 @@ namespace Senapp.Engine.UI.Combinations
         public void SetColour(Color textColour, Color backgroundColour)
         {
             text.gameObject.colour = textColour;
-            background.gameObject.colour = backgroundColour;
+            SetBackgroundColour(backgroundColour);
         }
         public void SetBackgroundColour(Color backgroundColour)
         {
             background.gameObject.colour = backgroundColour;
+            setBackgroundColour = backgroundColour;
         }
         public void SetTextColour(Color textColour)
         {
@@ -173,6 +174,9 @@ namespace Senapp.Engine.UI.Combinations
                 currentPosition++;
             }
 
+            if (value.Length > charLimit) value = value.Substring(0, charLimit);
+            if (currentPosition > charLimit) currentPosition = charLimit;
+
             if (TextValue != value)
             {
                 TextValue = value;
@@ -216,14 +220,28 @@ namespace Senapp.Engine.UI.Combinations
         }
 
         private void OnFocus() 
-        { 
-            lisiting = true; 
+        {
+            OnExit();
+            Input.Listen();
+            lisiting = true;
             currentPosition = text.TextValue.Length; 
         }
         private void OnLoseFocus()
         {
+            Input.StopListening();
             lisiting = false;
+
             currentPosMarker.gameObject.enabled = false;
+        }
+        private void OnEnter()
+        {
+            if (lisiting) return;
+
+            background.gameObject.colour = Color.LightGray;
+        }
+        private void OnExit()
+        {
+            background.gameObject.colour = setBackgroundColour;
         }
 
         private int currentPosition;
@@ -234,7 +252,10 @@ namespace Senapp.Engine.UI.Combinations
         private const float inputUpdateFrequency = 0.5f; // 2 updates per second
 
         private readonly float defaultFontSize = 20;
-        private readonly Color defaultColour = Color.White;
         private const float mult = 2.3f;
+
+        private Color setBackgroundColour = Color.White;
+
+        private const int charLimit = 20;
     }
 }

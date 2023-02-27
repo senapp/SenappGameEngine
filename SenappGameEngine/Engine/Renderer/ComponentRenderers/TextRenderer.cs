@@ -80,6 +80,7 @@ namespace Senapp.Engine.Renderer.ComponentRenderers
                 {
                     if (font.characterRawModels.TryGetValue(id, out RawModel model))
                     {
+                        if (model.VaoId == 0) continue;
                         BindCharacter(model);
                     }
 

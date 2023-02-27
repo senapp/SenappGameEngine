@@ -6,6 +6,7 @@ using Senapp.Engine.Models;
 using Senapp.Engine.Utilities;
 using Senapp.Engine.Entities;
 using Senapp.Engine.Shaders.Components;
+using Senapp.Engine.Utilities.Testing;
 
 namespace Senapp.Engine.Renderer.ComponentRenderers
 {
@@ -21,6 +22,8 @@ namespace Senapp.Engine.Renderer.ComponentRenderers
             shader.Start();
             shader.LoadCameraMatrix(camera);
             shader.LoadIsMultisample(isMultisample);
+            var wireFrame = WireFrame.IsEnabled();
+            if (wireFrame) GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
             foreach (TexturedModel model in entities.Keys)
             {
                 entities.TryGetValue(model, out List<Entity> batch);
@@ -32,6 +35,7 @@ namespace Senapp.Engine.Renderer.ComponentRenderers
                 }
                 UnbindCommon();
             }
+            if (wireFrame) GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
             shader.Stop();
         }
 

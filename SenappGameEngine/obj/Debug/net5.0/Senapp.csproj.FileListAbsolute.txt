@@ -3,7 +3,6 @@ C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\De
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\Senapp.runtimeconfig.json
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\Senapp.runtimeconfig.dev.json
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\Senapp.dll
-C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\ref\Senapp.dll
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\Senapp.pdb
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\OpenTK.dll
@@ -25,3 +24,4 @@ C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\De
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\System.Drawing.Common.dll
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\obj\Debug\net5.0\Senapp.csproj.AssemblyReference.cache
 C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\albin\Documents\Projects\Other\senappGameEngine\SenappGameEngine\obj\Debug\net5.0\refint\Senapp.dll

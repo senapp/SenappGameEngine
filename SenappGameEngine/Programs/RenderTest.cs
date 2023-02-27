@@ -1,11 +1,9 @@
 ﻿using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Input;
 using Senapp.Engine.Core;
 using Senapp.Engine.Core.GameObjects;
 using Senapp.Engine.Entities;
 using Senapp.Engine.Events;
-using Senapp.Engine.PlayerInput;
 using Senapp.Engine.Renderer.Helper;
 using Senapp.Engine.UI;
 using Senapp.Engine.Utilities;
@@ -30,7 +28,7 @@ namespace Senapp.Programs
         private void Initialize(object sender)
         {
             Icon = Resources.GetIcon("new_icon");
-            VSync = VSyncMode.On;
+            VSync = VSyncMode.Off;
 
             font.LoadFont("opensans");
 
@@ -38,17 +36,15 @@ namespace Senapp.Programs
                 .WithParent(MainScene)
                 .WithPosition(new Vector3(0, 0, -5))
                 .AddComponent(new Entity(Geometries.Sphere));
+
+            SunLight.gameObject.transform.SetPosition(new Vector3(0, 2.5f, 2.5f));
         }
 
         private void Update(object sender, GameUpdatedEventArgs args)
         {
             if (!Focused)
                 return;
-
-            if (Input.GetKeyDown(Key.Q))
-            {
-                Renderer.finalRenderer.ColourAttachmentId++;
-            }
+            
         }
     }
 }

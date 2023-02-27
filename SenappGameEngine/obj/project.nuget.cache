@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5ChUfBxsWKfvO2baLoGAKdnscoXuuadVA6LoSH69Mbihq3iCGYe/VAfEQcCpQVi1I/a5P3SNsTDw9WzMS7slvw==",
+  "dgSpecHash": "O6SFfdrE30O/UXjYKysKvTQ06Tsd45ewJRxk3AN3jm6awpuAEdk1/n+JLtfaqTKa8F28BlwFgd7ZtIH9UYxqmQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\albin\\Documents\\Projects\\Other\\senappGameEngine\\SenappGameEngine\\Senapp.csproj",
   "expectedPackageFiles": [
@@ -16,7 +16,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'OpenTK 3.3.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "message": "Package 'OpenTK 3.3.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
       "libraryId": "OpenTK",
       "targetGraphs": [
         "net5.0"

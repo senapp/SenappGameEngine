@@ -13,10 +13,17 @@ namespace Senapp.Engine.Renderer
 			this.shader = new LightingShader();
 		}
 
-		public void Bind(int colourTexture, int normalTexture, int positionTexture, int modelTexture)
+        public int VisibleTextureId = 0;
+
+        public void Bind(int colourTexture, int normalTexture, int positionTexture, int modelTexture)
         {
-			GL.ActiveTexture(TextureUnit.Texture0);
-			GL.BindTexture(TextureTarget.Texture2D, colourTexture);
+			var tex = VisibleTextureId == 1 ? normalTexture
+				: VisibleTextureId == 2 ? positionTexture
+				: VisibleTextureId == 3 ? modelTexture
+				: colourTexture;
+
+            GL.ActiveTexture(TextureUnit.Texture0);
+			GL.BindTexture(TextureTarget.Texture2D, tex);
 			GL.ActiveTexture(TextureUnit.Texture1);
 			GL.BindTexture(TextureTarget.Texture2D, normalTexture);
 			GL.ActiveTexture(TextureUnit.Texture2);

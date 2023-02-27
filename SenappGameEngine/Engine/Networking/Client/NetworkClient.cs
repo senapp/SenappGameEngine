@@ -13,7 +13,7 @@ namespace Senapp.Engine.Networking.Client
     public class NetworkClient
     {
         public static string ClientId { get; private set; }
-        public static bool ClientRunning { get; private set; }
+        public static bool ClientConnected { get; private set; }
         public static bool Optimize { get; private set; } = false;
 
         public static async void Start(bool optimize = false)
@@ -27,9 +27,12 @@ namespace Senapp.Engine.Networking.Client
                 ClientId = Guid.NewGuid().ToString();
 
                 var result = await Post(NetworkPacket.CreateRequest("connect", ClientId));
-                ClientRunning = true;
+                if (result.IsSuccessStatusCode)
+                {
+                    ClientConnected = true;
 
-                Console.WriteLine($"[CLIENT] Client connected with id {ClientId}");
+                    Console.WriteLine($"[CLIENT] Client connected with id {ClientId}");
+                }
             }
             catch (Exception e)
             {
@@ -116,7 +119,7 @@ namespace Senapp.Engine.Networking.Client
         }
         public static async Task<bool> Update()
         {
-            if (updating || !ClientRunning) return false;
+            if (updating || !ClientConnected) return false;
 
             updating = true;
             foreach (var key in subscribtions.Keys)

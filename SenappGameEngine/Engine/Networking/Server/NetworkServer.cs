@@ -17,6 +17,8 @@ namespace Senapp.Engine.Networking.Server
         private static Thread serverThread;
         public static void Start(string ipAddress = "localhost", int port = 3333, bool optimize = false)
         {
+            cts = new CancellationTokenSource();
+
             Port = port;
             IPAddress = ipAddress;
             Optimize = optimize;
@@ -26,13 +28,21 @@ namespace Senapp.Engine.Networking.Server
             Console.WriteLine($"[SERVER] IPAddress: {IPAddress}");
             Console.WriteLine($"[SERVER] Optimize: {Optimize}");
 
-            serverThread = new Thread(Run)
+            serverThread = new Thread(() => Run(cts))
             {
                 Name = "ServerThread",
             };
 
             serverThread.Start();
         }
+
+        public static void Kill()
+        {
+            Console.WriteLine($"[SERVER] Killing server...");
+            cts.Cancel();
+        }
+
+        private static CancellationTokenSource cts;
 
         public static string IPAddress { get; private set; } = "localhost";
         public static int Port { get; private set; } = 3333;
@@ -44,7 +54,7 @@ namespace Senapp.Engine.Networking.Server
         private static readonly List<string> connectedClients = new();
         private static bool serverRunning = false;
 
-        private static async void Run()
+        private static async void Run(CancellationTokenSource cts)
         {
             Console.WriteLine("[SERVER] Starting...");
             try
@@ -59,7 +69,7 @@ namespace Senapp.Engine.Networking.Server
 
                 Console.WriteLine("[SERVER] Listening for connections on {0}", Url);
 
-                while (true)
+                while (!cts.IsCancellationRequested)
                 {
                     HttpListenerContext ctx = await listener.GetContextAsync();
 

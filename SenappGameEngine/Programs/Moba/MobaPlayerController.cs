@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using OpenTK;
 using OpenTK.Input;
 
@@ -39,20 +39,39 @@ namespace Senapp.Programs.Moba
                 CurrentRaycastPosition = Raycast.ClosestPoint(Input.GetMousePositionWindow(), 0);
                 const float movementSpeed = 5.0f;
 
-                if (Input.GetMouseButton(MouseButton.Right))
+                if (Input.GetMouseButtonDown(MouseButton.Right))
                 {
-                    var dir = CurrentRaycastPosition - gameObject.transform.LocalPosition;
-                    movement = -dir.Normalized().WithY(0);
-                    targetPosition = CurrentRaycastPosition.WithY(0.01f);
-                    targetMarker.transform.SetPosition(targetPosition);
-                    targetMarker.enabled = true;
+                    var mouseTarget = CurrentRaycastPosition.WithY(0.01f);
+                    if (MobaWorld.Instance.IsPositionValid(mouseTarget))
+                    {
+                        comingPositions = MobaWorld.Instance.CalculateMovement(gameObject.transform.LocalPosition, CurrentRaycastPosition.WithY(0.01f));
+                        comingPositions.RemoveAt(0);
+                        if (comingPositions.Count == 0)
+                        {
+                            return;
+                        }
+                        targetPosition = comingPositions[0];
+                        var dir = targetPosition - gameObject.transform.LocalPosition;
+                        movement = -dir.Normalized().WithY(0);
+                        targetMarker.transform.SetPosition(mouseTarget);
+                        targetMarker.enabled = true;
+                        comingPositions.RemoveAt(0);
+                    }
                 }
 
                 if (IsOnPosition(gameObject.transform.LocalPosition, targetPosition))
                 {
-                    movement = Vector3.Zero;
-                    targetPosition = Vector3.Zero;
-                    targetMarker.enabled = false;
+                    if (comingPositions.Count == 0)
+                    {
+                        movement = Vector3.Zero;
+                        targetPosition = Vector3.Zero;
+                        targetMarker.enabled = false;
+                    }
+                    else
+                    {
+                        targetPosition = comingPositions[0];
+                        comingPositions.RemoveAt(0);
+                    }
                 }
                 else if (targetPosition != Vector3.Zero)
                 {
@@ -71,7 +90,6 @@ namespace Senapp.Programs.Moba
 
                     var direction = gameObject.transform.GetWorldPosition() + (camForward * -movement.Z + camRight * movement.X).Normalized();
                     gameObject.transform.RotateTowardsTarget(direction, args.DeltaTime * 5, 90);
-
 
                     var movementVector = new Vector3(((camForward * -movement.Z + camRight * movement.X).Normalized() * movementSpeed * args.DeltaTime).X, 0, ((camForward * -movement.Z + camRight * movement.X).Normalized() * movementSpeed * args.DeltaTime).Z);
                     gameObject.transform.Translate(-movementVector);
@@ -95,5 +113,6 @@ namespace Senapp.Programs.Moba
         private Vector3 movement = Vector3.Zero;
         private readonly GameObject targetMarker;
         private float cameraOffset = 3.3f;
+        private List<Vector3> comingPositions = new();
     }
 }

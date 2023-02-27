@@ -14,6 +14,18 @@ namespace Senapp.Engine.PlayerInput
         public static List<MouseButton> CurrentMouseButtons => currentMouseButtons;
 
         public static bool CursorLocked { get; private set; }
+        public static bool ActiveListening { get; private set; }
+
+
+        public static void Listen()
+        {
+            ActiveListening = true;
+        }
+
+        public static void StopListening()
+        {
+            ActiveListening = false;
+        }
 
         public static void Update()
         {
@@ -58,21 +70,21 @@ namespace Senapp.Engine.PlayerInput
 
         public static bool GetKey(Key key)
         {
-            if (!Game.Instance.Focused)
+            if (!Game.Instance.Focused || ActiveListening)
                 return false;
 
             return currentKeys.Contains(key);
         }
         public static bool GetKeyDown(Key key)
         {
-            if (!Game.Instance.Focused)
+            if (!Game.Instance.Focused || ActiveListening)
                 return false;
 
             return downKeys.Contains(key);
         }
         public static bool GetKeyUp(Key key)
         {
-            if (!Game.Instance.Focused)
+            if (!Game.Instance.Focused || ActiveListening)
                 return false;
 
             return upKeys.Contains(key);
