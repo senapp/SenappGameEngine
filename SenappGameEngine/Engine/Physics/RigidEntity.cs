@@ -26,9 +26,9 @@ namespace Senapp.Engine.Physics
         private readonly float mass = 1;
         public float MovedDistance = 0;
 
-        public RigidEntity() { }
+        public RigidEntity() : base(false) { }
 
-        public RigidEntity(Vector3 lastPosition, float mass = 0.1f) 
+        public RigidEntity(Vector3 lastPosition, float mass = 0.1f) : base(false)
         {
             this.lastPosition = lastPosition;
             this.mass = mass;

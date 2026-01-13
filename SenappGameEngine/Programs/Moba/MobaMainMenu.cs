@@ -29,8 +29,8 @@ namespace Senapp.Programs.Moba
         public TextButton CloseButton;
         public Text PlayerPosition;
 
-        public MobaMainMenu() { }
-        public MobaMainMenu(GameFont font)
+        public MobaMainMenu() : base(true) { }
+        public MobaMainMenu(GameFont font) : base(true)
         {
             this.font = font;
             Instance = this;

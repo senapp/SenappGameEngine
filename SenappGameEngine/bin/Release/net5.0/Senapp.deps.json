@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v5.0": {
       "Senapp/1.0.0": {
         "dependencies": {
+          "BulletSharp": "0.11.1",
           "Microsoft.Win32.SystemEvents": "6.0.0",
           "Newtonsoft.Json": "13.0.1",
           "OpenTK": "3.3.2",
@@ -16,6 +17,14 @@
         },
         "runtime": {
           "Senapp.dll": {}
+        }
+      },
+      "BulletSharp/0.11.1": {
+        "runtime": {
+          "lib/net40-client/BulletSharp.dll": {
+            "assemblyVersion": "0.11.0.0",
+            "fileVersion": "0.11.0.0"
+          }
         }
       },
       "Microsoft.Win32.SystemEvents/6.0.0": {
@@ -94,6 +103,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "BulletSharp/0.11.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-h63YXDBPZV2WZJ5YmP65NTAq0PiNN37lGrX/Ln+Of8ya1kZasIR815dkb/q2xE2HCafIbS9iRf7w7QzLoCTWRw==",
+      "path": "bulletsharp/0.11.1",
+      "hashPath": "bulletsharp.0.11.1.nupkg.sha512"
     },
     "Microsoft.Win32.SystemEvents/6.0.0": {
       "type": "package",

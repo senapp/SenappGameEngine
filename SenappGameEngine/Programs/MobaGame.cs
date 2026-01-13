@@ -37,7 +37,7 @@ namespace Senapp.Programs
         private void Initialize(object sender)
         {
             Icon = Resources.GetIcon("new_icon");
-            VSync = VSyncMode.On;
+            VSync = VSyncMode.Off;
 
             font.LoadFont("opensans");
 
@@ -55,6 +55,9 @@ namespace Senapp.Programs
             SceneManager.AddScene(GameScene);
 
             MainCamera.gameObject.transform.SetPosition(new Vector3(0, 20, 0));
+
+            // Profiler
+            new GameObject().WithParent(MainScene).WithName("ProfilerContainer").AddComponent(new Profiler());
         }
 
         private void Update(object sender, GameUpdatedEventArgs args)

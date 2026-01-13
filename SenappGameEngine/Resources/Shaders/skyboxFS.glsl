@@ -1,4 +1,4 @@
-﻿#version 400
+#version 400
 
 in vec3 textureCoords;
 layout(location = 0) out vec4 out_Colour;

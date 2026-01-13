@@ -86,9 +86,9 @@ namespace Senapp.Programs
             player.transform.SetScale(new Vector3(2, 2, 2));
             MainScene.AddGameObject(player);
 
-            SunLight.gameObject.transform = new Transform(SunLight.gameObject, - 200, 2000, -200, 0, 0, 0, 2f, 2f, 2f);
-            SunLight.gameObject.AddComponent(new Entity(Geometries.Sphere));
-            SunLight.gameObject.GetComponent<Entity>().model.luminosity = 1;
+            MainLight.gameObject.transform = new Transform(MainLight.gameObject, - 200, 2000, -200, 0, 0, 0, 2f, 2f, 2f);
+            MainLight.gameObject.AddComponent(new Entity(Geometries.Sphere));
+            MainLight.gameObject.GetComponent<Entity>().model.luminosity = 1;
 
             MainCamera.gameObject.transform = new Transform(MainCamera.gameObject, 0, 4, 10);
 
@@ -150,7 +150,7 @@ namespace Senapp.Programs
             ProfilerScreen = new GameObjectUI()
                .WithParent(MainScene)
                .WithName("profiler")
-               .WithScale(new Vector3(0.6f, 0.15f, 0.5f))
+               .WithScale(new Vector3(1f, 0.4f, 0.5f))
                .WithColour(Color.Black)
                .AddComponent(new Sprite());
 
@@ -159,14 +159,14 @@ namespace Senapp.Programs
             text1 = new GameObjectUI()
                 .WithName("text1")
                 .WithParent(ProfilerScreen.gameObject)
-                .WithPosition(new Vector3(22, 3f, 0))
+                .WithPosition(new Vector3(22, 15f, 0))
                 .AddComponent(new Text("FPS", font, 8));
 
             text2 = new GameObjectUI()
                 .WithParent(ProfilerScreen.gameObject)
                 .WithName("text2")
-                .WithPosition(new Vector3(22, -3f, 0))
-                .AddComponent(new Text("Memory", font, 8));
+                .WithPosition(new Vector3(22, 9f, 0))
+                .AddComponent(new Text("Memory", font, 8));  
         }
 
         readonly GameObject player = new();

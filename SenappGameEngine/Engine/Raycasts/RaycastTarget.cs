@@ -15,8 +15,8 @@ namespace Senapp.Engine.Raycasts
         public Action onExit = null;
         public Action onLoseFocus = null;
 
-        public RaycastTarget() { }
-        public RaycastTarget(float hitRadius, Action onEnter = null, Action onClick = null, Action onExit = null, Action onLoseFocus = null)
+        public RaycastTarget() : base(false) { }
+        public RaycastTarget(float hitRadius, Action onEnter = null, Action onClick = null, Action onExit = null, Action onLoseFocus = null) : base(false)
         {
             this.hitRadius = hitRadius;
             this.onEnter = onEnter;

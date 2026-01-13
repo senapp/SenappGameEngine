@@ -34,6 +34,7 @@ namespace Senapp.Engine.UI.Components
         protected Vector3 lastPosition = Vector3.Zero;
         protected Vector3 lastScale = Vector3.Zero;
 
+        public ComponentUI(bool requiresUpdates) : base(requiresUpdates) { }
         public override bool ComponentConditions(GameObject gameObject)
         {
             return gameObject.IsGameObjectUI && !gameObject.ComponentManager.GetComponents().Keys.Any(type => type.IsSubclassOf(typeof(ComponentUI)));

@@ -20,8 +20,8 @@ namespace Senapp.Programs.Moba
 
         public Vector3 CurrentRaycastPosition { get; private set; }
 
-        public MobaPlayerController() { }
-        public MobaPlayerController(GameObject targetMarker)
+        public MobaPlayerController() : base(true) { }
+        public MobaPlayerController(GameObject targetMarker) : base(true)
         {
             Instance = this;
             this.targetMarker = targetMarker;

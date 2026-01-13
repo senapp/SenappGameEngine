@@ -21,8 +21,8 @@ namespace Senapp.Programs.Moba
         public Sprite CharFace;
         public Text Level;
 
-        public MobaHUD() { }
-        public MobaHUD(GameFont font)
+        public MobaHUD() : base(false) { }
+        public MobaHUD(GameFont font) : base(false)
         {
             this.font = font;
 

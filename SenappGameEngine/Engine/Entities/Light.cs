@@ -4,6 +4,6 @@ namespace Senapp.Engine.Entities
 {
     public class Light : Component
     {
-        public Light() {}
+        public Light() : base(false) { }
     }
 }

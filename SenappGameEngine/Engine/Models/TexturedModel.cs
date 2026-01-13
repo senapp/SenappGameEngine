@@ -41,7 +41,8 @@ namespace Senapp.Engine.Models
                     this.shineDamper == model.shineDamper &&
                     this.reflectivity == model.reflectivity &&
                     this.luminosity == model.luminosity &&
-                    this.lightable == model.lightable);
+                    this.lightable == model.lightable && 
+                    this.rawModel.Name == model.rawModel.Name);
 
                 return equal;
             }

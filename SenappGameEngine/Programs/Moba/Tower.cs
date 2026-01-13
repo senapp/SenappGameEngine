@@ -16,9 +16,9 @@ namespace Senapp.Programs.Moba
     {
         public bool LeftTeam;
 
-        public Tower() { }
+        public Tower() : base(true) { }
 
-        public Tower(Vector3 position, Vector3 rotation, bool leftTeam)
+        public Tower(Vector3 position, Vector3 rotation, bool leftTeam) : base(true)
         {
             LeftTeam = leftTeam;
             startPos = position;

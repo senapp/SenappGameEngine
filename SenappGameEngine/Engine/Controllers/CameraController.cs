@@ -15,6 +15,8 @@ namespace Senapp.Engine.Controllers
     public class CameraController : Component
     {
         public bool CameraFollowMouse;
+
+        public CameraController() : base(true) { }
         public override void Update(GameUpdatedEventArgs args)
         {
             if (Input.GetKeyDown(Key.L) || ControllerManager.ControllerExists(0) && ControllerManager.GetController(0).GetButtonDown(Buttons.LeftShoulder))

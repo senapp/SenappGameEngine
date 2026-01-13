@@ -17,8 +17,8 @@ namespace Senapp.Engine.Entities
 
         public float Fov => MathHelper.RadiansToDegrees(fov);
 
-        public Camera() {}
-        public Camera(float aspectRatio, float fov)
+        public Camera() : base(false) {}
+        public Camera(float aspectRatio, float fov) : base(false)
         {
             AspectRatio = aspectRatio;
             SetFov(fov);

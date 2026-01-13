@@ -41,8 +41,8 @@ namespace Senapp.Engine.UI.Components
 
         public GameFont font;
 
-        public Text() { }
-        public Text(string text, GameFont font, float fontSize = DefaultFontSize, Capitalization capitalization = Capitalization.Regularcase, Dock dock = Dock.Left)
+        public Text() : base(false) { }
+        public Text(string text, GameFont font, float fontSize = DefaultFontSize, Capitalization capitalization = Capitalization.Regularcase, Dock dock = Dock.Left) : base(false)
         {
             this.font = font;
             this.RawFontSize = fontSize / FontScalingDivisor;

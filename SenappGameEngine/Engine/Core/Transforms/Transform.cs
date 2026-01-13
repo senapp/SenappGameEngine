@@ -43,34 +43,42 @@ namespace Senapp.Engine.Core.Transforms
         public void SetPosition(Vector3 positon)
         {
             LocalPosition = positon;
-            gameObject.IsGameObjectUpdated = true;
-
-            foreach (var child in gameObject.Children.Values)
+            if (gameObject != null)
             {
-                child.transform.parentPosition = parentPosition + GetRealLocalPosition();
-                child.transform.Translate(Vector3.Zero);
+                gameObject.IsGameObjectUpdated = true;
+
+                foreach (var child in gameObject.Children.Values)
+                {
+                    child.transform.parentPosition = parentPosition + GetRealLocalPosition();
+                    child.transform.Translate(Vector3.Zero);
+                }
             }
         }
         public void SetRotation(Vector3 rotation)
         {
             LocalRotation = rotation;
-            gameObject.IsGameObjectUpdated = true;
-
-            foreach (var child in gameObject.Children.Values)
+            if (gameObject != null)
             {
-                child.transform.parentRotation = parentRotation + LocalRotation;
-                child.transform.Rotate(Vector3.Zero);
+                gameObject.IsGameObjectUpdated = true;
+
+                foreach (var child in gameObject.Children.Values)
+                {
+                    child.transform.parentRotation = parentRotation + LocalRotation;
+                    child.transform.Rotate(Vector3.Zero);
+                }
             }
         }
         public void SetScale(Vector3 scale)
         {
             LocalScale = scale;
-            gameObject.IsGameObjectUpdated = true;
-
-            foreach (var child in gameObject.Children.Values)
+            if (gameObject != null)
             {
-                child.transform.parentScale = parentScale * LocalScale;
-                child.transform.Scale(Vector3.Zero);
+                gameObject.IsGameObjectUpdated = true;
+                foreach (var child in gameObject.Children.Values)
+                {
+                    child.transform.parentScale = parentScale * LocalScale;
+                    child.transform.Scale(Vector3.Zero);
+                }
             }
         }
         #endregion
@@ -88,7 +96,7 @@ namespace Senapp.Engine.Core.Transforms
             this.LocalScale = localScale;
             this.gameObject = gameObject;
 
-            if (gameObject.Parent != null)
+            if (gameObject?.Parent != null)
             {
                 parentPosition = gameObject.Parent.transform.parentPosition + gameObject.Parent.transform.GetRealLocalPosition();
                 parentRotation = gameObject.Parent.transform.parentRotation + gameObject.Parent.transform.LocalRotation;
@@ -164,11 +172,11 @@ namespace Senapp.Engine.Core.Transforms
             var wRotation = GetWorldRotation();
             var wScale = GetWorldScale();
 
-            wPosition = gameObject.IsGameObjectUI 
+            wPosition = gameObject?.IsGameObjectUI != null && gameObject.IsGameObjectUI
                 ? wPosition.WithZ(cameraPosition.Z - 1) 
                 : wPosition;
 
-            wRotation = gameObject.IsGameObjectUI
+            wRotation = gameObject?.IsGameObjectUI != null && gameObject.IsGameObjectUI
                 ? wRotation.WithX(0) 
                 : wRotation;
 
@@ -183,6 +191,34 @@ namespace Senapp.Engine.Core.Transforms
             Matrix4 scale = Matrix4.CreateScale(wScale);
             Matrix4 transformationMatrix = Matrix4.Mult(rota, Matrix4.Mult(scale, translation));
             return transformationMatrix;
+        }
+
+        public Matrix4 CalculateTranslationMatrix() => CalculateTranslationMatrix(Vector3.Zero, null, null);
+        public Matrix4 CalculateTranslationMatrix(Vector3 cameraPosition, Text text, Sprite sprite)
+        {
+            var wPosition = cameraPosition + GetWorldPosition();
+
+            wPosition = gameObject?.IsGameObjectUI != null && gameObject.IsGameObjectUI
+                ? wPosition.WithZ(cameraPosition.Z - 1)
+                : wPosition;
+
+            Matrix4 translation = Matrix4.CreateTranslation(wPosition);
+            return translation;
+        }
+
+        public Matrix4 CalculateScaleMatrix() => CalculateScaleMatrix(Vector3.Zero, null, null);
+        public Matrix4 CalculateScaleMatrix(Vector3 cameraPosition, Text text, Sprite sprite)
+        {
+            var wScale = GetWorldScale();
+
+            wScale = text != null
+                ? LocalScale
+                : sprite != null
+                    ? new Vector3(wScale.X * sprite.size.X, wScale.Y * sprite.size.Y, wScale.Z)
+                    : wScale;
+
+            Matrix4 scale = Matrix4.CreateScale(wScale);
+            return scale;
         }
 
         public Vector3 GetWorldVerticePosition(Vector3 vertice)
@@ -312,7 +348,7 @@ namespace Senapp.Engine.Core.Transforms
 
         public Vector3 GetRealLocalPosition()
         {
-            if (gameObject.IsGameObjectUI)
+            if (gameObject?.IsGameObjectUI != null && gameObject.IsGameObjectUI)
             {
                 return gameObject.ComponentManager.GetComponents().Values.Cast<IComponentUI>().FirstOrDefault().GetUIPosition();
             }
@@ -322,6 +358,13 @@ namespace Senapp.Engine.Core.Transforms
             }
         }
         #endregion
+
+        public Transform SetMatrix(Matrix4 matrix)
+        {
+            SetPosition(matrix.ExtractTranslation());
+            SetRotation(matrix.ExtractRotation().Xyz);
+            return this;
+        }
 
         private Vector3 parentPosition;
         private Vector3 parentRotation;

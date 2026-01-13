@@ -15,8 +15,8 @@ namespace Senapp.Engine.Raycasts
         public Action onExit = null;
         public Action onLoseFocus = null;
 
-        public RaycastTargetUI() { }
-        public RaycastTargetUI(Action onEnter = null, Action onClick = null, Action onExit = null, Action onLoseFocus = null)
+        public RaycastTargetUI() : base(false) { }
+        public RaycastTargetUI(Action onEnter = null, Action onClick = null, Action onExit = null, Action onLoseFocus = null) : base(false)
         {
             this.onEnter = onEnter;
             this.onClick = onClick;

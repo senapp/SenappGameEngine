@@ -73,7 +73,6 @@ namespace Senapp.Engine.Renderer.ComponentRenderers
             shader.LoadTransformationMatrix(entity.gameObject.transform.CalculateTransformationMatrix());
             shader.LoadColour(entity.gameObject.colour.ToVector());
             shader.LoadInstanceId(entity.gameObject.InstanceId);
-            shader.LoadInstanceId(entity.gameObject.InstanceId);
         }
         public void Dispose()
         {

@@ -13,8 +13,8 @@ namespace Senapp.Programs.Moba
         public MobaMainMenu MobaMainMenu;
         public MobaHUD MobaHUD;
 
-        public MobaUI() { }
-        public MobaUI(GameFont font)
+        public MobaUI() : base(true) { }
+        public MobaUI(GameFont font) : base(true)
         {
             MobaMainMenu = new MobaMainMenu(font);
             MobaHUD = new MobaHUD(font);

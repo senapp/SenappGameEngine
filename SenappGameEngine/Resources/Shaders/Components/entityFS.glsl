@@ -1,4 +1,4 @@
-﻿#version 400
+#version 400
 
 in vec2 pass_textureCoords;
 in float pass_isMultisample;
@@ -31,6 +31,6 @@ void main() {
 			out_Position = vec4(fragPos, 1);
 			out_Normal = vec4(surfaceNormal, 1);
 			out_Model = vec4(luminosity, shineDamper, reflectivity, 1);
-			out_InstanceId = instanceId;	
+			out_InstanceId = instanceId;
 		}
 }

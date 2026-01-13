@@ -33,6 +33,7 @@ namespace Senapp.Engine.Renderer
         }
 
         public readonly EntityRenderer entityRenderer;
+        public readonly GrassRenderer grassRenderer;
         public readonly SpriteRenderer spriteRenderer;
         public readonly TextRenderer textRenderer;
         public readonly SkyboxRenderer skyboxRenderer;
@@ -51,6 +52,7 @@ namespace Senapp.Engine.Renderer
             EnableCulling();
 
             entityRenderer = new EntityRenderer();
+            grassRenderer = new GrassRenderer();
             spriteRenderer = new SpriteRenderer();
             textRenderer = new TextRenderer();
             skyboxRenderer = new SkyboxRenderer(camera.GetProjectionMatrix());
@@ -103,6 +105,10 @@ namespace Senapp.Engine.Renderer
             ClearScreen();
 
             entityRenderer.Render(isMultisample: true, camera, CreateEntityRenderList());
+            if (Game.Instance.GrassBed != null) // Change later
+            {
+                grassRenderer.Render(isColourPass: true, sun, camera, Game.Instance.GrassBed);
+            }
 
             geometryColourFbo.Unbind();
             #endregion
@@ -113,7 +119,11 @@ namespace Senapp.Engine.Renderer
             
             skyboxRenderer.Render(isColourPass: false, camera);
             entityRenderer.Render(isMultisample: false, camera, CreateEntityRenderList());
-            
+            if (Game.Instance.GrassBed != null) // Change later
+            {
+                grassRenderer.Render(isColourPass: false, sun, camera, Game.Instance.GrassBed);
+            }
+
             geometryDataFbo.Unbind();
             Game.Instance.SetGeometryDataFbo(geometryDataFbo);
 
@@ -156,9 +166,42 @@ namespace Senapp.Engine.Renderer
             #endregion
         }
 
+        public void RenderFast(Light sun, Camera camera)
+        {
+            //foreach (var gameObject in Game.Instance.GetSceneGameObjects())
+            //{
+            //    gameObject.ProccessRenderHierarchy<Entity>(ProcessEntity);
+            //    gameObject.ProccessRenderHierarchy<Sprite>(ProcessSprite);
+            //    gameObject.ProccessRenderHierarchy<Text>(ProcessText);
+            //}
+
+            //skyboxRenderer.Render(isColourPass: true, camera);
+
+            entityRenderer.Render(isMultisample: true, camera, Game.Instance.EntityManager.renderList);
+            entityRenderer.Render(isMultisample: false, camera, Game.Instance.EntityManager.renderList);
+            grassRenderer.Render(isColourPass: true, sun, camera, Game.Instance.GrassBed);
+
+            //SortingLayers.Sort();
+            //
+            //spriteRenderer.Start(camera);
+            //textRenderer.Start(camera);
+            //foreach (var sortingLayer in SortingLayers)
+            //{
+            //    spriteRenderer.Render(CreateSpriteRenderList(sortingLayer));
+            //    textRenderer.Render(CreateTextRenderList(sortingLayer));
+            //}
+            //spriteRenderer.Stop();
+            //textRenderer.Stop();
+
+            entities.Clear();
+            sprites.Clear();
+            texts.Clear();
+        }
+
         public void Dispose()
         {
             entityRenderer.Dispose();
+            grassRenderer.Dispose();
             spriteRenderer.Dispose();
             textRenderer.Dispose();
             skyboxRenderer.Dispose();

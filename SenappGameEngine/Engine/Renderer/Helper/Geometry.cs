@@ -2235,13 +2235,13 @@ namespace Senapp.Engine.Renderer.Helper
             {
                 Geometries.Quad => new int[]
                                          {
-                0,1,3,
-                3,1,2,
-                               },
+                0,1,2,
+                3,0,2,
+                },
                 Geometries.Triangle => new int[]
                        {
                 0,1,2
-              },
+                },
                 Geometries.Cube => new int[]
                       {
                 0,1,3,

@@ -24,8 +24,8 @@ namespace Senapp.Engine.UI.Combinations
         public RaycastTargetUI raycastTarget;
         private Sprite currentPosMarker;
 
-        public InputField() { }
-        public InputField(string text, GameFont font, Dock dock) 
+        public InputField() : base(true) { }
+        public InputField(string text, GameFont font, Dock dock) : base(false)
         {
             this.text = new Text(text, font, defaultFontSize, Capitalization.Regularcase, dock);
             this.background = new Sprite();

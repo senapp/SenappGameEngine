@@ -1,4 +1,4 @@
-﻿#version 400
+#version 400
 
 in vec3 position;
 in vec2 textureCoords;
@@ -16,7 +16,7 @@ uniform mat4 projectionMatrix;
 uniform bool useFakeLighting;
 uniform bool isMultisample;
 
-void main() 
+void main()
 {
      vec4 worldPosition = vec4(position, 1.0) * transformationMatrix;
 	 vec4 positionRealtiveToCamera = worldPosition * viewMatrix;

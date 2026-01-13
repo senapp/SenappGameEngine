@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 using OpenTK;
@@ -11,6 +12,7 @@ namespace Senapp
     public class Program
     {
         [DllImport("user32.dll", SetLastError = true)]
+
         static extern bool SetProcessDPIAware();
 
         [STAThread]
@@ -18,6 +20,16 @@ namespace Senapp
         {
             if (Environment.OSVersion.Version.Major >= 6)
                 SetProcessDPIAware();
+
+            // try
+            // {
+            //     Assembly.Load("BulletSharp");
+            // }
+            // catch (Exception e)
+            // {
+            //     Console.WriteLine(e.ToString(), "Error loading BulletSharp!");
+            //     return;
+            // }
 
             GraphicsSettings.Initialize();
 

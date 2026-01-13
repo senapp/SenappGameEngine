@@ -15,8 +15,8 @@ namespace Senapp.Engine.UI.Combinations
         public Sprite background;
         public RaycastTargetUI raycastTarget;
 
-        public TextButton() { }
-        public TextButton(string text, GameFont font, Action onEnter = null, Action onClick = null, Action onExit = null, Action onLoseFocus = null) 
+        public TextButton() : base(false) { }
+        public TextButton(string text, GameFont font, Action onEnter = null, Action onClick = null, Action onExit = null, Action onLoseFocus = null) : base(false)
         {
             this.text = new Text(text, font, defaultFontSize, Capitalization.Regularcase, Dock.Center);
             this.background = new Sprite();

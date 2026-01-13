@@ -21,6 +21,8 @@ using Senapp.Engine.Loaders;
 using Senapp.Engine.Renderer.Helper;
 using Senapp.Engine.Networking.Client;
 using Senapp.Engine.Renderer.FrameBuffers;
+using Senapp.Engine.UI;
+using Senapp.Engine.Managers;
 
 namespace Senapp.Engine.Core
 {
@@ -34,13 +36,25 @@ namespace Senapp.Engine.Core
         public RaycastManager RaycastManager { get; private set; }
         public PhysicsManager PhysicsManager { get; private set; }
         public SceneManager SceneManager { get; private set; }
+        public EntityManager EntityManager { get; private set; }
 
         public float AspectRatio { get; private set; }
 
         public Scene MainScene;
-        public Light SunLight;
+        public Light MainLight;
         public Camera MainCamera;
+        public GameFont MainFont;
+        public GameObject GrassBed; // Change later
 
+        public List<GameObject> GetSceneAllGameObjects()
+        {
+            var total = new List<GameObject>();
+            foreach (var scene in SceneManager.scenes.Values)
+            {
+                total.AddRange(scene.GetAllGameObjects());
+            }
+            return total;
+        }
         public List<GameObject> GetSceneGameObjects()
         {
             var total = new List<GameObject>();
@@ -131,7 +145,7 @@ namespace Senapp.Engine.Core
             FrameRate.Update();
 
             MasterRenderer.ClearScreen();
-            Renderer.Render(SunLight, MainCamera);
+            Renderer.RenderFast(MainLight, MainCamera);
 
             var args = new GameRenderedEventArgs((float)e.Time);
             OnGameRendered(args);
@@ -181,7 +195,12 @@ namespace Senapp.Engine.Core
 
         private void EssentialSetup()
         {
-            SunLight = new GameObject()
+            EntityManager = new EntityManager();
+
+            MainFont = new GameFont();
+            MainFont.LoadFont("opensans");
+
+            MainLight = new GameObject()
                 .WithName("Sun Light")
                 .WithPosition(new Vector3(100, 100, 100))
                 .WithColour(Color.White)
@@ -196,7 +215,7 @@ namespace Senapp.Engine.Core
                 .GetComponent<Camera>();
 
             MainScene = new Scene()
-                .WithGameObject(SunLight.gameObject)
+                .WithGameObject(MainLight.gameObject)
                 .WithGameObject(MainCamera.gameObject);
 
             Renderer = new MasterRenderer(MainCamera);
@@ -212,7 +231,7 @@ namespace Senapp.Engine.Core
             if (force || raycastUpdateDeltaTime + args.DeltaTime > raycastUpdateFrequency)
             {
                 raycastUpdateDeltaTime = 0;
-                if (Input.IsMouseOnWindow(lastKnowMousePositionOnWindow))
+                if (Input.IsMouseOnWindow(lastKnowMousePositionOnWindow) && lastGeometryFbo != null)
                 {
                     RaycastManager.RaycastUISendingUpdate(lastKnowMousePositionOnWindow);
 

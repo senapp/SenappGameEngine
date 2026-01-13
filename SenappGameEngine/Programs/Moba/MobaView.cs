@@ -17,7 +17,7 @@ namespace Senapp.Programs.Moba
         public GameObject player;
         public GameObject targetMarker;
 
-        public MobaView() 
+        public MobaView() : base(false)
         {
             MobaWorld = new MobaWorld();
             Lux = new Entity("lux", ModelTypes.OBJ, "lux_tex");

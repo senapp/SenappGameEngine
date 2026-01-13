@@ -118,6 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AatroxSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\AatroxSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AhriSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\AhriSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AkaliSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\AkaliSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AkshanSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\AkshanSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="alduin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Models\alduin.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -127,14 +139,41 @@
   <data name="alduin_tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\alduin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AlistarSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\AlistarSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AmumuSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\AmumuSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AniviaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\AniviaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnnieSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\AnnieSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="arial" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Fonts\arial.fnt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="arial_img" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Fonts\arial.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AsheSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\AsheSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Aurelion_SolSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Aurelion_SolSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AzirSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\AzirSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="back" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BardSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\BardSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bel_VethSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Bel'VethSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bitmap" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\bitmap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,23 +181,68 @@
   <data name="blend_map" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\textures\blend_map.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BlitzcrankSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\BlitzcrankSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\bottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BrandSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\BrandSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BraumSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\BraumSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CaitlynSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\CaitlynSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cameraButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\camerabutton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CamilleSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\CamilleSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CassiopeiaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\CassiopeiaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Cho_GathSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Cho'GathSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CorkiSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\CorkiSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DariusSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\DariusSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="default_texture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Defaults\default_texture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DianaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\DianaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DJSonaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\DJSonaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="dragon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Models\dragon.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="DravenSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\DravenSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dr__MundoSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Dr._MundoSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EkkoSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\EkkoSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EliseSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\EliseSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="entityFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\components\entityfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Shaders\Components\entityFS.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="entityVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\components\entityvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Shaders\Components\entityVS.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="enviroback" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\enviroback.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,23 +262,176 @@
   <data name="envirotop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\envirotop.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="EvelynnSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\EvelynnSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EzrealSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\EzrealSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FiddlesticksSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\FiddlesticksSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FiddlesticksSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\FiddlesticksSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="finalFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\finalfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Shaders\finalFS.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="finalVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\finalvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Shaders\finalVS.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="FioraSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\FioraSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FizzSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\FizzSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="front" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\front.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="GalioSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\GalioSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GalioSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\GalioSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GangplankSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\GangplankSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GarenSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\GarenSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GnarSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\GnarSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GragasSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\GragasSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="grass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Textures\grass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="grassFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Shaders\Components\grassFS.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="grassVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Shaders\Components\grassVS - kopia.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="grass_blade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Textures\grass.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GravesSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\GravesSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GwenSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\GwenSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="healthbar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\healthbar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HecarimSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\HecarimSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HeimerdingerSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\HeimerdingerSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="HeimerdingerSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\HeimerdingerSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Defaults\icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="IllaoiSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\IllaoiSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IreliaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\IreliaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IvernSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\IvernSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JannaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\JannaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Jarvan_IVSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Jarvan_IVSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JaxSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\JaxSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JayceSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\JayceSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JhinSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\JhinSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JinxSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\JinxSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Kai_SaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Kai'SaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KalistaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\KalistaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KarmaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\KarmaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KarmaSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\KarmaSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KarthusSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\KarthusSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KassadinSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\KassadinSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KatarinaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\KatarinaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KatarinaSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\KatarinaSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KayleSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\KayleSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KayleSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\KayleSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KaynSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\KaynSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KennenSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\KennenSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Kha_ZixSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Kha'ZixSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KindredSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\KindredSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KledSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\KledSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Kog_MawSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Kog'MawSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="K_SanteSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\K'SanteSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LeBlancSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\LeBlancSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lee_SinSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Lee_SinSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lee_SinSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Lee_SinSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="left" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LeonaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\LeonaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="levelUpDisabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\levelupdisabled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -203,13 +440,31 @@
     <value>..\resources\mobaassets\levelupenabled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="lightingFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\lightingfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Shaders\lightingFS.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lightingVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\lightingvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Shaders\lightingVS.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LilliaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\LilliaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LissandraSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\LissandraSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LucianSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\LucianSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LuluSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\LuluSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="lux" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\lux.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LuxSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\LuxSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LuxSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\LuxSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="lux_dae" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\lux.dae;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -222,6 +477,15 @@
   </data>
   <data name="magicInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\magicinfo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MalphiteSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\MalphiteSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MalzaharSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\MalzaharSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MaokaiSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\MaokaiSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="map" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\map.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -238,14 +502,68 @@
   <data name="marker" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\marker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Master_YiSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Master_YiSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Mega_GnarSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Mega_GnarSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="minimap" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\minimap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MissFortuneSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\MissFortuneSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MordekaiserSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\MordekaiserSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MorganaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\MorganaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MorganaSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\MorganaSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NamiSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\NamiSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NamiSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\NamiSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NasusSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\NasusSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NasusSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\NasusSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NautilusSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\NautilusSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NeekoSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\NeekoSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="new_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Defaults\new_icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="NidaleeSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\NidaleeSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NilahSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\NilahSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NocturneSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\NocturneSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="noItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\noitem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NunuBotSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\NunuBotSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Nunu___WillumpSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Nunu_&amp;_WillumpSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OlafSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\OlafSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="opensans" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\fonts\opensans.fnt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -253,11 +571,38 @@
   <data name="opensans_img" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\fonts\opensans_img.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="OriannaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\OriannaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OrnnSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\OrnnSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="overlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\overlay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="overlayExt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\overlayext.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PantheonSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\PantheonSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PoppySquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\PoppySquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PulsefireEzrealSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\PulsefireEzrealSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PykeSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\PykeSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="QiyanaSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\QiyanaSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="QuinnSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\QuinnSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RakanSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\RakanSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="right" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -269,19 +614,19 @@
     <value>..\resources\mobaassets\settingsbutton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="skyboxFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\skyboxfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Shaders\skyboxFS.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="skyboxVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\skyboxvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Shaders\skyboxVS.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="sphere" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\models\sphere.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="spriteFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\components\spritefs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Shaders\Components\spriteFS.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="spriteVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\components\spritevs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Shaders\Components\spriteVS.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="statsInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\statsinfo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -289,11 +634,14 @@
   <data name="store" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\store.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="terrain" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Textures\terrain.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="textFS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\components\textfs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Shaders\Components\textFS.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="textVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\shaders\components\textvs.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\Shaders\Components\textVS.glsl;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="top" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\CubeMap\top.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -301,10 +649,46 @@
   <data name="tower" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\mobaassets\tower.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="WarwickSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\WarwickSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WarwickSquare_Unreleased_2nd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\WarwickSquare_Unreleased_2nd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WillumpSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\WillumpSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="witcher" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\models\witcher.obj;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="witcher_tex" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Textures\witcher.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WukongSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\WukongSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WukongSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\WukongSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="XayahSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\XayahSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="XerathSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\XerathSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Xin_ZhaoSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Xin_ZhaoSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Xin_ZhaoSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\Xin_ZhaoSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="YasuoSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\YasuoSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="YasuoSquare_Unreleased" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\YasuoSquare_Unreleased.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="YorickSquare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MobaAssets\icons\YorickSquare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

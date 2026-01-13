@@ -142,7 +142,10 @@ namespace Senapp.Engine.PlayerInput
         }
         public static bool IsMouseOnWindow(Vector2 mouseScreenPosition)
         {
-            if (mouseScreenPosition.X <= 0 || mouseScreenPosition.X >= Game.Instance.Width || mouseScreenPosition.Y <= 0 || mouseScreenPosition.Y >= Game.Instance.Height)
+            if (mouseScreenPosition.X <= 0 
+            || mouseScreenPosition.X >= Game.Instance.Width 
+            || mouseScreenPosition.Y <= 0 
+            || mouseScreenPosition.Y >= Game.Instance.Height)
             {
                 return false;
             }

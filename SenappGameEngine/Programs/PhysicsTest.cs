@@ -98,7 +98,7 @@ namespace Senapp.Programs
                 MainScene.AddGameObject(obj);
             }
 
-            SunLight.gameObject.transform.SetPosition(new Vector3(0, 10, 20));
+            MainLight.gameObject.transform.SetPosition(new Vector3(0, 10, 20));
 
             MainCamera.gameObject.transform = new Transform(MainCamera.gameObject, 0, 4, 10);
 

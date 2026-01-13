@@ -18,8 +18,8 @@ namespace Senapp.Engine.UI.Combinations
         public Text text;
         public InputField inputField;
 
-        public LabeledInputField() { }
-        public LabeledInputField(string label, string text, GameFont font, Dock dock) 
+        public LabeledInputField() : base(false) { }
+        public LabeledInputField(string label, string text, GameFont font, Dock dock) : base(false)
         {
             this.inputField = new InputField(text, font, dock);
             this.text = new Text(label, font, fontSize: defaultFontSize, dock: dock);

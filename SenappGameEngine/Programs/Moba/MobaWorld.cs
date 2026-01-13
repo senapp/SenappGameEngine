@@ -20,7 +20,7 @@ namespace Senapp.Programs.Moba
 
         public List<Tower> towers = new();
 
-        public MobaWorld()
+        public MobaWorld() : base(false)
         {
             Instance = this;
             Ground = new Entity(RawModel.GenerateTerrain(TerrainSize), "map");

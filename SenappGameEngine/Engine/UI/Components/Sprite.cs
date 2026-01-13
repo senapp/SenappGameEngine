@@ -16,7 +16,7 @@ namespace Senapp.Engine.UI.Components
         public Vector2 size = Vector2.One;
 
         public Sprite() : this(string.Empty) { }
-        public Sprite(string textureName)
+        public Sprite(string textureName) : base(false)
         {
             quad = Loader.LoadToVAO(Geometry.GetVertex(Geometries.Quad), Geometry.GetVertexName(Geometries.Quad));
             texture = Loader.LoadTexture(textureName);

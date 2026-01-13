@@ -80,7 +80,7 @@ namespace Senapp.Engine.Shaders
             GL.UniformMatrix4(location, true, ref value);
         }
         #endregion
- 
+
         protected int GetUniformLocation(string uniformName)
         {
             return GL.GetUniformLocation(programID, uniformName);
@@ -127,7 +127,7 @@ namespace Senapp.Engine.Shaders
             }
             catch(Exception e)
             {
-                Console.WriteLine($"[SHADER][ERROR] Could not read file - {e.Message}");
+                Console.WriteLine($"[SHADER][ERROR][{GetType().Name}] Could not read file - {e.Message}");
                 Environment.Exit(1);
             }
 
@@ -139,7 +139,7 @@ namespace Senapp.Engine.Shaders
 
             if (compileStatus == 0)
             {
-                Console.WriteLine($"[SHADER][ERROR] Error compiling shader: Could not compile shader - {GL.GetShaderInfoLog(shaderID)}");
+                Console.WriteLine($"[SHADER][ERROR][{GetType().Name}] Error compiling shader: Could not compile shader - {GL.GetShaderInfoLog(shaderID)}");
                 Environment.Exit(1);
             }
 

@@ -14,8 +14,8 @@ namespace Senapp.Engine.UI.Combinations
         public Sprite background;
         public RaycastTargetUI raycastTarget;
 
-        public Button() { }
-        public Button(string spriteTexture = "", Action onEnter = null, Action onClick = null, Action onExit = null, Action onLoseFocus = null) 
+        public Button() : base(false) { }
+        public Button(string spriteTexture = "", Action onEnter = null, Action onClick = null, Action onExit = null, Action onLoseFocus = null) : base(false)
         {
             this.background = new Sprite(spriteTexture);
             raycastTarget = new RaycastTargetUI(onEnter, onClick, onExit, onLoseFocus);

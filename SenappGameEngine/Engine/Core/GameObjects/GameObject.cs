@@ -45,7 +45,7 @@ namespace Senapp.Engine.Core.GameObjects
         {
             if (enabled)
             {
-                foreach (var component in ComponentManager.GetComponents())
+                foreach (var component in ComponentManager.GetDynamicComponents())
                 {
                     if (component.Value.enabled)
                     {

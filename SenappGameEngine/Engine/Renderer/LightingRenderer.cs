@@ -31,7 +31,7 @@ namespace Senapp.Engine.Renderer
 			GL.ActiveTexture(TextureUnit.Texture3);
 			GL.BindTexture(TextureTarget.Texture2D, modelTexture);
 
-			shader.LoadLight(Game.Instance.SunLight);
+			shader.LoadLight(Game.Instance.MainLight);
 			shader.LoadCameraPosition(Game.Instance.MainCamera.gameObject.transform.GetWorldPosition());
 			shader.LoadEnviromentMap(1);
 			shader.LoadTextureUnits();

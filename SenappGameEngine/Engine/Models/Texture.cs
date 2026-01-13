@@ -68,6 +68,7 @@ namespace Senapp.Engine.Models
 
             GL.TexParameter(TextureTarget.Texture2D, (TextureParameterName)OpenTK.Graphics.ES11.ExtTextureFilterAnisotropic.TextureMaxAnisotropyExt, MaxAniso);
 
+
             image.Dispose();
         }
         public Texture(string name, int width, int height, IntPtr data, bool generateMipmaps = false, bool srgb = false)

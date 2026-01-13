@@ -3,6 +3,7 @@ using Senapp.Engine.Core.Components;
 using Senapp.Engine.Loaders;
 using Senapp.Engine.Loaders.Models;
 using Senapp.Engine.Renderer.Helper;
+using Senapp.Engine.Core;
 
 namespace Senapp.Engine.Entities
 {
@@ -16,11 +17,12 @@ namespace Senapp.Engine.Entities
             : this(Loader.LoadModel(modelPath, modelType, texturePath, fromResources)) { }
         public Entity(RawModel rawModel, string textureFileName = "", bool loadFromResources = true) 
             : this(new TexturedModel(rawModel, Loader.LoadTexture(textureFileName, loadFromResources))) { }
-        public Entity(TexturedModel model)
+        public Entity(TexturedModel model) : base(false)
         {
             this.model = model;
+            Game.Instance.EntityManager.OnNewEntity(this);
         }
-        public Entity() { }
+        public Entity(): base(false) { }
 
         public Entity WithLuminosity(float luminosity)
         {
